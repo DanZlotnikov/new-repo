@@ -13,7 +13,7 @@ function PostHeader({headerData}) {
                             {headerData.author.firstName} {headerData.author.lastName}
                         </span>
                         <span className='checkmark-icon'>
-                            <FaCheckCircle color={colors.checkmarkBlue}size={13}/>
+                            <FaCheckCircle color={colors.checkmarkBlue} size={13}/>
                         </span>
                     </span>
                     <span className='post-created-time'>

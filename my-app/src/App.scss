@@ -1,10 +1,28 @@
 $background-gray: #f0f2f5;
+$background-pink: #f5e1e7;
 $background-white: white;
 $text-gray: #6d6f73;
 
 body {
   height:100vh;
   background-color: $background-gray;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+div {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+span {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+  -webkit-font-smoothing: antialiased; 
+}
+
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 .header {
@@ -38,6 +56,8 @@ body {
 }
 
 .post-div {
+  min-height: 100vh;
+
   .post-header-div {
     display: flex;
 
@@ -55,12 +75,6 @@ body {
         
         .user-name {
           font-weight: 500;
-        }
-
-        .checkmark-icon {
-          position: relative;
-          left: 7px;
-          top: 0px;
         }
       }
 
@@ -120,6 +134,135 @@ body {
   }
 }
 
+.discussion-section-div {
+  .new-comment-div {
+    position: relative;
+    margin-bottom: 20px;
+    .new-comment {
+      .comment-inp {
+        border: 0;
+        background-color: #f0f2f5;
+        border-radius: 15px;
+        margin-left: 48px;
+        width: 60%;
+        padding: 10px;
+        line-height: inherit;
+        font-size: 14px;
+        resize: none;
+        position: relative;
+        bottom: 3px;
+        overflow: hidden;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .send-icon {
+        position: relative;
+        right: 30px;
+        bottom: 13px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .comment-div {
+    position: relative;
+    margin-bottom: 20px;
+    .new-comment {
+      .comment-inp {
+        border: 0;
+        background-color: #f0f2f5;
+        border-radius: 15px;
+        margin-left: 48px;
+        width: 60%;
+        padding: 10px;
+        line-height: inherit;
+        font-size: 14px;
+        resize: none;
+        position: relative;
+        bottom: 3px;
+        overflow: hidden;
+      }
+    }
+
+    .existing-comment {
+      border: 0;
+      background-color: #f0f2f5;
+      border-radius: 15px;
+      margin-left: 48px;
+      display: inline-block;
+      padding: 10px;
+      font-size: 14px;
+      resize: none;
+      position: relative;
+      bottom: 3px;
+  
+      &:focus {
+        outline: none;
+      }
+  
+      .comment-author-name {
+        font-weight: 600;
+        display: block;
+        margin-right: 10px;
+      }
+    }
+    
+    .comment-reaction-counters {
+      position: absolute;
+      right: 12px;
+      top: -10px;
+      z-index: 1;
+      
+      .brains, .comments {
+        margin-right: 5px;
+        background: white;
+        border-radius: 30px;
+        box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
+        font-size: 12px;
+        padding: 6px;
+        color: $text-gray;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $background-pink;
+        }
+        .counter-icon {
+          position: relative;
+          top: 4px;
+          right: 2px;
+        }
+      }
+    }
+  }
+  
+  .subcomments-container {
+    display: block;
+    margin-left: 70px;
+    width: fit-content;
+    padding: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: $background-gray;
+    border-radius: 10px;
+
+    .see-comments {
+      font-size: 14px;
+      color: $text-gray;
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
 .user-profile-pic {
   border-radius: 50%;
   display: inline-flex;
@@ -130,4 +273,15 @@ body {
     height: 40px;
     width: 40px;
   }
+
+  &.comment-profile-pic {
+    position: absolute;
+    left: 10px;
+  }
+}
+
+.checkmark-icon {
+  position: relative;
+  left: 7px;
+  top: 0px;
 }
