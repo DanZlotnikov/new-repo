@@ -1,5 +1,6 @@
 $background-gray: #f0f2f5;
 $background-white: white;
+$text-gray: #6d6f73;
 
 body {
   height:100vh;
@@ -11,6 +12,7 @@ body {
   padding: 10px;
   box-shadow: 0px 0px 7px rgba(0,0,0,0.2);
   margin-bottom: 2px;
+ 
   .user-header {
     .user-name {
       position: relative;
@@ -25,6 +27,7 @@ body {
   padding-top: 30px;
   display: flex;
   justify-content: center;
+  
   .main-page {
     padding: 20px;
     background-color: $background-white;
@@ -37,6 +40,7 @@ body {
 .post-div {
   .post-header-div {
     display: flex;
+
     .name-and-date {
       display: flex;
       flex-direction: column;
@@ -44,28 +48,73 @@ body {
       position: relative;
       bottom: 4px;
       margin-right: 0px;
+      
       .user-name-span {
         display: flex;
         margin-top: 2px;
+        
         .user-name {
           font-weight: 500;
         }
+
         .checkmark-icon {
           position: relative;
           left: 7px;
           top: 0px;
         }
       }
+
       .post-created-time {
         font-size: 12px;
         margin-top: 1px;
-        color: #6d6f73;
+        color: $text-gray;
         font-weight: 400;
+        
         .globe-icon {
           position: relative;
           left: 5px;
           top: 2px;
         }
+      }
+    }
+  }
+  .post-text {
+    margin-left: 47px;
+    margin-top: 5px;
+  }
+  .body-selection-div {
+    margin-left: 48px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    .body-selection-card {
+      display: inline-flex;
+      flex-direction: column;
+      text-align: center;
+      background-color: $background-white;
+      padding: 3px;
+      padding-left: 9px;
+      padding-right: 10px;
+      border-radius: 14px;
+      margin-right: 10px;
+      
+      &.selected {
+        background-color: $background-gray;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $background-gray;
+      }
+
+      .selection-img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .data-count {
+        font-size: 11px;
+        color: $text-gray;
       }
     }
   }
@@ -76,6 +125,7 @@ body {
   display: inline-flex;
   height: 30px;
   width: 30px;
+
   &.post-pic {
     height: 40px;
     width: 40px;
