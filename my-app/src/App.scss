@@ -295,12 +295,16 @@ textarea {
               position: relative;
               bottom: 3px;
               overflow: hidden;
+
               &:focus {
                 outline: none;
               }
-              
-              .send-icon {
-                position: relative;
+            }
+            .send-icon {
+              position: relative;
+              bottom: 2px;
+              &:hover {
+                cursor: pointer;
               }
             }
           }
