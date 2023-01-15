@@ -1,7 +1,9 @@
 $background-gray: #f0f2f5;
-$background-pink: #f5e1e7;
+$background-pink: #ffe6fe;
+$background-blue: #e1eaf5;
 $background-white: white;
 $text-gray: #6d6f73;
+$discussion-blue: #35a1ff;
 
 body {
   height:100vh;
@@ -146,6 +148,7 @@ textarea {
         margin-left: 48px;
         width: 60%;
         padding: 10px;
+        padding-right: 45px;
         line-height: inherit;
         font-size: 14px;
         resize: none;
@@ -227,41 +230,116 @@ textarea {
         padding: 6px;
         color: $text-gray;
 
-        &:hover {
-          cursor: pointer;
-          background-color: $background-pink;
-        }
         .counter-icon {
           position: relative;
           top: 4px;
           right: 2px;
-        }
+        }        
+      }
+      
+      .brains:hover {
+        cursor: pointer;
+        background-color: $background-pink;
+      }
+
+      .comments:hover {
+        cursor: pointer;
+        background-color: $background-blue;
       }
     }
   }
   
   .subcomments-container {
     display: block;
-    margin-left: 70px;
-    width: fit-content;
-    padding: 3px;
-    padding-right: 10px;
-    padding-left: 10px;
-    background-color: $background-gray;
-    border-radius: 10px;
+    margin-left: 80px;
+
 
     .see-comments {
       font-size: 14px;
-      color: $text-gray;
-
+      color: $discussion-blue;
+      width: fit-content;
+      padding: 3px;
+      padding-right: 10px;
+      padding-left: 10px;
+      background-color: $background-gray;
+      border-radius: 10px;
+      
       &:hover {
         text-decoration: underline;
         cursor: pointer;
       }
     }
+
+    .subcomments {
+      .subcomments-div {
+        .new-subcomment-div {
+          position: relative;
+          width: 65%;
+          padding: 3px;
+          background-color: #f0f2f5;
+          border-radius: 11px;
+          margin-top: 3px;
+          margin-bottom: 5px;
+
+          .new-subcomment {
+            .new-subcomment-inp {
+              border: 0;
+              background-color: #f0f2f5;
+              border-radius: 15px;
+              width: 87%;
+              padding: 10px;
+              padding-bottom: 0px;
+              line-height: inherit;
+              font-size: 14px;
+              resize: none;
+              position: relative;
+              bottom: 3px;
+              overflow: hidden;
+              &:focus {
+                outline: none;
+              }
+              
+              .send-icon {
+                position: relative;
+              }
+            }
+          }
+        }
+
+        .subcomment-div {
+          position: relative;
+          width: fit-content;
+          padding: 3px;
+          background-color: $background-gray;
+          border-radius: 10px;
+          margin-bottom: 5px;
+        }
+
+        .subcomment {
+          border: 0;
+          background-color: #f0f2f5;
+          border-radius: 15px;
+          display: inline-block;
+          padding: 7px;
+          font-size: 14px;
+          resize: none;
+          position: relative;
+          bottom: 3px;
+      
+          &:focus {
+            outline: none;
+          }
+      
+          .subcomment-author-name {
+            font-weight: 600;
+            display: block;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
   }
 }
-
 
 .user-profile-pic {
   border-radius: 50%;
@@ -278,6 +356,14 @@ textarea {
     position: absolute;
     left: 10px;
   }
+
+  &.subcomment-profile-pic {
+    position: absolute;
+    left: -25px;
+    height: 20px;
+    width: 20px;
+  }
+
 }
 
 .checkmark-icon {

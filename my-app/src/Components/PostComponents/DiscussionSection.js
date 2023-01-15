@@ -53,7 +53,7 @@ function DiscussionSection() {
             <NewComment />
             <div className='existing-comments-div'>
                 {comments.map((comment) => (
-                    <span key={comment}>
+                    <span key={comment.id}>
                         <ExistingComment commentData={comment}/>
                     </span>
                 ))}

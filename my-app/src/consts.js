@@ -9,7 +9,7 @@ export const colors = {
     backgroundGray: '#f0f2f5',
     checkmarkBlue: '#1877f2',
     discussionBlue: '#62b1f6',
-    brainPink: '#f03268'
+    brainPink: '#f03268',
 }
 
 export const postBodySections = [
