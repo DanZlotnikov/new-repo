@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaCheckCircle, FaBrain, FaComment } from 'react-icons/fa';
-import { colors } from '../../consts';
+import { colors } from '../../../consts';
 import SubComments from './SubComments/SubComments';
 
 function ExistingComment({commentData}) {

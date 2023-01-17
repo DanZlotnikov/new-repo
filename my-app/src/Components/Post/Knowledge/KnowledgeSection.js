@@ -1,7 +1,9 @@
+import FileList from './FileList';
+
 function KnowledgeSection() {
     return (
         <div className='knowledge-section-div'>
-            knowledge
+            <FileList />
         </div>
     )
 }

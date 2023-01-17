@@ -1,7 +1,7 @@
-import BodySelectionCard from './Common/BodySelectionCard';
+import BodySelectionCard from '../Common/BodySelectionCard';
 import { useState } from 'react';
-import PostHeader from './PostComponents/PostHeader';
-import { postBodySections } from '../consts';
+import PostHeader from './PostHeader';
+import { postBodySections } from '../../consts';
 
 function Post() {
     var headerData = {

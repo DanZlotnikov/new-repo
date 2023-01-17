@@ -1,5 +1,5 @@
 import { FaCheckCircle } from 'react-icons/fa';
-import { colors } from '../../../consts';
+import { colors } from '../../../../consts';
 
 function SubComment({subcommentData}) {
     return (

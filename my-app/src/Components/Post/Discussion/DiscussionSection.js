@@ -1,9 +1,9 @@
-import NewComment from '../Common/NewComment';
-import ExistingComment from '../Common/ExistingComment';
-import profilePicDan from '../../New folder/profile-pic-dan.jpg'
-import profilePic1 from '../../New folder/profile-pic-margot.jpg'
-import profilePic2 from '../../New folder/woman_profile_pic.png'
-import profilePic3 from '../../New folder/profile-pic-man.jpg'
+import NewComment from './NewComment';
+import ExistingComment from './ExistingComment'
+import profilePicDan from '../../../New folder/profile-pic-dan.jpg'
+import profilePic1 from '../../../New folder/profile-pic-margot.jpg'
+import profilePic2 from '../../../New folder/woman_profile_pic.png'
+import profilePic3 from '../../../New folder/profile-pic-man.jpg'
 
 function DiscussionSection() {
     var comments = [

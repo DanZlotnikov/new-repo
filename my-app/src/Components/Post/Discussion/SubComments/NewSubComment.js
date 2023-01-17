@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import profilePicDan from '../../../New folder/profile-pic-dan.jpg'
+import profilePicDan from '../../../../New folder/profile-pic-dan.jpg'
 import { IoMdSend  } from 'react-icons/io';
-import { colors } from '../../../consts';
+import { colors } from '../../../../consts';
 
 function NewSubComment() {
     const [comment, setComment] = useState('');

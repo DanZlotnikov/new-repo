@@ -1,4 +1,4 @@
-import Post  from './Post.js';
+import Post  from './Post/Post.js';
 
 function MainPage() {
     return (

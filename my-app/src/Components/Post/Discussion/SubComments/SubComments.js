@@ -1,5 +1,4 @@
-import defaultProfilePic from '../../../New folder/default_user_profile_pic.png';
-import NewComment from '../NewComment';
+import defaultProfilePic from '../../../../New folder/default_user_profile_pic.png';
 import NewSubComment from './NewSubComment';
 import SubComment from './SubComment';
 

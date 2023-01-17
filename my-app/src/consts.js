@@ -1,6 +1,6 @@
-import KnowledgeSection from './Components/PostComponents/KnowledgeSection';
-import DiscussionSection from './Components/PostComponents/DiscussionSection';
-import PopularSection from './Components/PostComponents/PopularSection.js';
+import KnowledgeSection from './Components/Post/Knowledge/KnowledgeSection';
+import DiscussionSection from './Components/Post/Discussion/DiscussionSection';
+import PopularSection from './Components/Post/PopularSection.js';
 import discussionSymbol from '../src/New folder/discussion_symbol.png';
 import knowledgeSymbol from '../src/New folder/knowledge_symbol.png';
 import popularSymbol from '../src/New folder/popular_symbol.png';
