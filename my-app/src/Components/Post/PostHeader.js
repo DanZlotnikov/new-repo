@@ -1,19 +1,19 @@
-import womanProfilePic from '../../../src/New folder/profile-pic-margot.jpg';
+import womanProfilePic from '../../../src/New folder/profile_pic_margot.jpg';
 import { FaCheckCircle, FaGlobeAmericas  } from 'react-icons/fa';
-import { colors } from '../../consts.js';
+import { Colors } from '../../consts.js';
 
 function PostHeader({headerData}) {
     return (
         <div>
             <div className='post-header-div'>
-                <img className='user-profile-pic post-pic' src={womanProfilePic} />
+                <img className='user-profile-img post-img' src={womanProfilePic} />
                 <span className='name-and-date'>
                     <span className='user-name-span'>
                         <span className='user-name'>
                             {headerData.author.firstName} {headerData.author.lastName}
                         </span>
                         <span className='checkmark-icon'>
-                            <FaCheckCircle color={colors.checkmarkBlue} size={13}/>
+                            <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
                         </span>
                     </span>
                     <span className='post-created-time'>

@@ -1,7 +1,7 @@
 import BodySelectionCard from '../Common/BodySelectionCard';
 import { useState } from 'react';
 import PostHeader from './PostHeader';
-import { postBodySections } from '../../consts';
+import { PostBodySections } from '../../consts';
 
 function Post() {
     var headerData = {
@@ -13,12 +13,12 @@ function Post() {
         message: 'How much of climate change is caused by humans?'
     }
     
-    const [selectedSection, setSelectedSection] = useState(postBodySections.find(section => section.default == true).component);
+    const [selectedSection, setSelectedSection] = useState(PostBodySections.find(section => section.default == true).component);
     return (
         <div className='post-div'>
            <PostHeader headerData={headerData}/>
             <div className='body-selection-div'>
-            {postBodySections.map((section) => (
+            {PostBodySections.map((section) => (
                 <span key={section.key} onClick={() => setSelectedSection(section.component)}>
                     <BodySelectionCard selected={selectedSection.type.name == section.component.type.name} imgPath={section.imgPath} dataCount={'10K'}/>
                 </span>

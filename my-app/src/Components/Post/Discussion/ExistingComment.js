@@ -1,24 +1,23 @@
 import { useState } from 'react';
 import { FaCheckCircle, FaBrain, FaComment } from 'react-icons/fa';
-import { colors } from '../../../consts';
+import { Colors } from '../../../consts';
 import SubComments from './SubComments/SubComments';
 
 function ExistingComment({commentData}) {
     const [subcommentsOpen, setSubcommentsOpen] = useState(false)
     return (
         <div className='comment-div'>
-            <img className='user-profile-pic comment-profile-pic' src={commentData.author.profilePic} title={commentData.author.firstName + ' ' + commentData.author.lastName}/>
-            
+            <img className='user-profile-img comment-profile-img' src={commentData.author.profilePic} title={commentData.author.firstName + ' ' + commentData.author.lastName}/>
             <span className='existing-comment'>
-                <span className='comment-reaction-counters'>
+                <span className='reaction-counters comment-counters'>
                     <span className='brains'>
-                        <FaBrain className='counter-icon' color={colors.brainPink} size={18}/>
+                        <FaBrain className='counter-icon' color={Colors.brainPink} size={18}/>
                         <span className='counter-number'>
                             3.2K
                         </span>
                     </span>
                     <span className='comments' onClick={() => setSubcommentsOpen(!subcommentsOpen)}>
-                        <FaComment className='counter-icon' color={colors.discussionBlue} size={18}/>
+                        <FaComment className='counter-icon' color={Colors.discussionBlue} size={18}/>
                         <span className='counter-number'>
                             825
                         </span>
@@ -28,7 +27,7 @@ function ExistingComment({commentData}) {
                     {commentData.author.firstName + ' ' + commentData.author.lastName}
                     {commentData.author.hasCheckmark &&  
                         <span className='checkmark-icon'>
-                            <FaCheckCircle color={colors.checkmarkBlue} size={13}/>
+                            <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
                         </span>
                     }
                 </span>

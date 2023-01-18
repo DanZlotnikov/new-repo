@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import profilePicDan from '../../../New folder/profile-pic-dan.jpg';
+import profilePicDan from '../../../New folder/profile_pic_dan.jpg';
 import { IoMdSend  } from 'react-icons/io';
-import { colors } from '../../../consts';
+import { Colors } from '../../../consts';
 
 function NewComment() {
     const [comment, setComment] = useState('');
@@ -10,7 +10,7 @@ function NewComment() {
     
     return (
         <div className='new-comment-div'>
-            <img className='user-profile-pic comment-profile-pic' src={profilePicDan} title='Dan Zlotnikov' />
+            <img className='user-profile-img comment-profile-img' src={profilePicDan} title='Dan Zlotnikov' />
             <span className='new-comment'>
                 <TextareaAutosize
                     ref={commentInputRef}
@@ -20,7 +20,7 @@ function NewComment() {
                     onChange = {(e) => setComment(e.target.value)} 
                     />
                 <span className='send-icon'>
-                    <IoMdSend size={20} color={colors.discussionBlue}/>
+                    <IoMdSend size={20} color={Colors.discussionBlue}/>
                 </span>
             </span>
         </div>

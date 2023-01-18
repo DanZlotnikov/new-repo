@@ -1,9 +1,9 @@
 import NewComment from './NewComment';
 import ExistingComment from './ExistingComment'
-import profilePicDan from '../../../New folder/profile-pic-dan.jpg'
-import profilePic1 from '../../../New folder/profile-pic-margot.jpg'
-import profilePic2 from '../../../New folder/woman_profile_pic.png'
-import profilePic3 from '../../../New folder/profile-pic-man.jpg'
+import profilePicDan from '../../../New folder/profile_pic_dan.jpg'
+import profilePic1 from '../../../New folder/profile_pic_margot.jpg'
+import profilePic2 from '../../../New folder/profile_pic_woman.png'
+import profilePic3 from '../../../New folder/profile_pic_man.jpg'
 
 function DiscussionSection() {
     var comments = [
