@@ -13,16 +13,17 @@ function PopularSection() {
             id: 1,
             title: 'Leonardo DiCaprio winning Best Actor | 88th Oscars (2016)',
             platform: PlatformType.Youtube,
-            thumbnailImg: dicaprioThumbnail,
+            iframeUrl: 'https://www.youtube.com/embed/xpyrefzvTpI',
             uploaderImg: profilePicWoman,
             upvotes: '1.2M',
             comments: '69K'
+            
         },
         {
             id: 2,
             title: 'The Joe Rogan Experience #1776 – Steven E. Koonin',
             platform: PlatformType.Spotify,
-            thumbnailImg: spotifyThumbnail,
+            iframeUrl: 'https://open.spotify.com/embed/episode/76RdMG5Tne7H9jaP7mhkdk/video?utm_source=generator&theme=0',
             uploaderImg: profilePicMan,
             upvotes: '831K',
             comments: '75K'
@@ -31,7 +32,7 @@ function PopularSection() {
             id: 3,
             title: 'Calling all #ClimateChange activists! Tell the 🌍 about the change you want to see! #COP26 #OurPlanet #FightForOurWorld',
             platform: PlatformType.Tiktok,
-            thumbnailImg: tiktokThumbnail,
+            iframeUrl: 'https://www.tiktok.com/embed/7025299649821003013',
             uploaderImg: profilePicMargot,
             upvotes: '586K',
             comments: '52K'
