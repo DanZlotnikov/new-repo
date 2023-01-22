@@ -13,10 +13,10 @@ export const Colors = {
     markerOrange: '#f28e29',
 }
 
-export const PostBodySections = [
-    { key: 0, component: <DiscussionSection />, imgPath: discussionSymbol, default: true },
-    { key: 1, component: <KnowledgeSection />, imgPath: knowledgeSymbol, default: false },
-    { key: 2, component: <PopularSection />, imgPath: popularSymbol, default: false },
+export let PostBodySections = [
+    { key: 0, component: <DiscussionSection />, imgPath: discussionSymbol, default: true, count: 0 },
+    { key: 1, component: <KnowledgeSection />, imgPath: knowledgeSymbol, default: false, count: 0 },
+    { key: 2, component: <PopularSection />, imgPath: popularSymbol, default: false, count: 0 },
 ]
 
 export const PlatformType = {

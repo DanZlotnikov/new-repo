@@ -42,7 +42,7 @@ function FileList() {
     return (
         <div className='file-list-div'>
             <div className='file-list-header'>
-                <span class='uploader-img'>
+                <span className='uploader-img'>
                 </span>
                 <span className='file-list-cell header-name' >
                     Title
@@ -52,7 +52,7 @@ function FileList() {
                 </span>  
             </div>
             {fileDataList.map((fileData) => 
-               <FileItem fileData={fileData} />
+               <FileItem key={fileData.id} fileData={fileData} />
             )}
             
         </div>

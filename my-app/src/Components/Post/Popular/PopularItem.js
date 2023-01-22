@@ -23,7 +23,6 @@ function PopularItem({item}) {
             break;
     }
 
-
     return (
         <div className={'item-div ' + platformName} >
             <img src={platformIcon} className={'item-type-img ' + platformName}/>
@@ -38,12 +37,11 @@ function PopularItem({item}) {
                         frameborder="0" 
                         allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         scrolling="no"
-                        frameBorder="0"
                     />
                 }
                 
             </div>
-            <div class={'footer ' + platformName}>
+            <div className={'footer ' + platformName}>
                 <span className='reaction-counters'>
                     <span className='brains'>
                         <FaBrain className='counter-icon' color={Colors.brainPink} size={18}/>

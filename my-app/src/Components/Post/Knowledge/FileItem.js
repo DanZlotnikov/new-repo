@@ -4,11 +4,11 @@ import { FaBrain, FaPen } from 'react-icons/fa';
 function FileItem({fileData}) {
     return (
         <div className='file-list-row'>                        
-            <span class='uploader-img-span'>
+            <span className='uploader-img-span'>
                 <img className='file-list-cell user-profile-img' src={fileData.uploaderPicUrl} />
             </span>
             <div className='file-list-cell' >
-                <a href={fileData.file} className='file-title-link' without rel="noopener noreferrer" target="_blank">
+                <a href={fileData.file} className='file-title-link' rel="noopener noreferrer" target="_blank">
                     <div className='title-span ellipsis' >
                         {fileData.title}
                     </div>

@@ -1,8 +1,9 @@
 import womanProfilePic from '../../../src/New folder/profile_pic_margot.jpg';
 import { FaCheckCircle, FaGlobeAmericas  } from 'react-icons/fa';
 import { Colors } from '../../consts.js';
+import dateFormat from 'dateformat';
 
-function PostHeader({headerData}) {
+function PostHeader({post}) {
     return (
         <div>
             <div className='post-header-div'>
@@ -10,14 +11,14 @@ function PostHeader({headerData}) {
                 <span className='name-and-date'>
                     <span className='user-name-span'>
                         <span className='user-name'>
-                            {headerData.author.firstName} {headerData.author.lastName}
+                            {post.author.firstName} {post.author.lastName}
                         </span>
                         <span className='checkmark-icon'>
                             <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
                         </span>
                     </span>
                     <span className='post-created-time'>
-                    {headerData.date} 
+                    {dateFormat(post.createdDate)} 
                         <span className='globe-icon'>
                             <FaGlobeAmericas size={13}/>
                         </span>
@@ -25,7 +26,7 @@ function PostHeader({headerData}) {
                 </span>
             </div>
             <div className='post-text'>
-                {headerData.message}            
+                {post.message}            
             </div>
         </div>
     )
