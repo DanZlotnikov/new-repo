@@ -18,7 +18,7 @@ function PostHeader({post}) {
                         </span>
                     </span>
                     <span className='post-created-time'>
-                    {dateFormat(post.createdDate)} 
+                    {dateFormat(post.createdDate, 'dddd, mmmm dS, yyyy')} 
                         <span className='globe-icon'>
                             <FaGlobeAmericas size={13}/>
                         </span>

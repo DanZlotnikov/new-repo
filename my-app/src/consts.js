@@ -14,13 +14,13 @@ export const Colors = {
 }
 
 export let PostBodySections = [
-    { key: 0, component: <DiscussionSection />, imgPath: discussionSymbol, default: true, count: 0 },
-    { key: 1, component: <KnowledgeSection />, imgPath: knowledgeSymbol, default: false, count: 0 },
-    { key: 2, component: <PopularSection />, imgPath: popularSymbol, default: false, count: 0 },
+    { key: 0, component: <DiscussionSection />, imgPath: discussionSymbol, count: 0, data: [] },
+    { key: 1, component: <KnowledgeSection />, imgPath: knowledgeSymbol, count: 0, data: []  },
+    { key: 2, component: <PopularSection />, imgPath: popularSymbol, count: 0, data: []  },
 ]
 
-export const PlatformType = {
-    Youtube: 'Youtube',
-    Spotify: 'Spotify',
-    Tiktok: 'Tiktok'
+export const PopularPlatformType = {
+    0: 'youtube',
+    1: 'spotify', 
+    2: 'tiktok'
 }

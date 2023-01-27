@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using MyApp.Backend.Models;
+using MyApp.Backend.Models.PostModels;
+using MyApp.Backend.Repositories.PostRepositories;
 
 namespace MyApp.Backend.Controllers
 {
@@ -7,7 +8,6 @@ namespace MyApp.Backend.Controllers
     [Route("[controller]")]
     public class PostsController : ControllerBase
     {
-
         private readonly ILogger<PostsController> _logger;
 
         public PostsController(ILogger<PostsController> logger)
@@ -16,43 +16,15 @@ namespace MyApp.Backend.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Post> Get()
+        public List<Post> Get()
         {
-            return Enumerable.Range(1, 2).Select(index => new Post
-            {
-                Id = index,
-                Author = new User
-                {
-                    Id = 1,
-                    firstName = "Margot",
-                    LastName = "Robbie"
-                },
-                CreatedDate = DateTime.Now.AddDays(-100),
-                Message = "How much of climate change is caused by humans?",
-                DiscussionCount = 123,
-                KnowledgeCount = 3,
-                PopularCount = 3
-            }).ToArray();
+            return PostRepository.posts;
         }
 
         [HttpGet("GetPost")]
         public Post GetPostById(int id)
         {
-            return new Post
-            {
-                Id = id,
-                Author = new User
-                {
-                    Id = 1,
-                    firstName = "Margot",
-                    LastName = "Robbie"
-                },
-                CreatedDate = DateTime.Now.AddDays(-100),
-                Message = "How much of climate change is caused by humans?",
-                DiscussionCount = 123,
-                KnowledgeCount = 3,
-                PopularCount = 3
-            };
+            return Get().First();
         }
     }
 }

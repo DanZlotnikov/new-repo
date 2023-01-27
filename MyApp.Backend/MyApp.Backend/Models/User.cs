@@ -5,6 +5,6 @@
         public long Id { get; set; }
         public string firstName { get; set; }
         public string LastName { get; set; }
-        public string? ProfilePicUrl { get; set; }
+        public string? ProfileImgUrl { get; set; }
     }
 }

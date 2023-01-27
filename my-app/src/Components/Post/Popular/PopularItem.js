@@ -1,6 +1,6 @@
 import { FaBrain, FaComment } from 'react-icons/fa';
 import { Colors } from '../../../consts';
-import { PlatformType } from '../../../consts';
+import { PopularPlatformType } from '../../../consts';
 import youtubeIcon from '../../../New folder/youtube_icon.png';
 import tiktokIcon from '../../../New folder/tiktok_icon.png';
 import spotifyIcon from '../../../New folder/spotify_icon.png';
@@ -8,18 +8,18 @@ import { TikTok } from "react-tiktok";
 
 function PopularItem({item}) {
     let platformIcon, platformName;
-    switch(item.platform) {
-        case PlatformType.Youtube:
+    switch(PopularPlatformType[item.platformType]) {
+        case 'youtube':
             platformIcon = youtubeIcon;
-            platformName = PlatformType[item.platform].toLowerCase();
+            platformName = PopularPlatformType[item.platformType];
             break;
-        case PlatformType.Spotify:
+        case 'spotify':
             platformIcon = spotifyIcon;
-            platformName = PlatformType[item.platform].toLowerCase();
+            platformName = PopularPlatformType[item.platformType];
             break;
-        case PlatformType.Tiktok:
+        case 'tiktok':
             platformIcon = tiktokIcon;
-            platformName = PlatformType[item.platform].toLowerCase();
+            platformName = PopularPlatformType[item.platformType];
             break;
     }
 
@@ -28,7 +28,7 @@ function PopularItem({item}) {
             <img src={platformIcon} className={'item-type-img ' + platformName}/>
             <div className='thumbnail'>
                 {platformName == 'tiktok' ? 
-                    <TikTok url="https://www.tiktok.com/@scout2015/video/7025299649821003013" />
+                    <TikTok url={item.iframeUrl} />
                 :
                     <iframe 
                         className={'thumbnail-iframe ' + platformName} 
@@ -46,17 +46,17 @@ function PopularItem({item}) {
                     <span className='brains'>
                         <FaBrain className='counter-icon' color={Colors.brainPink} size={18}/>
                         <span className='counter-number'>
-                            {item.upvotes}
+                            {item.brainsCount}
                         </span>
                     </span>
                     <span className='comments'>
                         <FaComment className='counter-icon' color={Colors.discussionBlue} size={16}/>
                         <span className='counter-number'>
-                            {item.comments}
+                            {item.commentsCount}
                         </span>
                     </span>
                 </span>
-                <img src={item.uploaderImg} className='uploader-img'></img>
+                <img src={item.author.profileImgUrl} className='uploader-img'></img>
             </div>
         </div>
     )

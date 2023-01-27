@@ -7,19 +7,19 @@ function ExistingComment({commentData}) {
     const [subcommentsOpen, setSubcommentsOpen] = useState(false)
     return (
         <div className='comment-div'>
-            <img className='user-profile-img comment-profile-img' src={commentData.author.profilePic} title={commentData.author.firstName + ' ' + commentData.author.lastName}/>
+            <img className='user-profile-img comment-profile-img' src={commentData.author.profileImgUrl} title={commentData.author.firstName + ' ' + commentData.author.lastName}/>
             <span className='existing-comment'>
                 <span className='reaction-counters comment-counters'>
                     <span className='brains'>
                         <FaBrain className='counter-icon' color={Colors.brainPink} size={18}/>
                         <span className='counter-number'>
-                            3.2K
+                            {commentData.brainsCount}
                         </span>
                     </span>
                     <span className='comments' onClick={() => setSubcommentsOpen(!subcommentsOpen)}>
                         <FaComment className='counter-icon' color={Colors.discussionBlue} size={18}/>
                         <span className='counter-number'>
-                            825
+                            {commentData.subDiscussionsCount}
                         </span>
                     </span>
                 </span>
@@ -32,7 +32,7 @@ function ExistingComment({commentData}) {
                     }
                 </span>
                 <span className='comment-text'>
-                    {commentData.text}
+                    {commentData.message}
                 </span> 
             </span>
             <span className='subcomments-container'>
