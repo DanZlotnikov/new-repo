@@ -12,10 +12,12 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 Author = UserRepository.margot,
                 CreatedDate = DateTime.Now.AddDays(-100),
                 Message = "How much of climate change is caused by humans?",
-                Discussions = DiscussionRepository.discussions,
+                Comments = DiscussionRepository.comments,
                 KnowledgeItems = KnowledgeRepository.knowledgeItems,
                 PopularItems = PopularRepository.popularItems
             }
         };
+
+
     }
 }

@@ -1,8 +1,8 @@
 function BodySelectionCard({selected, imgPath, dataCount}) {
     return (
-        <div className={'body-selection-card ' + (selected ? 'selected' : '')}>
-            <img className='selection-img' src={imgPath} />
-            <div className='data-count'>
+        <div className={'bodySelectionCard ' + (selected ? 'selected' : '')}>
+            <img className='selectionImg' src={imgPath} alt=''/>
+            <div className='dataCount'>
                 {dataCount}
             </div>
         </div>

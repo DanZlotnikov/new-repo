@@ -2,14 +2,15 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { Colors } from '../../../../consts';
 
 function SubComment({subcommentData}) {
+    let authorFullName = subcommentData.author.firstName + ' ' + subcommentData.author.lastName;
     return (
-        <div className='subcomment-div'>
-            <img className='user-profile-img subcomment-profile-img' src={subcommentData.author.profilePic} title={subcommentData.author.firstName + ' ' + subcommentData.author.lastName}/>
+        <div className='subcommentDiv'>
+            <img className='userProfileImg subcommentProfileImg' src={subcommentData.author.profilePic} title={authorFullName} alt={authorFullName} />
             <span className='subcomment'>
-                <span className='subcomment-author-name'>
+                <span className='subcommentAuthorName'>
                     {subcommentData.author.firstName + ' ' + subcommentData.author.lastName}
                     {subcommentData.author.hasCheckmark &&  
-                        <span className='checkmark-icon'>
+                        <span className='checkmarkIcon'>
                             <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
                         </span>
                     }

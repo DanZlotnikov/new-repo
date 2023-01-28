@@ -1,9 +1,9 @@
 import FileList from './FileList';
 
-function KnowledgeSection({data}) {
+function KnowledgeSection({postData}) {
     return (
-        <div className='knowledge-section-div'>
-            <FileList items={data}/>
+        <div className='knowledgeSectionDiv'>
+            <FileList items={postData.knowledgeItems}/>
         </div>
     )
 }

@@ -5,7 +5,7 @@ namespace MyApp.Backend.Models.PostModels
     public class PopularModel
     {
         public long Id { get; set; }
-        public User Author { get; set; }
+        public User Uploader { get; set; }
         public PopularPlatformType PlatformType { get; set; }
         public string IframeUrl { get; set; }
         public int BrainsCount { get; set; }

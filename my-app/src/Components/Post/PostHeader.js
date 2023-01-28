@@ -1,4 +1,3 @@
-import womanProfilePic from '../../../src/New folder/profile_pic_margot.jpg';
 import { FaCheckCircle, FaGlobeAmericas  } from 'react-icons/fa';
 import { Colors } from '../../consts.js';
 import dateFormat from 'dateformat';
@@ -6,26 +5,26 @@ import dateFormat from 'dateformat';
 function PostHeader({post}) {
     return (
         <div>
-            <div className='post-header-div'>
-                <img className='user-profile-img post-img' src={womanProfilePic} />
-                <span className='name-and-date'>
-                    <span className='user-name-span'>
-                        <span className='user-name'>
+            <div className='postHeaderDiv'>
+                <img className='userProfileImg postImg' src={post.author.profileImgUrl} alt={post.author.firstName + ' ' + post.author.lastName}/>
+                <span className='nameAndDate'>
+                    <span className='userNameSpan'>
+                        <span className='userName'>
                             {post.author.firstName} {post.author.lastName}
                         </span>
-                        <span className='checkmark-icon'>
+                        <span className='checkmarkIcon'>
                             <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
                         </span>
                     </span>
-                    <span className='post-created-time'>
+                    <span className='postCreatedTime'>
                     {dateFormat(post.createdDate, 'dddd, mmmm dS, yyyy')} 
-                        <span className='globe-icon'>
+                        <span className='globeIcon'>
                             <FaGlobeAmericas size={13}/>
                         </span>
                     </span>
                 </span>
             </div>
-            <div className='post-text'>
+            <div className='postText'>
                 {post.message}            
             </div>
         </div>

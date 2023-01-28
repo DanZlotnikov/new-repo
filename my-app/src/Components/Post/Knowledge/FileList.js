@@ -2,14 +2,14 @@ import FileItem from './FileItem';
 
 function FileList({items}) {
     return (
-        <div className='file-list-div'>
-            <div className='file-list-header'>
-                <span className='uploader-img'>
+        <div className='fileListDiv'>
+            <div className='fileListHeader'>
+                <span className='uploaderImg'>
                 </span>
-                <span className='file-list-cell header-name' >
+                <span className='fileListCell header-name' >
                     Title
                 </span>
-                <span className='file-list-cell published-cell'>
+                <span className='fileListCell publishedCell'>
                     Published
                 </span>  
             </div>

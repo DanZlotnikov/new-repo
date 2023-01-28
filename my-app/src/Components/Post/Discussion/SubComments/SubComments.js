@@ -2,7 +2,7 @@ import defaultProfilePic from '../../../../New folder/default_user_profile_pic.p
 import NewSubComment from './NewSubComment';
 import SubComment from './SubComment';
 
-function SubComments() {
+function SubComments({mainCommentData}) {
     var subcomments = [
         {
             id: 1,
@@ -36,8 +36,8 @@ function SubComments() {
         },
     ];
     return (
-        <div className='subcomments-div'>
-            <NewSubComment />
+        <div className='subcommentsDiv'>
+            <NewSubComment mainCommentData={mainCommentData}/>
            {subcomments.map((subcomment) => (
                 <span key={subcomment.id}>
                     <SubComment subcommentData={subcomment} />

@@ -3,23 +3,30 @@ import TextareaAutosize from 'react-textarea-autosize';
 import profilePicDan from '../../../New folder/profile_pic_dan.jpg';
 import { IoMdSend  } from 'react-icons/io';
 import { Colors } from '../../../consts';
+import PostsApi from '../../../api/PostsApi';
+import { useSelector } from 'react-redux';
 
-function NewComment() {
-    const [comment, setComment] = useState('');
+function NewComment({postData}) {
+    const [commentText, setCommentText] = useState('');
     const commentInputRef = useRef(null);
-    
+    const loggedInUserId = useSelector((state) => state.authReducer.loggedInUserId);
+
+    const createNewComment = () => {
+        PostsApi.createNewComment(postData.id, commentText, loggedInUserId).then(response => console.log(response));
+    }
+
     return (
-        <div className='new-comment-div'>
-            <img className='user-profile-img comment-profile-img' src={profilePicDan} title='Dan Zlotnikov' />
-            <span className='new-comment'>
+        <div className='discussionSectionDiv'>
+            <img className='userProfileImg commentProfileImg' src={profilePicDan} title='Dan Zlotnikov' alt='Dan Zlotnikov'/>
+            <span className='newComment'>
                 <TextareaAutosize
                     ref={commentInputRef}
                     type='textarea' 
-                    className='comment-inp' 
+                    className='commentInp' 
                     placeholder='Add an insight...' 
-                    onChange = {(e) => setComment(e.target.value)} 
+                    onChange = {(e) => setCommentText(e.target.value)} 
                     />
-                <span className='send-icon'>
+                <span className='sendIcon' onClick={() => createNewComment()}>
                     <IoMdSend size={20} color={Colors.discussionBlue}/>
                 </span>
             </span>

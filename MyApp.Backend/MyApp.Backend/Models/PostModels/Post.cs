@@ -9,7 +9,7 @@ namespace MyApp.Backend.Models.PostModels
         public User Author { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Message { get; set; }
-        public List<DiscussionModel> Discussions { get; set; }
+        public List<CommentModel> Comments { get; set; }
         public List<KnowledgeModel> KnowledgeItems { get; set; }
         public List<PopularModel> PopularItems { get; set; }
     }

@@ -8,6 +8,8 @@ import { TikTok } from "react-tiktok";
 
 function PopularItem({item}) {
     let platformIcon, platformName;
+    let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
+
     switch(PopularPlatformType[item.platformType]) {
         case 'youtube':
             platformIcon = youtubeIcon;
@@ -21,17 +23,19 @@ function PopularItem({item}) {
             platformIcon = tiktokIcon;
             platformName = PopularPlatformType[item.platformType];
             break;
+        default:
+            break;
     }
 
     return (
-        <div className={'item-div ' + platformName} >
-            <img src={platformIcon} className={'item-type-img ' + platformName}/>
+        <div className={'itemDiv ' + platformName} >
+            <img src={platformIcon} className={'itemTypeImg ' + platformName} title={platformName} alt={platformName}/>
             <div className='thumbnail'>
-                {platformName == 'tiktok' ? 
+                {platformName === 'tiktok' ? 
                     <TikTok url={item.iframeUrl} />
                 :
                     <iframe 
-                        className={'thumbnail-iframe ' + platformName} 
+                        className={'thumbnailIframe ' + platformName} 
                         src={item.iframeUrl}
                         title="YouTube video player" 
                         frameborder="0" 
@@ -42,21 +46,21 @@ function PopularItem({item}) {
                 
             </div>
             <div className={'footer ' + platformName}>
-                <span className='reaction-counters'>
+                <span className='reactionCounters'>
                     <span className='brains'>
-                        <FaBrain className='counter-icon' color={Colors.brainPink} size={18}/>
+                        <FaBrain className='counterIcon' color={Colors.brainPink} size={18}/>
                         <span className='counter-number'>
                             {item.brainsCount}
                         </span>
                     </span>
                     <span className='comments'>
-                        <FaComment className='counter-icon' color={Colors.discussionBlue} size={16}/>
+                        <FaComment className='counterIcon' color={Colors.discussionBlue} size={16}/>
                         <span className='counter-number'>
                             {item.commentsCount}
                         </span>
                     </span>
                 </span>
-                <img src={item.author.profileImgUrl} className='uploader-img'></img>
+                <img src={item.uploader.profileImgUrl} className='uploaderImg' title={uploaderFullName} alt={uploaderFullName}></img>
             </div>
         </div>
     )

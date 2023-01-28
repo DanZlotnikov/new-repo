@@ -10,7 +10,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             new PopularModel
             {
                 Id = 1,
-                Author = UserRepository.woman,
+                Uploader = UserRepository.woman,
                 PlatformType = Enums.PopularPlatformType.Youtube,
                 IframeUrl = "https://www.youtube.com/embed/xpyrefzvTpI",
                 BrainsCount = 30597,
@@ -19,7 +19,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             new PopularModel
             {
                 Id = 2,
-                Author = UserRepository.dan,
+                Uploader = UserRepository.dan,
                 PlatformType = Enums.PopularPlatformType.Spotify,
                 IframeUrl = "https://open.spotify.com/embed/episode/76RdMG5Tne7H9jaP7mhkdk/video?utm_source=generator&theme=0",
                 BrainsCount = 17687,
@@ -28,7 +28,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             new PopularModel
             {
                 Id = 3,
-                Author = UserRepository.man,
+                Uploader = UserRepository.man,
                 PlatformType = Enums.PopularPlatformType.Tiktok,
                 IframeUrl = "https://www.tiktok.com/@scout2015/video/7025299649821003013",
                 BrainsCount = 6489,

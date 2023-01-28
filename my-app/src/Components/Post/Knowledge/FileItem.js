@@ -1,39 +1,47 @@
 import { Colors } from '../../../consts';
 import { FaBrain, FaPen } from 'react-icons/fa';
 import dateFormat from 'dateformat';
+import PostsApi from '../../../api/PostsApi';
+import { useSelector } from 'react-redux';
 
 function FileItem({item}) {
+    const loggedInUserId = useSelector((state) => state.authReducer.loggedInUserId);
+    let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
+
+    const addBrainToKnowledgeItem = () => {
+        PostsApi.addBrainToKnowledgeItem(item.id, loggedInUserId)
+    }
     return (
-        <div className='file-list-row'>                        
-            <span className='uploader-img-span'>
-                <img className='file-list-cell user-profile-img' src={item.uploader.profileImgUrl} />
+        <div className='fileListRow'>                        
+            <span className='uploaderImgSpan'>
+                <img className='fileListCell userProfileImg' src={item.uploader.profileImgUrl} title={uploaderFullName} alt={uploaderFullName}/>
             </span>
-            <div className='file-list-cell' >
-                <a href={item.fileUrl} className='file-title-link' rel="noopener noreferrer" target="_blank">
-                    <div className='title-span ellipsis' title={item.title}>
+            <div className='fileListCell' >
+                <a href={item.fileUrl} className='fileTitleLink' rel="noopener noreferrer" target="_blank">
+                    <div className='titleSpan ellipsis' title={item.title}>
                         {item.title}
                     </div>
                 </a>
-                <div className='author-span ellipsis' title={item.originalAuthors}>
+                <div className='authorSpan ellipsis' title={item.originalAuthors}>
                     {item.originalAuthors}
                 </div>
             </div>
-            <span className='file-list-cell published-cell'>
-                <span className='published-span'>
+            <span className='fileListCell publishedCell'>
+                <span className='publishedSpan'>
                     {dateFormat(item.publishDate, 'mmmm, yyyy')}
                 </span>
             </span>  
-            <span className='file-list-cell reactions-cell'>
+            <span className='fileListCell reactionsCell'>
                 <span className='reactions-span'>
-                    <span className='reaction-counters file-reactions'>
+                    <span className='reactionCounters file-reactions'>
                         <span className='brains'>
-                            <FaBrain className='counter-icon' color={Colors.brainPink} size={18}/>
+                            <FaBrain className='counterIcon' color={Colors.brainPink} size={18} onClick={() => addBrainToKnowledgeItem()} />
                             <span className='counter-number'>
                                 {item.brainsCount}
                             </span>
                         </span>
                         <span className='highlights'>
-                            <FaPen className='counter-icon marker-icon' color={Colors.markerOrange} size={16}/>
+                            <FaPen className='counterIcon markerIcon' color={Colors.markerOrange} size={16}/>
                             <span className='counter-number'>
                                 {item.highlightsCount}
                             </span>

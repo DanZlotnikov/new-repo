@@ -1,12 +1,12 @@
 import NewComment from './NewComment';
 import ExistingComment from './ExistingComment'
 
-function DiscussionSection({data}) {
-    var comments = data;
+function DiscussionSection({postData}) {
+    var comments = postData.comments;
     return (
-        <div className='discussion-section-div'>
-            <NewComment />
-            <div className='existing-comments-div'>
+        <div className='discussionSectionDiv'>
+            <NewComment postData={postData}/>
+            <div className='existingComments-div'>
                 {comments.map((comment) => (
                     <span key={comment.id}>
                         <ExistingComment commentData={comment}/>

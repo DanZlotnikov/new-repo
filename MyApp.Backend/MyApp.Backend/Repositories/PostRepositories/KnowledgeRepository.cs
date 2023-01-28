@@ -40,5 +40,10 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 HighlightsCount = 13,
             },
         };
+
+        public static bool AddBrainToKnowledgeItem(long itemId, long userId)
+        {
+            return true;
+        }
     }
 }

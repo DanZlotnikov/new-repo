@@ -3,9 +3,9 @@ import profilePicDan from '../../src/New folder/profile_pic_dan.jpg';
 function Header() {
     return (
         <div className='header'>
-            <span className='user-header'>
-                <img className='user-profile-img' src={profilePicDan} />
-                <span className='user-name'>
+            <span className='userHeader'>
+                <img className='userProfileImg' src={profilePicDan} alt='Dan Zlotnikov'/>
+                <span className='userName'>
                     Dan Zlotnikov
                 </span>
             </span>

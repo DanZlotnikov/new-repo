@@ -7,26 +7,31 @@ namespace MyApp.Backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PostsController : ControllerBase
+    public class KnowledgeController : ControllerBase
     {
         private readonly ILogger<PostsController> _logger;
 
-        public PostsController(ILogger<PostsController> logger)
+        public KnowledgeController(ILogger<PostsController> logger)
         {
             _logger = logger;
         }
 
         #region Get Requests
+
         [HttpGet]
         public List<Post> Get()
         {
-            return PostRepository.posts;
+            return null;
         }
 
-        [HttpGet("GetPost")]
-        public Post GetPostById(long id)
+        #endregion
+
+        #region Post Requests
+
+        [HttpPost("AddBrainToKnowledgeItem")]
+        public bool AddBrainToKnowledgeItem(AddBrainToKnowledgeItemParam param)
         {
-            return Get().First();
+            return KnowledgeRepository.AddBrainToKnowledgeItem(param.itemId, param.userId);
         }
 
         #endregion
