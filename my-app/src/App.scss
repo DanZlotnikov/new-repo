@@ -1,15 +1,4 @@
-$background-gray: #f0f2f5;
-$background-pink: #ffe6fe;
-$background-blue: #e1eaf5;
-$background-orange: #f5ede1;
-$background-white: white;
-$text-gray: #6d6f73;
-$discussion-blue: #35a1ff;
-$text-blue: #103db8;
-$text-light-blue: #5aa3c0;
-$youtube-background: #000000;
-$spotify-background: #1ed75f;
-$tiktok-background: #aefcfc;
+@import 'variables';
 
 body {
   height:100vh;
@@ -34,11 +23,14 @@ textarea {
 }
 
 .header {
-  background-color: $background-white;
+  background: linear-gradient(to right, $app-green, #5ece41) no-repeat 0 0/cover;
   padding: 10px;
   box-shadow: 0px 0px 7px rgba(0,0,0,0.2);
   margin-bottom: 2px;
- 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
   .userHeader {
     .userName {
       position: relative;
@@ -47,43 +39,151 @@ textarea {
       font-weight: 600;
     }
   }
+
+  .logout {
+    cursor: pointer;
+  }
 }
 
-  
-.loginForm {
+
+.loginDiv {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  justify-content: center;
+  padding-top: 100px;
 
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-
-    input {
-      padding: 5px;
-      border-radius: 5px;
-      border: 1px solid gray;
+  .container {
+    background: #fff;
+    border-radius: 90px;
+    box-shadow: 30px 14px 28px rgba(0, 0, 5, .2), 0 10px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    opacity: 85%;
+    width: 750px;
+    min-height: 400px;
+    
+    h1 {
+      font-weight: bold;
+      margin: 0;
     }
+  
+    p {
+      font-size: 14px;
+      font-weight: 100;
+      line-height: 20px;
+      letter-spacing: .5px;
+      margin: 20px 0 30px;
+    }
+  
+    span {
+      font-size: 12px;
+    }
+  
+    a {
+      color: #0e263d;
+      font-size: 14px;
+      text-decoration: none;
+      margin: 15px 0;
+    }
+    
+    .formContainer {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      transition: all .6s ease-in-out;
 
-    div {
-      color: red;
+      &.signInContainer {
+        left: 0;
+        width: 50%;
+        z-index: 2;
+      }
+
+      .loginForm { 
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        padding:  0 50px;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+  
+        .socialContainer {
+          margin: 20px 0;
+          display: inline-flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          width: 50%;
+          
+          .facebookButton {
+            color: $facebook-blue;
+            cursor: pointer;
+          }
+
+          .googleButton {
+            color: $google-red;
+            cursor: pointer;
+          }
+        }
+
+        .forgotPassword {
+          margin-bottom: 20px;
+        }
+      }
+
+      input {
+        background: #eee;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 15px;
+        margin: 8px 0;
+        width: 100%;
+        outline: none;
+      }
     }
   }
 
   button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: green;
-    color: white;
-    border-radius: 5px;
-    border: none;
+    border-radius: 50px;
+    border: 1px solid white;
+    background: $app-green;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
     cursor: pointer;
 
-    &:hover {
-      background-color: darkgreen;
+    &:active {
+      transform: scale(.95);
+    }
+  }
+  
+  .overlayContainer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform .6s ease-in-out;
+    z-index: 100;
+      
+    .overlay {
+      background: linear-gradient(to right, $app-green, #5ece41) no-repeat 0 0/cover;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+
+      .createAccountDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }
@@ -194,7 +294,7 @@ textarea {
         margin-left: 48px;
         width: 60%;
         padding: 10px;
-        padding-right: 45px;
+        padding-right: 50px;
         line-height: inherit;
         font-size: 14px;
         resize: none;
@@ -295,11 +395,28 @@ textarea {
           margin-bottom: 5px;
 
           .newSubcomment {
+            .subcommentAuthorName {
+              font-weight: 600;
+              font-size: 14px;
+              display: block;
+              margin-left: 7px;
+              margin-top: 4px;
+
+              .editingHint {
+                position: absolute;
+                right: 10px;
+                top: 4px;
+                font-size: 12px;
+                font-weight: bold;
+                color: $text-gray;
+              }
+            }
+            
             .newSubcommentInp {
               border: 0;
               background-color: #f0f2f5;
               border-radius: 15px;
-              width: 87%;
+              width: 85%;
               padding: 10px;
               padding-bottom: 0px;
               line-height: inherit;
@@ -309,13 +426,21 @@ textarea {
               bottom: 3px;
               overflow: hidden;
 
+              &.editing {
+                padding-left: 7px;
+                padding-top: 3px;
+                padding-bottom: 0px;
+              }
+
               &:focus {
                 outline: none;
               }
             }
             .sendIcon {
-              position: relative;
-              bottom: 2px;
+              position: absolute;
+              bottom: 5px;
+              right: 10px;
+
               &:hover {
                 cursor: pointer;
               }
@@ -351,6 +476,46 @@ textarea {
             font-weight: 600;
             display: block;
             margin-right: 10px;
+          }
+
+          .subcommentEditSpan {
+            margin-top: 5px;
+            margin-top: 5px;
+            margin-bottom: -5px;
+            font-size: 12px;
+            font-weight: bold;
+            color: $text-gray;
+            cursor: pointer;
+
+            .editSubcomment, .deleteSubcomment  {
+              &:hover {
+                color: $discussion-blue;
+              }
+            }
+
+            .editSubcomment {
+              margin-right: 4px;
+
+            }
+            
+            .deleteAreYouSure {
+              cursor: pointer;
+              .yes {
+                margin-left: 5px;
+                margin-right: 3px;
+
+                &:hover {
+                  color: $discussion-blue;
+                }
+              }
+              .no {
+                margin-left: 3px;
+ 
+                &:hover {
+                  color: $discussion-blue;
+                }
+              }
+            }
           }
         }
       }
@@ -556,15 +721,41 @@ textarea {
     padding-right: 8px;
     padding-top: 1px;
     padding-bottom: 6px;
-    color: #6d6f73;
+    color: $text-gray;
     display: inline-block;
     cursor: pointer;
 
+    &.brained {
+      background-color: $brain-pink;
+      color: white;
+
+      .counterIcon {
+        color: white !important;
+      }
+    } 
+
+    &.commented {
+      background-color: $discussion-blue;
+      color: white;
+
+      .counterIcon {
+        color: white !important;
+      }
+    } 
+    
     .counterIcon {
       position: relative;
       top: 4px;
       right: 2px;
       margin-right: 3px;
+      
+      &.brainsIcon {
+        color: $brain-pink;
+      }
+
+      &.commentsIcon {
+        color: $discussion-blue;
+      }
 
       &.markerIcon {
         margin-bottom: 1px; 
@@ -573,12 +764,22 @@ textarea {
     }        
   }
 
-  .brains:hover {
+  .brains:hover:not(.brained) {
     background-color: $background-pink;
+    color: $text-gray;
+    
+    .counterIcon {
+      color: $brain-pink;
+    }
   }
 
-  .comments:hover {
+  .comments:hover:not(.commented) {
     background-color: $background-blue;
+    color: $text-gray;
+    
+    .counterIcon {
+      color: $discussion-blue;
+    }
   }
 
   .highlights:hover {

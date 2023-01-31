@@ -12,9 +12,11 @@ function PostHeader({post}) {
                         <span className='userName'>
                             {post.author.firstName} {post.author.lastName}
                         </span>
-                        <span className='checkmarkIcon'>
-                            <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
-                        </span>
+                        {post.author.verified &&  
+                            <span className='checkmarkIcon'>
+                                <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
+                            </span>
+                        }
                     </span>
                     <span className='postCreatedTime'>
                     {dateFormat(post.createdDate, 'dddd, mmmm dS, yyyy')} 

@@ -1,7 +1,9 @@
-function BodySelectionCard({selected, imgPath, dataCount}) {
+import { cloneElement } from 'react';
+
+function BodySelectionCard({selected, icon, iconColor, dataCount}) {
     return (
         <div className={'bodySelectionCard ' + (selected ? 'selected' : '')}>
-            <img className='selectionImg' src={imgPath} alt=''/>
+            {cloneElement(icon, {size: 50, color: iconColor})}
             <div className='dataCount'>
                 {dataCount}
             </div>

@@ -1,50 +1,56 @@
-import defaultProfilePic from '../../../../New folder/default_user_profile_pic.png';
-import NewSubComment from './NewSubComment';
-import SubComment from './SubComment';
+import NewSubcomment from './NewSubcomment';
+import ExistingSubcomment from './ExistingSubcomment';
+import { useSelector } from 'react-redux';
+import PostsApi from '../../../../api/PostsApi';
+import { useState } from 'react';
 
-function SubComments({mainCommentData}) {
-    var subcomments = [
-        {
-            id: 1,
-            author: {
-                firstName: 'Sample',
-                lastName: 'User 1',
-                profilePic: defaultProfilePic,
-                hasCheckmark: true
-            },
-            text: 'this is a default text'
-        },
-        {
-            id: 2,
-            author: {
-                firstName: 'Sample',
-                lastName: 'User 2',
-                profilePic: defaultProfilePic,
-                hasCheckmark: true
-            },
-            text: 'this is a default text'
-        },
-        {
-            id: 3,
-            author: {
-                firstName: 'Sample',
-                lastName: 'User 3',
-                profilePic: defaultProfilePic,
-                hasCheckmark: false
-            },
-            text: 'this is a default text'
-        },
-    ];
+function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
+    const currentUser = useSelector((state) => state.authReducer.currentUser);
+    const [subcommentEditCount, setSubcommentEditCount] = useState(0);
+ 
+
+    const handleAddSubcomment = (message) => {
+        PostsApi.addSubcomment(mainCommentData.postId, mainCommentData.id, currentUser.id, message).then(newSubcomment => {
+            if (newSubcomment && newSubcomment.id > 0) {
+                mainCommentData.subcomments.push(newSubcomment);
+                addSubcomment();
+            }
+        });
+    }
+
+    const handleDeleteSubcomment = (subcommentId) => {
+        PostsApi.deleteSubcomment(mainCommentData.postId, mainCommentData.id, subcommentId, currentUser.id).then(success => {
+            if (success) {
+                mainCommentData.subcomments = mainCommentData.subcomments.filter(c => c.id !== subcommentId);
+                deleteSubcomment();
+            }
+        });
+    }
+
+    const handleEditSubcomment = (subcommentId, message) => {
+        if (!message) {
+            handleDeleteSubcomment(subcommentId);
+        }
+        else {
+            PostsApi.editSubcomment(mainCommentData.postId, mainCommentData.id, subcommentId, message).then(success => {
+                if (success) {
+                    mainCommentData.subcomments.find(s => s.id === subcommentId).message = message;
+                    setSubcommentEditCount(subcommentEditCount + 1);
+                }
+            })
+        }
+    }
+
     return (
         <div className='subcommentsDiv'>
-            <NewSubComment mainCommentData={mainCommentData}/>
-           {subcomments.map((subcomment) => (
+            <NewSubcomment handleAddSubcomment={handleAddSubcomment}/>
+           {mainCommentData.subcomments.map((subcomment) => (
                 <span key={subcomment.id}>
-                    <SubComment subcommentData={subcomment} />
+                    <ExistingSubcomment subcommentData={subcomment} handleDeleteSubcomment={handleDeleteSubcomment} handleEditSubcomment={handleEditSubcomment}/>
                 </span>
            ))}
         </div>
     )
 }
 
-export default SubComments;
+export default Subcomments;

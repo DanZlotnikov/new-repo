@@ -1,77 +1,99 @@
-import React, { useState } from 'react';
-import { FacebookLogin } from 'react-facebook-login-component';
+import React from 'react';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { FaFacebook, FaGoogle } from 'react-icons/fa';
+import { config } from '../config';
+import { Navigate  } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { facebookLogin, googleLogin } from '../redux/authReducer';
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
+import { useEffect } from 'react';
 
-function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState({});
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    }
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setError({});
-
-        if (!email) {
-            setError((prevError) => ({
-                ...prevError,
-                email: "Email is required"
-            }));
+const LoginPage = () => {
+    const currentUser = useSelector((state) => state.authReducer.currentUser)
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        function start() {
+            gapi.client.init({
+            clientId: config.googleClientId,
+            scope: 'email',
+            });
         }
 
-        if (!password) {
-            setError((prevError) => ({
-                ...prevError,
-                password: "Password is required"
-            }));
-        }
+        gapi.load('client:auth2', start);
+    }, []);
 
-        if (email && password) {
-            // Add your login logic here
-        }
+    if (currentUser.isLoggedIn) {
+        return <Navigate to="/home" />
     }
 
-    const responseFacebook = (response) => {
-        console.log(response);
-        setIsLoggedIn(true);
-    }
+    const handleFacebookLogin = (response) => {
+        dispatch(facebookLogin(response));
+    };
+
+    const handleGoogleLogin = (response) => {
+        dispatch(googleLogin(response));
+    };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Email:
-                    <input type="email" value={email} onChange={handleEmailChange} />
-                    {error.email && <div>{error.email}</div>}
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={handlePasswordChange} />
-                    {error.password && <div>{error.password}</div>}
-                </label>
-                <br />
-                <button type="submit">Login</button>
-            </form>
-            <FacebookLogin socialId="347160866103236"
-                language="en_US"
-                scope="public_profile,email"
-                responseHandler={responseFacebook}
-                xfbml={true}
-                fields="id,email,name"
-                version="v4.0"
-                className="facebook-login"
-                buttonText="Login With Facebook"/>
-            {isLoggedIn ? <div>You are logged in!</div> : null}
+        <div className='loginDiv'>
+            <div className='container'>
+                <div className='formContainer signInContainer'>
+                    <div className='loginForm'>
+                        <h1 className='signinHeader'>Welcome</h1>
+                        <div className='socialContainer'>
+                        <FacebookLogin
+                            appId={config.facebookAppId}
+                            callback={handleFacebookLogin}
+                            render={(renderProps) => (
+                                <span
+                                    onClick={renderProps.onClick}
+                                    className='facebookLoginButton'
+                                    >
+                                    <FaFacebook className='facebookButton' size={40}/>
+                                </span>
+                            )}
+                        />
+                        <GoogleLogin
+                            clientId={config.googleClientId}
+                            buttonText=''
+                            onSuccess={handleGoogleLogin}
+                            onFailure={(response) => {console.log(response);}}
+                            cookiePolicy={'single_host_origin'}
+                            render={(renderProps) => (
+                                <span
+                                    onClick={renderProps.onClick}
+                                    className='googleLoginButton'
+                                    >
+                                    <FaGoogle className='googleButton' size={40}/>
+                                </span>
+                            )}
+                        />
+                        </div>
+                        <span> Or sign in using E-Mail Address</span>
+                        <label>
+                            <input type='email' placeholder='Email'/>
+                        </label>
+                        <label>
+                            <input type='password' placeholder='Password'/>
+                        </label>
+                        <span className='forgotPassword'>Forgot your password?</span>
+                        <button className='signIn'>Sign In</button>
+                    </div>
+                </div>
+                <div className='overlayContainer'>
+                    <div className='overlay'>
+                        <div className='createAccountDiv'>
+                            <h1>Create Account!</h1>
+                            <p>Sign up if you still don't have an account... </p>
+                            <button>Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
-}
+};
 
 export default LoginPage;

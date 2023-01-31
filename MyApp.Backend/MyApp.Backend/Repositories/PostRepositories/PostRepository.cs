@@ -17,7 +17,5 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 PopularItems = PopularRepository.popularItems
             }
         };
-
-
     }
 }

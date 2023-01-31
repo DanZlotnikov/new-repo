@@ -1,8 +1,7 @@
 import NewComment from './NewComment';
 import ExistingComment from './ExistingComment'
 
-function DiscussionSection({postData}) {
-    var comments = postData.comments;
+function DiscussionSection({comments}) {
     return (
         <div className='discussionSectionDiv'>
             <NewComment postData={postData}/>

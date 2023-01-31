@@ -13,7 +13,25 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 PostId = 1,
                 Author = UserRepository.margot,
                 BrainsCount = 98,
-                SubCommentsCount = 73,
+                Subcomments = new List<SubcommentModel>
+                {
+                    new SubcommentModel
+                    {
+                        Id = 1,
+                        PostId = 1,
+                        MainCommentId = 1,
+                        Author = UserRepository.man,
+                        Message = "YEAH MARGOT LETS GOO"
+                    },
+                    new SubcommentModel
+                    {
+                        Id = 2,
+                        PostId = 1,
+                        MainCommentId = 1,
+                        Author = UserRepository.dan,
+                        Message = "Read the docs brooo"
+                    },
+                },
                 Message = "We gotta all unite to save the planet! Go see my highlights in #Knowledge"
             },
             new CommentModel
@@ -22,7 +40,25 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 PostId = 1,
                 Author = UserRepository.dan,
                 BrainsCount = 75,
-                SubCommentsCount = 66,
+                Subcomments = new List<SubcommentModel>
+                {
+                    new SubcommentModel
+                    {
+                        Id = 3,
+                        PostId = 1,
+                        MainCommentId = 1,
+                        Author = UserRepository.woman,
+                        Message = "I read them all and you're still wrong"
+                    },
+                    new SubcommentModel
+                    {
+                        Id = 4,
+                        PostId = 1,
+                        MainCommentId = 1,
+                        Author = UserRepository.man,
+                        Message = "I don't need to read it"
+                    },
+                },
                 Message = "This is a really complex issue. Check out some of the UN's research paper I posted in #Knowledge"
             },
             new CommentModel
@@ -31,7 +67,17 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 PostId = 1,
                 Author = UserRepository.woman,
                 BrainsCount = 54,
-                SubCommentsCount = 23,
+                Subcomments = new List<SubcommentModel>
+                {
+                    new SubcommentModel
+                    {
+                        Id = 1,
+                        PostId = 1,
+                        MainCommentId = 1,
+                        Author = UserRepository.margot,
+                        Message = "If you don't have anything smart to say, say nothing"
+                    },
+                },
                 Message = "Climate change is a complete hoax!!! I JUST posted about it on #Popular"
             },
 
@@ -41,7 +87,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 PostId = 1,
                 Author = UserRepository.man,
                 BrainsCount = 13,
-                SubCommentsCount = 5,
+                Subcomments = new List<SubcommentModel> { },
                 Message = "Hey @ElonMusk, would you find a solution already?"
             }
         };
@@ -51,12 +97,34 @@ namespace MyApp.Backend.Repositories.PostRepositories
             return true;
         }
 
+        public static bool RemoveBrainFromComment(long postId, long commentId, long userId)
+        {
+            return true;
+        }
+
         public static bool CreateNewComment(long postId, string commentText, long authorUserId)
         {
             return true;
         }
 
-        public static bool CreateNewSubComment(long postId, long mainCommentId, string commentText, long authorUserId)
+        public static SubcommentModel AddSubcomment(long postId, long mainCommentId, long authorUserId, string message)
+        {
+            return new SubcommentModel
+            {
+                Id = 100,
+                PostId = postId,
+                MainCommentId = mainCommentId,
+                Author = UserRepository.dan,
+                Message = message
+            };
+        }
+
+        public static bool DeleteSubcomment(long postId, long mainCommentId, long subcommentId, long removingUserId)
+        {
+            return true;
+        }
+
+        public static bool EditSubcomment(long postId, long mainCommentId, long subcommentId, string message)
         {
             return true;
         }

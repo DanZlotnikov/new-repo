@@ -2,11 +2,11 @@
 
 namespace MyApp.Backend.Controllers.HttpRequestParams
 {
-    public class CreateNewSubCommentParam
+    public class AddSubcommentParam
     {
         public long postId { get; set; }
         public long mainCommentId { get; set; }
-        public string commentText { get; set; }
+        public string message { get; set; }
         public long authorUserId { get; set; }
     }
 }

@@ -5,11 +5,11 @@ import PostsApi from '../../../api/PostsApi';
 import { useSelector } from 'react-redux';
 
 function FileItem({item}) {
-    const loggedInUserId = useSelector((state) => state.authReducer.loggedInUserId);
+    const currentUser = useSelector((state) => state.authReducer.currentUser);
     let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
 
     const addBrainToKnowledgeItem = () => {
-        PostsApi.addBrainToKnowledgeItem(item.id, loggedInUserId)
+        PostsApi.addBrainToKnowledgeItem(item.id, currentUser.id)
     }
     return (
         <div className='fileListRow'>                        

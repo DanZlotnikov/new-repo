@@ -1,9 +1,9 @@
 import PopularItem from './PopularItem';
 
-function PopularSection({postData}) {
+function PopularSection({data}) {
     return (
         <div className='popularSectionDiv'>
-            {postData.popularItems.map((item) => (
+            {data.map((item) => (
                 <PopularItem key={item.id} item={item} />
             ))}
         </div>

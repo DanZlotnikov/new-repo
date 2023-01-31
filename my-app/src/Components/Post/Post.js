@@ -14,14 +14,9 @@ function Post() {
 
     const initBodySectionData = (postData) => {
         setPost(postData);
-        PostBodySections.filter(section => section.component.type.name === (<DiscussionSection />).type.name)[0].count = postData.comments.length;
-        PostBodySections.filter(section => section.component.type.name === (<DiscussionSection />).type.name)[0].data = postData;
-
-        PostBodySections.filter(section => section.component.type.name === (<KnowledgeSection />).type.name)[0].count = postData.knowledgeItems.length;
-        PostBodySections.filter(section => section.component.type.name === (<KnowledgeSection />).type.name)[0].data = postData;
-        
-        PostBodySections.filter(section => section.component.type.name === (<PopularSection />).type.name)[0].count = postData.popularItems.length;
-        PostBodySections.filter(section => section.component.type.name === (<PopularSection />).type.name)[0].data = postData;
+        PostBodySections.filter(section => section.component.type.name === (<DiscussionSection />).type.name)[0].data = postData.comments;
+        PostBodySections.filter(section => section.component.type.name === (<KnowledgeSection />).type.name)[0].data = postData.knowledgeItems;
+        PostBodySections.filter(section => section.component.type.name === (<PopularSection />).type.name)[0].data = postData.popularItems;
     }
 
     useEffect(() => {
@@ -41,7 +36,7 @@ function Post() {
             <div className='bodySelectionDiv'>
             {PostBodySections.map((section) => (
                 <span key={section.key} onClick={() => setSelectedSection(section)}>
-                    <BodySelectionCard selected={selectedSection.component.type.name === section.component.type.name} imgPath={section.imgPath} dataCount={section.count} />
+                    <BodySelectionCard selected={selectedSection.component.type.name === section.component.type.name} icon={section.icon} iconColor={section.iconColor} dataCount={section.count} />
                 </span>
             ))}
             </div>

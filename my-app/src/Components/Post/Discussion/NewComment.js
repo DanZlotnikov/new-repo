@@ -9,10 +9,10 @@ import { useSelector } from 'react-redux';
 function NewComment({postData}) {
     const [commentText, setCommentText] = useState('');
     const commentInputRef = useRef(null);
-    const loggedInUserId = useSelector((state) => state.authReducer.loggedInUserId);
+    const currentUser = useSelector((state) => state.authReducer.currentUser);
 
     const createNewComment = () => {
-        PostsApi.createNewComment(postData.id, commentText, loggedInUserId).then(response => console.log(response));
+        PostsApi.createNewComment(postData.id, commentText, currentUser.id).then(response => console.log(response));
     }
 
     return (
