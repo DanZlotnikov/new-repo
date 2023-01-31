@@ -1,5 +1,4 @@
 import { FaCheckCircle, FaGlobeAmericas  } from 'react-icons/fa';
-import { Colors } from '../../consts.js';
 import dateFormat from 'dateformat';
 
 function PostHeader({post}) {
@@ -14,7 +13,7 @@ function PostHeader({post}) {
                         </span>
                         {post.author.verified &&  
                             <span className='checkmarkIcon'>
-                                <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
+                                <FaCheckCircle size={13}/>
                             </span>
                         }
                     </span>

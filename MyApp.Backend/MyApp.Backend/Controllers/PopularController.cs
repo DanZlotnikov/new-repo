@@ -7,11 +7,11 @@ namespace MyApp.Backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class KnowledgeController : ControllerBase
+    public class PopularController : ControllerBase
     {
         private readonly ILogger<PostsController> _logger;
 
-        public KnowledgeController(ILogger<PostsController> logger)
+        public PopularController(ILogger<PostsController> logger)
         {
             _logger = logger;
         }
@@ -28,16 +28,16 @@ namespace MyApp.Backend.Controllers
 
         #region Post Requests
 
-        [HttpPost("AddBrainToKnowledgeItem")]
-        public bool AddBrainToKnowledgeItem(AddBrainToKnowledgeItemParam param)
+        [HttpPost("AddBrainToPopularItem")]
+        public bool AddBrainToPopularItem(AddBrainToKnowledgeItemParam param)
         {
-            return KnowledgeRepository.AddBrainToKnowledgeItem(param.postId, param.itemId, param.userId);
+            return PopularRepository.AddBrainToPopularItem(param.postId, param.itemId, param.userId);
         }
 
-        [HttpPost("RemoveBrainFromKnowledgeItem")]
-        public bool RemoveBrainFromKnowledgeItem(RemoveBrainFromKnowledgeItemParam param)
+        [HttpPost("RemoveBrainFromPopularItem")]
+        public bool RemoveBrainFromPopularItem(RemoveBrainFromKnowledgeItemParam param)
         {
-            return KnowledgeRepository.RemoveBrainFromKnowledgeItem(param.postId, param.itemId, param.userId);
+            return PopularRepository.RemoveBrainFromPopularItem(param.postId, param.itemId, param.userId);
         }
 
         #endregion

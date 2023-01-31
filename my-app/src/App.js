@@ -20,7 +20,7 @@ function App() {
       {!isAuthenticated && <Navigate to="/login" />}
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<MainPage />} />
+        <Route path="/" element={<MainPage />} />
       </Routes>
     </div>
   );

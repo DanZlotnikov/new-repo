@@ -35,5 +35,15 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 CommentsCount = 447
             }
         };
+
+        public static bool AddBrainToPopularItem(long postId, long itemId, long userId)
+        {
+            return true;
+        }
+
+        public static bool RemoveBrainFromPopularItem(long postId, long itemId, long userId)
+        {
+            return true;
+        }
     }
 }

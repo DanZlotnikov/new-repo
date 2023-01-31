@@ -1,3 +1,4 @@
+import texts from '../../../texts';
 import FileItem from './FileItem';
 
 function FileList({items}) {
@@ -7,16 +8,15 @@ function FileList({items}) {
                 <span className='uploaderImg'>
                 </span>
                 <span className='fileListCell header-name' >
-                    Title
+                    {texts.knowledge.itemListHeaderTitle}
                 </span>
                 <span className='fileListCell publishedCell'>
-                    Published
+                    {texts.knowledge.itemListHeaderPublished}
                 </span>  
             </div>
             {items.map((item) => 
                <FileItem key={item.id} item={item} />
             )}
-            
         </div>
     )
 }

@@ -92,6 +92,24 @@ namespace MyApp.Backend.Repositories.PostRepositories
             }
         };
 
+        public static bool EditComment(long postId, long commentId, string message)
+        {
+            return true;
+        }
+
+        public static CommentModel CreateNewComment(long postId, long authorUserId, string message)
+        {
+            return new CommentModel
+            {
+                Id = 100,
+                PostId = postId,
+                Author = UserRepository.dan,
+                Message = message,
+                Subcomments = new List<SubcommentModel>(),
+                BrainsCount = 0
+            };
+        }
+
         public static bool AddBrainToComment(long postId, long commentId, long userId)
         {
             return true;
@@ -102,10 +120,6 @@ namespace MyApp.Backend.Repositories.PostRepositories
             return true;
         }
 
-        public static bool CreateNewComment(long postId, string commentText, long authorUserId)
-        {
-            return true;
-        }
 
         public static SubcommentModel AddSubcomment(long postId, long mainCommentId, long authorUserId, string message)
         {

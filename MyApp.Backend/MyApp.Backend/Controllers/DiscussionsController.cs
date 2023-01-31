@@ -29,6 +29,19 @@ namespace MyApp.Backend.Controllers
 
         #region Post Requests
 
+        [HttpPost("CreateNewComment")]
+        public CommentModel CreateNewComment(CreateNewCommentParam param)
+        {
+            return DiscussionRepository.CreateNewComment(param.postId, param.authorUserId, param.message );
+        }
+
+
+        [HttpPost("EditComment")]
+        public bool EditComment(EditCommentParam param)
+        {
+            return DiscussionRepository.EditComment(param.postId, param.commentId, param.message);
+        }
+
         [HttpPost("AddBrainToComment")]
         public bool AddBrainToComment(AddBrainToCommentParam param)
         {
@@ -41,11 +54,6 @@ namespace MyApp.Backend.Controllers
             return DiscussionRepository.RemoveBrainFromComment(param.postId, param.commentId, param.userId);
         }
 
-        [HttpPost("CreateNewComment")]
-        public bool CreateNewComment(CreateNewCommentParam param)
-        {
-            return DiscussionRepository.CreateNewComment(param.postId, param.commentText, param.authorUserId);
-        }
 
         [HttpPost("AddSubcomment")]
         public SubcommentModel AddSubcomment(AddSubcommentParam param)

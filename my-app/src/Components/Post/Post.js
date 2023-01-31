@@ -2,7 +2,7 @@ import BodySelectionCard from '../Common/BodySelectionCard';
 import { useState, useEffect, useRef, cloneElement } from 'react';
 import PostHeader from './PostHeader';
 import { PostBodySections } from '../../consts';
-import PostsApi from '../../api/PostsApi';
+import PostsApi from '../../api/PostApi';
 import DiscussionSection from './Discussion/DiscussionSection';
 import KnowledgeSection from './Knowledge/KnowledgeSection';
 import PopularSection from './Popular/PopularSection';
@@ -14,9 +14,9 @@ function Post() {
 
     const initBodySectionData = (postData) => {
         setPost(postData);
-        PostBodySections.filter(section => section.component.type.name === (<DiscussionSection />).type.name)[0].data = postData.comments;
-        PostBodySections.filter(section => section.component.type.name === (<KnowledgeSection />).type.name)[0].data = postData.knowledgeItems;
-        PostBodySections.filter(section => section.component.type.name === (<PopularSection />).type.name)[0].data = postData.popularItems;
+        PostBodySections.filter(section => section.component.type.name === (<DiscussionSection />).type.name)[0].postData = postData;
+        PostBodySections.filter(section => section.component.type.name === (<KnowledgeSection />).type.name)[0].postData = postData;
+        PostBodySections.filter(section => section.component.type.name === (<PopularSection />).type.name)[0].postData = postData;
     }
 
     useEffect(() => {
@@ -36,11 +36,11 @@ function Post() {
             <div className='bodySelectionDiv'>
             {PostBodySections.map((section) => (
                 <span key={section.key} onClick={() => setSelectedSection(section)}>
-                    <BodySelectionCard selected={selectedSection.component.type.name === section.component.type.name} icon={section.icon} iconColor={section.iconColor} dataCount={section.count} />
+                    <BodySelectionCard selected={selectedSection.component.type.name === section.component.type.name} icon={section.icon} iconColor={section.iconColor} dataCount={section.postData[section.dataAttributeName].length} />
                 </span>
             ))}
             </div>
-            {cloneElement(selectedSection.component, {postData: selectedSection.data})}
+            {cloneElement(selectedSection.component, {postData: selectedSection.postData})}
         </div>
     )
 }

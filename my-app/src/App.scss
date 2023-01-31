@@ -259,9 +259,11 @@ textarea {
       padding-right: 10px;
       border-radius: 14px;
       margin-right: 10px;
-      
+      margin-bottom: 15px;
+
       &.selected {
         background-color: $background-gray;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       }
 
       &:hover {
@@ -275,7 +277,9 @@ textarea {
       }
 
       .dataCount {
-        font-size: 11px;
+        margin-top: 3px;
+        font-size: 12px;
+        font-weight: bold;
         color: $text-gray;
       }
     }
@@ -283,61 +287,81 @@ textarea {
 }
 
 .discussionSectionDiv {
-  .discussionSectionDiv {
+  .newCommentCont {
     position: relative;
-    margin-bottom: 20px;
+    width: 65%;
+    padding: 3px;
+    background-color: #f0f2f5;
+    border-radius: 11px;
+    margin-top: 3px;
+    margin-bottom: 25px;
+    margin-left: 48px;
+
+    .commentAuthorName {
+      font-weight: 600;
+      font-size: 14px;
+      display: block;
+      margin-left: 7px;
+      margin-top: 4px;
+
+      .editingHint {
+        position: absolute;
+        right: 10px;
+        top: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        color: $text-gray;
+
+        &.empty {
+          color: $brain-pink;
+        }
+      }
+    }
+
     .newComment {
       .commentInp {
         border: 0;
         background-color: #f0f2f5;
         border-radius: 15px;
-        margin-left: 48px;
-        width: 60%;
+        width: 85%;
         padding: 10px;
-        padding-right: 50px;
+        padding-bottom: 0px;
         line-height: inherit;
         font-size: 14px;
         resize: none;
         position: relative;
         bottom: 3px;
         overflow: hidden;
+        
+        &.editing {
+          padding-top: 0;
+          padding-left: 8px;
+          padding-bottom: 5px;
+          top: 0px;
+        }
 
         &:focus {
           outline: none;
         }
       }
-
+  
       .sendIcon {
-        position: relative;
-        right: 30px;
-        bottom: 13px;
-
+        position: absolute;
+        right: 12px;
+        bottom: 6px;
+        color: $app-green;
+  
         &:hover {
           cursor: pointer;
         }
       }
     }
   }
+  
   .commentDiv {
     position: relative;
-    margin-bottom: 20px;
-    .newComment {
-      .commentInp {
-        border: 0;
-        background-color: #f0f2f5;
-        border-radius: 15px;
-        margin-left: 48px;
-        width: 60%;
-        padding: 10px;
-        line-height: inherit;
-        font-size: 14px;
-        resize: none;
-        position: relative;
-        bottom: 3px;
-        overflow: hidden;
-      }
-    }
-
+    margin-bottom: 30px;
+    
     .existingComment {
       border: 0;
       background-color: #f0f2f5;
@@ -349,7 +373,8 @@ textarea {
       resize: none;
       position: relative;
       bottom: 3px;
-  
+      min-width: 240px;
+      
       &:focus {
         outline: none;
       }
@@ -362,6 +387,46 @@ textarea {
     }
   }
   
+  .commentEditSpan {
+    margin-top: 5px;
+    margin-top: 5px;
+    margin-bottom: -5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $text-gray;
+    cursor: pointer;
+
+    .editSpan, .deleteSubcomment  {
+      &:hover {
+        color: $discussion-blue;
+      }
+    }
+
+    .editSpan {
+      margin-right: 4px;
+
+    }
+    
+    .deleteAreYouSure {
+      cursor: pointer;
+      .yes {
+        margin-left: 5px;
+        margin-right: 3px;
+
+        &:hover {
+          color: $discussion-blue;
+        }
+      }
+      .no {
+        margin-left: 3px;
+
+        &:hover {
+          color: $discussion-blue;
+        }
+      }
+    }
+  }
+
   .subcommentsContainer {
     display: block;
     margin-left: 80px;
@@ -369,7 +434,7 @@ textarea {
 
     .seeComments {
       font-size: 14px;
-      color: $discussion-blue;
+      color: $app-green;
       width: fit-content;
       padding: 3px;
       padding-right: 10px;
@@ -440,6 +505,7 @@ textarea {
               position: absolute;
               bottom: 5px;
               right: 10px;
+              color: $app-green;
 
               &:hover {
                 cursor: pointer;
@@ -487,13 +553,13 @@ textarea {
             color: $text-gray;
             cursor: pointer;
 
-            .editSubcomment, .deleteSubcomment  {
+            .editSpan, .deleteSpan  {
               &:hover {
                 color: $discussion-blue;
               }
             }
 
-            .editSubcomment {
+            .editSpan {
               margin-right: 4px;
 
             }
@@ -561,6 +627,10 @@ textarea {
           .titleSpan {
             cursor: pointer;
             color: $text-blue;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
 
@@ -588,6 +658,7 @@ textarea {
   height: fit-content;
   border-radius: 10px;
   padding: 5%;
+  margin-top: -20px;
  
   .itemDiv {
     display: inline-block;
@@ -682,6 +753,11 @@ textarea {
     left: 10px;
   }
 
+  &.newCommentProfileImg {
+    position: absolute;
+    left: -38px;
+  }
+
   &.subcommentProfileImg {
     position: absolute;
     left: -25px;
@@ -694,6 +770,7 @@ textarea {
   position: relative;
   left: 7px;
   top: 0px;
+  color: $app-green;
 }
 
 .ellipsis {
@@ -703,6 +780,9 @@ textarea {
 }
 
 .reactionCounters {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
   &.commentCounters {
     position: absolute;
     right: 12px;
@@ -721,12 +801,11 @@ textarea {
     padding-right: 8px;
     padding-top: 1px;
     padding-bottom: 6px;
-    color: $text-gray;
     display: inline-block;
     cursor: pointer;
 
     &.brained {
-      background-color: $brain-pink;
+      background-color: $discussion-blue;
       color: white;
 
       .counterIcon {
@@ -735,7 +814,7 @@ textarea {
     } 
 
     &.commented {
-      background-color: $discussion-blue;
+      background-color: $app-green;
       color: white;
 
       .counterIcon {
@@ -750,14 +829,15 @@ textarea {
       margin-right: 3px;
       
       &.brainsIcon {
-        color: $brain-pink;
-      }
-
-      &.commentsIcon {
         color: $discussion-blue;
       }
 
+      &.commentsIcon {
+        color: $app-green;
+      }
+
       &.markerIcon {
+        color: $text-blue;
         margin-bottom: 1px; 
         margin-left: 3px;
       }
@@ -765,11 +845,11 @@ textarea {
   }
 
   .brains:hover:not(.brained) {
-    background-color: $background-pink;
+    background-color: $background-blue;
     color: $text-gray;
     
     .counterIcon {
-      color: $brain-pink;
+      color: $discussion-blue;
     }
   }
 
@@ -778,7 +858,7 @@ textarea {
     color: $text-gray;
     
     .counterIcon {
-      color: $discussion-blue;
+      color: $app-green;
     }
   }
 

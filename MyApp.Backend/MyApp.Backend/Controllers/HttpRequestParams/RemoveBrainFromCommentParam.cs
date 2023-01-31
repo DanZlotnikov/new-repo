@@ -1,6 +1,4 @@
-﻿using MyApp.Backend.Models;
-
-namespace MyApp.Backend.Controllers.HttpRequestParams
+﻿namespace MyApp.Backend.Controllers.HttpRequestParams
 {
     public class RemoveBrainFromCommentParam
     {

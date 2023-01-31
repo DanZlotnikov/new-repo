@@ -1,27 +1,20 @@
 import axios from 'axios';
 import { config } from '../config';
 
-const PostsApi = {
-  getPost: (id) => {
-    return axios.get(`${config.apiBaseUrl}/Posts/GetPost`, {
-      params: {id: id}
-    })
-    .then(response => response.data);
-  },
-  createNewComment: (postId, commentText, authorUserId) => {
+const DiscussionsApi = {
+  createNewComment: (postId, authorUserId, message) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/CreateNewComment`, {
       postId: postId,
-      commentText: commentText,
-      authorUserId: authorUserId
+      authorUserId: authorUserId,
+      message: message,
     })
     .then(response => response.data);
   },
-  createNewSubcomment: (postId, mainCommentId, commentText, authorUserId) => {
-    return axios.post(`${config.apiBaseUrl}/Discussions/CreateNewSubcomment`, {
+  editComment: (postId, commentId, message) => {
+    return axios.post(`${config.apiBaseUrl}/Discussions/EditComment`, {
       postId: postId,
-      mainCommentId: mainCommentId,
-      commentText: commentText,
-      authorUserId: authorUserId
+      commentId: commentId,
+      message: message,
     })
     .then(response => response.data);
   },
@@ -77,4 +70,4 @@ const PostsApi = {
   }
 }
 
-export default PostsApi;
+export default DiscussionsApi;

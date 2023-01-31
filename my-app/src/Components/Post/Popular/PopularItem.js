@@ -1,12 +1,16 @@
-import { FaBrain, FaComment } from 'react-icons/fa';
-import { Colors } from '../../../consts';
+import { FaBrain } from 'react-icons/fa';
 import { PopularPlatformType } from '../../../consts';
 import youtubeIcon from '../../../New folder/youtube_icon.png';
 import tiktokIcon from '../../../New folder/tiktok_icon.png';
 import spotifyIcon from '../../../New folder/spotify_icon.png';
 import { TikTok } from "react-tiktok";
+import { useSelector } from 'react-redux';
+import PopularApi from '../../../api/PopularApi';
+import { useState } from 'react';
 
 function PopularItem({item}) {
+    const currentUser = useSelector((state) => state.authReducer.currentUser);
+    const [itemBrained, setItemBrained] = useState(false);
     let platformIcon, platformName;
     let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
 
@@ -25,6 +29,25 @@ function PopularItem({item}) {
             break;
         default:
             break;
+    }
+
+    const handleBrainClick = () => {
+        if (itemBrained) {
+            PopularApi.removeBrainFromPopularItem(item.postId, item.id, currentUser.id).then(success => {
+                if (success) {
+                    item.brainsCount--;
+                    setItemBrained(false);
+                }
+            });
+        }
+        else {
+            PopularApi.addBrainToPopularItem(item.postId, item.id, currentUser.id).then(success => {
+                if (success) {
+                    item.brainsCount++;
+                    setItemBrained(true);
+                }
+            });
+        }
     }
 
     return (
@@ -47,18 +70,18 @@ function PopularItem({item}) {
             </div>
             <div className={'footer ' + platformName}>
                 <span className='reactionCounters'>
-                    <span className='brains'>
-                        <FaBrain className='counterIcon' color={Colors.brainPink} size={18}/>
+                    <span className={'brains ' + (itemBrained ? 'brained' : '')} onClick={handleBrainClick}>
+                        <FaBrain className='counterIcon brainsIcon' size={18}/>
                         <span className='counter-number'>
                             {item.brainsCount}
                         </span>
                     </span>
-                    <span className='comments'>
-                        <FaComment className='counterIcon' color={Colors.discussionBlue} size={16}/>
+                    {/* <span className='comments'>
+                        <FaComment className='counterIcon commentsIcon' size={16}/>
                         <span className='counter-number'>
                             {item.commentsCount}
                         </span>
-                    </span>
+                    </span> */}
                 </span>
                 <img src={item.uploader.profileImgUrl} className='uploaderImg' title={uploaderFullName} alt={uploaderFullName}></img>
             </div>

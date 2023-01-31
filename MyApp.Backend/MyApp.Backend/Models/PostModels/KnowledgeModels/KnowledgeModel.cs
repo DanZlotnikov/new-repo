@@ -3,6 +3,7 @@
     public class KnowledgeModel
     {
         public long Id { get; set; }
+        public long PostId { get; set; }
         public User Uploader { get; set; }
         public string Title { get; set; }
         public string FileUrl { get; set; }

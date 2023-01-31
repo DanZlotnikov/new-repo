@@ -2,7 +2,7 @@
 
 namespace MyApp.Backend.Controllers.HttpRequestParams
 {
-    public class AddBrainToKnowledgeItemParam
+    public class AddBrainToPopularItemParam
     {
         public long postId { get; set; }
         public long itemId { get; set; }

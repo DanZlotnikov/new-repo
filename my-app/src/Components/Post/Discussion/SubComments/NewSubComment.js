@@ -4,22 +4,22 @@ import profilePicDan from '../../../../New folder/profile_pic_dan.jpg'
 import { FaCheckCircle } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 import { GiCheckMark } from 'react-icons/gi';
-import { Colors } from '../../../../consts';
+import texts from '../../../../texts';
 
 function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSubcomment}) {
-    const [subcommentText, setSubcommentText] = useState(subcommentDataToEdit ? subcommentDataToEdit.message : '');
+    const [message, setMessage] = useState(subcommentDataToEdit ? subcommentDataToEdit.message : '');
     const commentInputRef = useRef(null);
     
     const addSubcomment = () => {
-        handleAddSubcomment(subcommentText);
+        handleAddSubcomment(message);
         commentInputRef.current.value = '';
-        setSubcommentText('');
+        setMessage('');
     }
 
     const editSubcomment = () => {
-        handleEditSubcomment(subcommentText);
+        handleEditSubcomment(message);
         commentInputRef.current.value = '';
-        setSubcommentText('');
+        setMessage('');
     }
 
     return (
@@ -31,28 +31,29 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
                         {subcommentDataToEdit.author.firstName + ' ' + subcommentDataToEdit.author.lastName}
                         {subcommentDataToEdit.author.verified &&  
                             <span className='checkmarkIcon'>
-                                <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
+                                <FaCheckCircle size={13}/>
                             </span>
                         }
                         <span className='editingHint'>
-                            [Editing]
+                            {texts.discussions.commentEditHint}
                         </span>
                     </span>
                 }
                 <TextareaAutosize
+                    autoFocus={subcommentDataToEdit ? true : false}
                     ref={commentInputRef}
                     type='textarea' 
                     className={'newSubcommentInp ' + (subcommentDataToEdit ? 'editing' : '')}
-                    placeholder={subcommentDataToEdit ? '' : 'Add a comment...'}
-                    value={subcommentText}
-                    onChange = {(e) => setSubcommentText(e.target.value)} 
-                    />
+                    placeholder={subcommentDataToEdit ? '' : texts.discussions.newSubcommentPlaceholder}
+                    value={message}
+                    onChange = {(e) => setMessage(e.target.value)} 
+                />
                 <span className='sendIcon' onClick={() => subcommentDataToEdit ? editSubcomment() : addSubcomment()}>
                     {subcommentDataToEdit && 
-                        <GiCheckMark size={20} color={Colors.discussionBlue} />
+                        <GiCheckMark size={20}  />
                     }
                     {!subcommentDataToEdit && 
-                        <IoMdSend size={20} color={Colors.discussionBlue} />
+                        <IoMdSend size={20} />
                     }
                 </span>
             </span>

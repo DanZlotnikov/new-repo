@@ -25,7 +25,7 @@ const LoginPage = () => {
     }, []);
 
     if (currentUser.isLoggedIn) {
-        return <Navigate to="/home" />
+        return <Navigate to="/" />
     }
 
     const handleFacebookLogin = (response) => {

@@ -1,7 +1,7 @@
 import KnowledgeSection from './Components/Post/Knowledge/KnowledgeSection';
 import DiscussionSection from './Components/Post/Discussion/DiscussionSection';
 import PopularSection from './Components/Post/Popular/PopularSection.js';
-import { FaDiscourse, FaBookOpen } from 'react-icons/fa';
+import { FaBookOpen, FaFire, FaComments } from 'react-icons/fa';
 
 export const Colors = {
     backgroundGray: '#f0f2f5',
@@ -13,9 +13,9 @@ export const Colors = {
 }
 
 export let PostBodySections = [
-    { key: 0, component: <DiscussionSection />, icon: <FaDiscourse />, iconColor: Colors.discussionBlue },
-    { key: 1, component: <KnowledgeSection />, icon: <FaBookOpen />, iconColor: Colors.appGreen },
-    { key: 2, component: <PopularSection />, icon: <FaDiscourse />, iconColor: Colors.brainPink },
+    { key: 0, component: <DiscussionSection />, icon: <FaComments />, iconColor: Colors.appGreen, dataAttributeName: 'comments' },
+    { key: 1, component: <KnowledgeSection />, icon: <FaBookOpen />, iconColor: Colors.discussionBlue, dataAttributeName: 'knowledgeItems' },
+    { key: 2, component: <PopularSection />, icon: <FaFire />, iconColor: Colors.brainPink, dataAttributeName: 'popularItems' },
 ]
 
 export const PopularPlatformType = {

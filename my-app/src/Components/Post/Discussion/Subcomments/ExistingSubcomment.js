@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { Colors } from '../../../../consts';
 import NewSubcomment from './NewSubcomment';
+import EditDeleteSpan from '../../../Common/EditDeleteSpan';
 
 function ExistingSubcomment({subcommentData, handleEditSubcomment, handleDeleteSubcomment}) {
-    const [checkDeleteSure, setCheckDeleteSure] = useState(false);
     const [isEditingSubcomment, setIsEditingSubcomment] = useState(false);
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     let authorFullName = subcommentData.author.firstName + ' ' + subcommentData.author.lastName;
@@ -32,7 +31,7 @@ function ExistingSubcomment({subcommentData, handleEditSubcomment, handleDeleteS
                             {subcommentData.author.firstName + ' ' + subcommentData.author.lastName}
                             {subcommentData.author.verified &&  
                                 <span className='checkmarkIcon'>
-                                    <FaCheckCircle color={Colors.checkmarkBlue} size={13}/>
+                                    <FaCheckCircle size={13}/>
                                 </span>
                             }
                         </span>
@@ -41,30 +40,9 @@ function ExistingSubcomment({subcommentData, handleEditSubcomment, handleDeleteS
                         </span>
                         {currentUser.id === subcommentData.author.id &&
                             <div className='subcommentEditSpan'>
-                                {!checkDeleteSure &&
-                                    <span>
-                                        <span className='editSubcomment' onClick={() => setIsEditingSubcomment(true)}>
-                                            Edit
-                                        </span>
-                                        <span className='deleteSubcomment' onClick={() => setCheckDeleteSure(true)}>
-                                            Delete
-                                        </span>
-                                    </span>
-                                }
-                                {checkDeleteSure &&
-                                    <span className='deleteAreYouSure'>
-                                        Are you sure?
-                                        <span className='yes' onClick={() => deleteSubcomment(false)}>
-                                            Yes
-                                        </span>
-                                        /
-                                        <span className='no' onClick={() => setCheckDeleteSure(false)}>
-                                            No
-                                        </span>
-                                    </span>
-                                }
+                                <EditDeleteSpan handleSetEdit={setIsEditingSubcomment} handleDelete={deleteSubcomment}/>
                             </div>
-                            }
+                        }
                     </span>
                 </div>
             }

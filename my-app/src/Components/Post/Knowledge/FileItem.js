@@ -1,15 +1,31 @@
-import { Colors } from '../../../consts';
 import { FaBrain, FaPen } from 'react-icons/fa';
 import dateFormat from 'dateformat';
-import PostsApi from '../../../api/PostsApi';
+import KnowledgeApi from '../../../api/KnowledgeApi';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 function FileItem({item}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
+    const [itemBrained, setItemBrained] = useState(false);
     let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
 
-    const addBrainToKnowledgeItem = () => {
-        PostsApi.addBrainToKnowledgeItem(item.id, currentUser.id)
+    const handleBrainClick = () => {
+        if (itemBrained) {
+            KnowledgeApi.RemoveBrainFromKnowledgeItem(item.postId, item.id, currentUser.id).then(success => {
+                if (success) {
+                    item.brainsCount--;
+                    setItemBrained(false);
+                }
+            });
+        }
+        else {
+            KnowledgeApi.addBrainToKnowledgeItem(item.postId, item.id, currentUser.id).then(success => {
+                if (success) {
+                    item.brainsCount++;
+                    setItemBrained(true);
+                }
+            });
+        }
     }
     return (
         <div className='fileListRow'>                        
@@ -33,15 +49,15 @@ function FileItem({item}) {
             </span>  
             <span className='fileListCell reactionsCell'>
                 <span className='reactions-span'>
-                    <span className='reactionCounters file-reactions'>
-                        <span className='brains'>
-                            <FaBrain className='counterIcon' color={Colors.brainPink} size={18} onClick={() => addBrainToKnowledgeItem()} />
+                    <span className='reactionCounters'>
+                    <span className={'brains ' + (itemBrained ? 'brained' : '')} onClick={handleBrainClick}>
+                            <FaBrain className='counterIcon brainsIcon' size={18} />
                             <span className='counter-number'>
                                 {item.brainsCount}
                             </span>
                         </span>
                         <span className='highlights'>
-                            <FaPen className='counterIcon markerIcon' color={Colors.markerOrange} size={16}/>
+                            <FaPen className='counterIcon markerIcon' size={16}/>
                             <span className='counter-number'>
                                 {item.highlightsCount}
                             </span>

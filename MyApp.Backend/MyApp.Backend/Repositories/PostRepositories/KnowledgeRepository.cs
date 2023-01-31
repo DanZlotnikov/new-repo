@@ -9,6 +9,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             new KnowledgeModel
             {
                 Id = 1,
+                PostId = 1,
                 Title = "Innovation and climate change: A review and introduction to the special issue",
                 FileUrl = "http://localhost:8080/file1.pdf",
                 Uploader = UserRepository.man,
@@ -20,6 +21,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             new KnowledgeModel
             {
                 Id = 2,
+                PostId = 1,
                 Title = "Adapting to climate change and climate policy: progress, problems and potentials",
                 Uploader = UserRepository.margot,
                 FileUrl = "http://localhost:8080/file2.pdf",
@@ -31,6 +33,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             new KnowledgeModel
             {
                 Id = 3,
+                PostId = 1,
                 Title = "Climate Change Adaptation and Development: Exploring the Linkages",
                 FileUrl = "http://localhost:8080/file3.pdf",
                 Uploader = UserRepository.dan,
@@ -41,7 +44,12 @@ namespace MyApp.Backend.Repositories.PostRepositories
             },
         };
 
-        public static bool AddBrainToKnowledgeItem(long itemId, long userId)
+        public static bool AddBrainToKnowledgeItem(long postId, long itemId, long userId)
+        {
+            return true;
+        }
+
+        public static bool RemoveBrainFromKnowledgeItem(long postId, long itemId, long userId)
         {
             return true;
         }
