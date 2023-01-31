@@ -17,14 +17,17 @@ function Header() {
 
     return (
         <div className='header'>
+            
+            {currentUser.isLoggedIn && 
+            <>
             <span className='userHeader'>
-                <img className='userProfileImg' src={profilePicDan} alt='Dan Zlotnikov'/>
+                <img className='userProfileImg' src={currentUser.profileImgUrl} alt='Dan Zlotnikov'/>
                 <span className='userName'>
                     Dan Zlotnikov
                 </span>
             </span>
-            {currentUser.isLoggedIn && 
-                <span className='logout'><MdLogout size={20} onClick={handleLogout}/></span>
+            <span className='logout'><MdLogout size={20} onClick={handleLogout}/></span>
+            </>
             }
         </div>
     )
