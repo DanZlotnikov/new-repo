@@ -19,7 +19,7 @@ namespace MyApp.Backend.Controllers
         #region Get Requests
 
         [HttpGet]
-        public List<Post> Get()
+        public List<PostModel> Get()
         {
             return null;
         }
@@ -31,13 +31,13 @@ namespace MyApp.Backend.Controllers
         [HttpPost("AddBrainToPopularItem")]
         public bool AddBrainToPopularItem(AddBrainToKnowledgeItemParam param)
         {
-            return PopularRepository.AddBrainToPopularItem(param.postId, param.itemId, param.userId);
+            return PopularDataAccess.AddBrainToPopularItem(param.postId, param.itemId, param.userId);
         }
 
         [HttpPost("RemoveBrainFromPopularItem")]
         public bool RemoveBrainFromPopularItem(RemoveBrainFromKnowledgeItemParam param)
         {
-            return PopularRepository.RemoveBrainFromPopularItem(param.postId, param.itemId, param.userId);
+            return PopularDataAccess.RemoveBrainFromPopularItem(param.postId, param.itemId, param.userId);
         }
 
         #endregion

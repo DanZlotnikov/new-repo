@@ -7,6 +7,8 @@
         public User Author { get; set; }
         public int BrainsCount { get; set; }
         public List<SubcommentModel> Subcomments { get; set; }
-        public string Message { get; set; }
+        public string? Message { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime UpdatedTime { get; set; }
     }
 }

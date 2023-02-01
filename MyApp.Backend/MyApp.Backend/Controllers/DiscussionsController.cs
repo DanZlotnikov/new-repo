@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
+using MyApp.Backend.Logic;
 using MyApp.Backend.Models.PostModels;
 using MyApp.Backend.Models.PostModels.DiscussionModels;
 using MyApp.Backend.Repositories.PostRepositories;
@@ -20,7 +21,7 @@ namespace MyApp.Backend.Controllers
         #region Get Requests
 
         [HttpGet]
-        public List<Post> Get()
+        public List<PostModel> Get()
         {
             return null;
         }
@@ -32,45 +33,45 @@ namespace MyApp.Backend.Controllers
         [HttpPost("CreateNewComment")]
         public CommentModel CreateNewComment(CreateNewCommentParam param)
         {
-            return DiscussionRepository.CreateNewComment(param.postId, param.authorUserId, param.message );
+            return CommentLogic.CreateNewComment(param.postId, param.authorUserId, param.message);
         }
 
 
         [HttpPost("EditComment")]
         public bool EditComment(EditCommentParam param)
         {
-            return DiscussionRepository.EditComment(param.postId, param.commentId, param.message);
+            return CommentLogic.EditComment(param.commentId, param.message, param.editingUserId);
         }
 
         [HttpPost("AddBrainToComment")]
         public bool AddBrainToComment(AddBrainToCommentParam param)
         {
-            return DiscussionRepository.AddBrainToComment(param.postId, param.commentId, param.userId);
+            return CommentLogic.AddBrainToComment(param.commentId, param.userId);
         }
 
         [HttpPost("RemoveBrainFromComment")]
         public bool RemoveBrainFromComment(RemoveBrainFromCommentParam param)
         {
-            return DiscussionRepository.RemoveBrainFromComment(param.postId, param.commentId, param.userId);
+            return CommentLogic.RemoveBrainFromComment(param.commentId, param.userId);
         }
 
 
         [HttpPost("AddSubcomment")]
         public SubcommentModel AddSubcomment(AddSubcommentParam param)
         {
-            return DiscussionRepository.AddSubcomment(param.postId, param.mainCommentId, param.authorUserId, param.message);
+            return CommentLogic.AddSubcomment(param.mainCommentId, param.authorId, param.message);
         }
 
         [HttpPost("DeleteSubcomment")]
         public bool DeleteSubcomment(DeleteSubcommentParam param)
         {
-            return DiscussionRepository.DeleteSubcomment(param.postId, param.mainCommentId, param.subCommentId, param.removingUserId);
+            return CommentLogic.DeleteSubcomment(param.subCommentId, param.removingUserId);
         }
 
         [HttpPost("EditSubcomment")]
         public bool EditSubcomment(EditSubcommentParam param)
         {
-            return DiscussionRepository.EditSubcomment(param.postId, param.mainCommentId, param.subCommentId, param.message);
+            return CommentLogic.EditSubcomment(param.subCommentId, param.message, param.editingUserId);
         }
 
 

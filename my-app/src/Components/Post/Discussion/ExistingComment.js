@@ -16,11 +16,11 @@ function ExistingComment({commentData}) {
     let authorFullName = commentData.author.firstName + ' ' + commentData.author.lastName;
 
     const handleEditComment = (commentId, message) => {
-        DiscussionsApi.editComment(commentData.postId, commentId, message).then(success => {
+        DiscussionsApi.editComment(commentId, message, currentUser.id).then(success => {
             if (success) {
                 setIsEditingComment(false);
             }
-        })
+        });
     }
 
     const handleBrainClick = () => {

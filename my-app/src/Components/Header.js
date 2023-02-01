@@ -1,4 +1,3 @@
-import profilePicDan from '../../src/New folder/profile_pic_dan.jpg';
 import { MdLogout } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authReducer';
@@ -15,15 +14,22 @@ function Header() {
         navigate('/login');
     };
 
+    if (!currentUser) {
+        return;
+    }
     return (
         <div className='header'>
-            
+            {!currentUser.isLoggedIn && 
+                <span className='chambersHeader'>
+                    Chambers
+                </span>
+            }
             {currentUser.isLoggedIn && 
             <>
             <span className='userHeader'>
                 <img className='userProfileImg' src={currentUser.profileImgUrl} alt='Dan Zlotnikov'/>
                 <span className='userName'>
-                    Dan Zlotnikov
+                    {currentUser.fullName}
                 </span>
             </span>
             <span className='logout'><MdLogout size={20} onClick={handleLogout}/></span>

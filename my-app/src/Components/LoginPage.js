@@ -4,10 +4,11 @@ import { FaFacebook, FaGoogle } from 'react-icons/fa';
 import { config } from '../config';
 import { Navigate  } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { facebookLogin, googleLogin } from '../redux/authReducer';
+import { facebookLogin, googleLogin, setProfileImgUrl } from '../redux/authReducer';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 const LoginPage = () => {
     const currentUser = useSelector((state) => state.authReducer.currentUser)
@@ -24,12 +25,20 @@ const LoginPage = () => {
         gapi.load('client:auth2', start);
     }, []);
 
-    if (currentUser.isLoggedIn) {
+    if (currentUser && currentUser.isLoggedIn) {
         return <Navigate to="/" />
     }
 
     const handleFacebookLogin = (response) => {
         dispatch(facebookLogin(response));
+        axios.get(`http://graph.facebook.com/${response.id}/picture`, {
+        params: {
+          redirect: false,
+          access_token: response.accessToken
+        }})
+        .then(response => {
+          dispatch(setProfileImgUrl(response.data.data.url));
+        });
     };
 
     const handleGoogleLogin = (response) => {

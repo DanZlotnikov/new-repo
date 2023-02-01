@@ -19,7 +19,7 @@ namespace MyApp.Backend.Controllers
         #region Get Requests
 
         [HttpGet]
-        public List<Post> Get()
+        public List<PostModel> Get()
         {
             return null;
         }
@@ -31,13 +31,13 @@ namespace MyApp.Backend.Controllers
         [HttpPost("AddBrainToKnowledgeItem")]
         public bool AddBrainToKnowledgeItem(AddBrainToKnowledgeItemParam param)
         {
-            return KnowledgeRepository.AddBrainToKnowledgeItem(param.postId, param.itemId, param.userId);
+            return KnowledgeDataAccess.AddBrainToKnowledgeItem(param.postId, param.itemId, param.userId);
         }
 
         [HttpPost("RemoveBrainFromKnowledgeItem")]
         public bool RemoveBrainFromKnowledgeItem(RemoveBrainFromKnowledgeItemParam param)
         {
-            return KnowledgeRepository.RemoveBrainFromKnowledgeItem(param.postId, param.itemId, param.userId);
+            return KnowledgeDataAccess.RemoveBrainFromKnowledgeItem(param.postId, param.itemId, param.userId);
         }
 
         #endregion

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
+using MyApp.Backend.Logic;
 using MyApp.Backend.Models.PostModels;
+using MyApp.Backend.Repositories;
 using MyApp.Backend.Repositories.PostRepositories;
 
 namespace MyApp.Backend.Controllers
@@ -18,15 +20,15 @@ namespace MyApp.Backend.Controllers
 
         #region Get Requests
         [HttpGet]
-        public List<Post> Get()
+        public List<PostModel> Get()
         {
-            return PostRepository.posts;
+            return new List<PostModel>();
         }
 
         [HttpGet("GetPost")]
-        public Post GetPostById(long id)
+        public PostModel GetPostById(int id)
         {
-            return Get().First();
+            return PostLogic.GetPost(1);
         }
 
         #endregion

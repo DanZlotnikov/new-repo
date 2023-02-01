@@ -9,7 +9,7 @@ function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
     const [subcommentEditCount, setSubcommentEditCount] = useState(0);
 
     const handleAddSubcomment = (message) => {
-        DiscussionsApi.addSubcomment(mainCommentData.postId, mainCommentData.id, currentUser.id, message).then(newSubcomment => {
+        DiscussionsApi.addSubcomment(mainCommentData.id, currentUser.id, message).then(newSubcomment => {
             if (newSubcomment && newSubcomment.id > 0) {
                 mainCommentData.subcomments.push(newSubcomment);
                 addSubcomment();
@@ -18,7 +18,7 @@ function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
     }
 
     const handleDeleteSubcomment = (subcommentId) => {
-        DiscussionsApi.deleteSubcomment(mainCommentData.postId, mainCommentData.id, subcommentId, currentUser.id).then(success => {
+        DiscussionsApi.deleteSubcomment(subcommentId, currentUser.id).then(success => {
             if (success) {
                 mainCommentData.subcomments = mainCommentData.subcomments.filter(c => c.id !== subcommentId);
                 deleteSubcomment();
@@ -27,17 +27,19 @@ function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
     }
 
     const handleEditSubcomment = (subcommentId, message) => {
+        let ret;
         if (!message) {
-            handleDeleteSubcomment(subcommentId);
+            ret = Promise.resolve(handleDeleteSubcomment(subcommentId));
         }
         else {
-            DiscussionsApi.editSubcomment(mainCommentData.postId, mainCommentData.id, subcommentId, message).then(success => {
+            ret = Promise.resolve(DiscussionsApi.editSubcomment(subcommentId, message, currentUser.id).then(success => {
                 if (success) {
                     mainCommentData.subcomments.find(s => s.id === subcommentId).message = message;
                     setSubcommentEditCount(subcommentEditCount + 1);
                 }
-            })
+            }));
         }
+        return ret;
     }
 
     return (

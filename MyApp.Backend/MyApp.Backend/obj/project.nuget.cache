@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "xd/byJw4jX5/Psd49go6Qy9AKG28iKpVGqQC3L32a/eAzheIKb1+mkCOd1J1loVz90GeLygDJHlXuWy2j89Qag==",
+  "dgSpecHash": "4m1nS4o4fNBpEJEX/W4Re4hCxV+TD6SZnW6mvev+oOZYIi8gVpRyafPNdX0qCANWdHUzxX+kmo75GcGJCRcStw==",
   "success": true,
   "projectFilePath": "C:\\Projects\\new-repo\\MyApp.Backend\\MyApp.Backend\\MyApp.Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dan.z\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\dan.z\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\dan.z\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",
     "C:\\Users\\dan.z\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\dan.z\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\dan.z\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

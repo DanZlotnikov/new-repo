@@ -10,11 +10,11 @@ const DiscussionsApi = {
     })
     .then(response => response.data);
   },
-  editComment: (postId, commentId, message) => {
+  editComment: (commentId, message, editingUserId) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/EditComment`, {
-      postId: postId,
       commentId: commentId,
       message: message,
+      editingUserId: editingUserId
     })
     .then(response => response.data);
   },
@@ -34,30 +34,26 @@ const DiscussionsApi = {
     })
     .then(response => response.data);
   },
-  addSubcomment: (postId, mainCommentId, userId, message) => {
+  addSubcomment: (mainCommentId, authorId, message) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/AddSubcomment`, {
-      postId: postId,
       mainCommentId: mainCommentId,
-      userId: userId,
-      message: message
+      authorId: authorId,
+      message: message,
     })
     .then(response => response.data);
   },
-  deleteSubcomment: (postId, mainCommentId, subCommentId, removingUserId) => {
+  deleteSubcomment: (subCommentId, removingUserId) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/DeleteSubcomment`, {
-      postId: postId,
-      mainCommentId: mainCommentId,
       subCommentId: subCommentId,
       removingUserId: removingUserId
     })
     .then(response => response.data);
   },
-  editSubcomment: (postId, mainCommentId, subCommentId, message) => {
+  editSubcomment: (subCommentId, message, editingUserId) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/EditSubcomment`, {
-      postId: postId,
-      mainCommentId: mainCommentId,
       subCommentId: subCommentId,
-      message: message
+      message: message,
+      editingUserId: editingUserId
     })
     .then(response => response.data);
   },

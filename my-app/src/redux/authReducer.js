@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios';
 
 const authSlice = createSlice({
   name: 'user',
@@ -20,11 +19,10 @@ const authSlice = createSlice({
       if (payload.id) {
         state.currentUser.isLoggedIn = true;
         state.currentUser.accessToken = payload.accessToken;
-        state.currentUser.id = 2;
+        state.currentUser.id = 1;
         state.currentUser.externalSsoType = 'facebook';
         state.currentUser.externalSsoId = payload.id;
         state.currentUser.fullName = payload.name;
-        state.currentUser.profileImgUrl = `http://graph.facebook.com/${payload.id}/picture`
       }
     },
     googleLogin: (state, action) => {
@@ -38,6 +36,9 @@ const authSlice = createSlice({
         state.currentUser.fullName = payload.profileObj.name;
       }
     },
+    setProfileImgUrl: (state, action) => {
+      state.currentUser.profileImgUrl = action.payload;
+    },
     logout: (state) => {
       state.currentUser = {
         isLoggedIn: false
@@ -46,6 +47,6 @@ const authSlice = createSlice({
   }
 });
 
-export const { facebookLogin, googleLogin, logout } = authSlice.actions
+export const { facebookLogin, googleLogin, setProfileImgUrl, logout } = authSlice.actions
 
 export default authSlice.reducer;

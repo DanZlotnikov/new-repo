@@ -3,14 +3,15 @@ using MyApp.Backend.Models.PostModels.KnowledgeModels;
 
 namespace MyApp.Backend.Models.PostModels
 {
-    public class Post
+    public class PostModel
     {
         public long Id { get; set; }
         public User Author { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string Message { get; set; }
+        public string? Message { get; set; }
         public List<CommentModel> Comments { get; set; }
-        public List<KnowledgeModel> KnowledgeItems { get; set; }
-        public List<PopularModel> PopularItems { get; set; }
+        public List<KnowledgeItemModel> KnowledgeItems { get; set; }
+        public List<PopularItemModel> PopularItems { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime UpdatedTime { get; set; }
     }
 }

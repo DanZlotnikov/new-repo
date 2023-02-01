@@ -41,6 +41,14 @@ textarea {
     }
   }
 
+  .chambersHeader {
+    position: relative;
+    bottom: 2px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
   .logout {
     cursor: pointer;
   }
