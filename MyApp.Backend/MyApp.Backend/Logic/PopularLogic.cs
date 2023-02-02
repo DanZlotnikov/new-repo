@@ -29,11 +29,22 @@ namespace MyApp.Backend.Logic
                             IsVerified = (bool)row["uploader_is_verified"],
                             ProfileImgUrl = row["uploader_profile_img_url"].ToString(),
                         },
+                        BrainsCount = (int)row["brains_count"],
                         PlatformType = (Enums.PopularPlatformType)(int)row["platform_type_id"]
-                    });
+                    }); ;
                 }
             }
             return popularItems;
+        }
+
+        public static bool AddBrainToPopularItem(long itemId, long userId)
+        {
+            return PopularDataAccess.AddBrainToPopularItem(itemId, userId);
+        }
+
+        public static bool RemoveBrainFromPopularItem(long itemId, long userId)
+        {
+            return PopularDataAccess.RemoveBrainFromPopularItem(itemId, userId);
         }
     }
 }

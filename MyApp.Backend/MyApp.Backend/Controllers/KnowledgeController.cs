@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
+using MyApp.Backend.Logic;
 using MyApp.Backend.Models.PostModels;
 using MyApp.Backend.Repositories.PostRepositories;
 
@@ -31,13 +32,13 @@ namespace MyApp.Backend.Controllers
         [HttpPost("AddBrainToKnowledgeItem")]
         public bool AddBrainToKnowledgeItem(AddBrainToKnowledgeItemParam param)
         {
-            return KnowledgeDataAccess.AddBrainToKnowledgeItem(param.postId, param.itemId, param.userId);
+            return KnowledgeLogic.AddBrainToKnowledgeItem(param.itemId, param.userId);
         }
 
         [HttpPost("RemoveBrainFromKnowledgeItem")]
         public bool RemoveBrainFromKnowledgeItem(RemoveBrainFromKnowledgeItemParam param)
         {
-            return KnowledgeDataAccess.RemoveBrainFromKnowledgeItem(param.postId, param.itemId, param.userId);
+            return KnowledgeLogic.RemoveBrainFromKnowledgeItem(param.itemId, param.userId);
         }
 
         #endregion

@@ -5,15 +5,22 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 import { GiCheckMark } from 'react-icons/gi';
 import texts from '../../../../texts';
+import { Oval } from 'react-loader-spinner';
 
 function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSubcomment}) {
     const [message, setMessage] = useState(subcommentDataToEdit ? subcommentDataToEdit.message : '');
     const commentInputRef = useRef(null);
+    const [showLoader, setShowLoader] = useState(false);
     
     const addSubcomment = () => {
-        handleAddSubcomment(message);
-        commentInputRef.current.value = '';
-        setMessage('');
+        if (message) {
+            setShowLoader(true);
+            handleAddSubcomment(message).then((res) => {
+                setShowLoader(false);
+            });
+            commentInputRef.current.value = '';
+            setMessage('');
+        }
     }
 
     const editSubcomment = () => {
@@ -48,12 +55,27 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
                     value={message}
                     onChange = {(e) => setMessage(e.target.value)} 
                 />
-                <span className='sendIcon' onClick={() => subcommentDataToEdit ? editSubcomment() : addSubcomment()}>
-                    {subcommentDataToEdit && 
-                        <GiCheckMark size={20}  />
-                    }
-                    {!subcommentDataToEdit && 
-                        <IoMdSend size={20} />
+                <span className='sendDiv'>
+                    <span className='commentLoader'>
+                        {showLoader &&
+                            <Oval
+                            className='loaderSpinner'
+                            height={18}
+                            width={18}
+                            strokeWidth={2}
+                            strokeWidthSecondary={2}
+                        />
+                        }
+                    </span>
+                    {!showLoader &&
+                        <span className='sendIcon' onClick={() => subcommentDataToEdit ? editSubcomment() : addSubcomment()}>
+                            {subcommentDataToEdit && 
+                            <GiCheckMark size={20}  />
+                            }
+                            {!subcommentDataToEdit && 
+                                <IoMdSend size={20} />
+                            }
+                        </span>
                     }
                 </span>
             </span>

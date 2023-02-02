@@ -11,6 +11,7 @@ import { useState } from 'react';
 function PopularItem({item}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [itemBrained, setItemBrained] = useState(false);
+    
     let platformIcon, platformName;
     let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
 

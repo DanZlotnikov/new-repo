@@ -5,6 +5,7 @@ import DiscussionsApi from '../../../api/DiscussionsApi';
 import { useSelector } from 'react-redux';
 import NewComment from './NewComment';
 import EditDeleteSpan from '../../Common/EditDeleteSpan';
+import AWS from 'aws-sdk';
 
 function ExistingComment({commentData}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser)
@@ -50,6 +51,11 @@ function ExistingComment({commentData}) {
     const deleteSubcomment = () => {
         setSubcommentsAddedByUser(subcommentsAddedByUser - 1);
     }
+    
+    AWS.config.update({
+        accessKeyId: 'AKIARPFWQQBPX4GOQI45',
+        secretAccessKey: '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',
+    });
 
     return (
         <>

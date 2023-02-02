@@ -1,38 +1,20 @@
 import BodySelectionCard from '../Common/BodySelectionCard';
-import { useState, useEffect, useRef, cloneElement } from 'react';
+import { useState, cloneElement } from 'react';
 import PostHeader from './PostHeader';
 import { PostBodySections } from '../../consts';
-import PostsApi from '../../api/PostApi';
 import DiscussionSection from './Discussion/DiscussionSection';
 import KnowledgeSection from './Knowledge/KnowledgeSection';
 import PopularSection from './Popular/PopularSection';
 
-function Post() {
-    const didMount = useRef(false);
-    const [post, setPost] = useState(null);
+function Post({postData}) {
     const [selectedSection, setSelectedSection] = useState(PostBodySections[0]);
+    PostBodySections.filter(section => section.component.type.name === (<DiscussionSection />).type.name)[0].postData = postData;
+    PostBodySections.filter(section => section.component.type.name === (<KnowledgeSection />).type.name)[0].postData = postData;
+    PostBodySections.filter(section => section.component.type.name === (<PopularSection />).type.name)[0].postData = postData;
 
-    const initBodySectionData = (postData) => {
-        setPost(postData);
-        PostBodySections.filter(section => section.component.type.name === (<DiscussionSection />).type.name)[0].postData = postData;
-        PostBodySections.filter(section => section.component.type.name === (<KnowledgeSection />).type.name)[0].postData = postData;
-        PostBodySections.filter(section => section.component.type.name === (<PopularSection />).type.name)[0].postData = postData;
-    }
-
-    useEffect(() => {
-        if (!didMount.current) { // this will only run on first render
-            PostsApi.getPost(1).then((postData) => {
-               initBodySectionData(postData);
-            });
-            return;
-        }
-    }, []);
-
-    if (!post) return null;
-    
     return (
         <div className='postDiv'>
-           <PostHeader post={post}/>
+        <PostHeader post={postData}/>
             <div className='bodySelectionDiv'>
             {PostBodySections.map((section) => (
                 <span key={section.key} onClick={() => setSelectedSection(section)}>

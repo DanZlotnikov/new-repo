@@ -1,10 +1,13 @@
 import PopularItem from './PopularItem';
+import ErrorBoundary from '../../Common/ErrorBoundary';
 
 function PopularSection({postData}) {
     return (
         <div className='popularSectionDiv'>
             {postData.popularItems.map((item) => (
-                <PopularItem key={item.id} item={item} />
+                <ErrorBoundary key={item.id}>
+                    <PopularItem item={item} />
+                </ErrorBoundary>
             ))}
         </div>
     )

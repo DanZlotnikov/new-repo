@@ -41,5 +41,15 @@ namespace MyApp.Backend.Logic
             }
             return knowledgeItems;
         }
+
+        public static bool AddBrainToKnowledgeItem(long itemId, long userId)
+        {
+            return KnowledgeDataAccess.AddBrainToKnowledgeItem(itemId, userId);
+        }
+
+        public static bool RemoveBrainFromKnowledgeItem(long itemId, long userId)
+        {
+            return KnowledgeDataAccess.RemoveBrainFromKnowledgeItem(itemId, userId);
+        }
     }
 }

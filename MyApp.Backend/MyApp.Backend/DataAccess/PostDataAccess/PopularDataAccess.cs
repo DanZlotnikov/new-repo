@@ -1,5 +1,4 @@
 ﻿using MyApp.Backend.Logic;
-using MyApp.Backend.Models.PostModels.KnowledgeModels;
 using MySqlConnector;
 using System.Data;
 
@@ -49,13 +48,33 @@ namespace MyApp.Backend.Repositories.PostRepositories
             return table;
         }
 
-        public static bool AddBrainToPopularItem(long postId, long itemId, long userId)
+        public static bool AddBrainToPopularItem(long itemId, long userId)
         {
+            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
+            {
+                MySqlCommand command = new MySqlCommand();
+                command.CommandType = CommandType.Text;
+                command.CommandText = @"UPDATE popular_items SET brains_count = (brains_count + 1) WHERE id = ?item_id";
+                command.Connection = connection;
+                command.Parameters.AddWithValue("item_id", itemId);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
             return true;
         }
 
-        public static bool RemoveBrainFromPopularItem(long postId, long itemId, long userId)
+        public static bool RemoveBrainFromPopularItem(long itemId, long userId)
         {
+            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
+            {
+                MySqlCommand command = new MySqlCommand();
+                command.CommandType = CommandType.Text;
+                command.CommandText = @"UPDATE popular_items SET brains_count = (brains_count - 1) WHERE id = ?item_id";
+                command.Connection = connection;
+                command.Parameters.AddWithValue("item_id", itemId);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
             return true;
         }
     }

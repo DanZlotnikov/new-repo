@@ -2,7 +2,7 @@
 {
     public class AddBrainToCommentParam
     {
-        public int commentId { get; set; }
-        public int userId { get; set; }
+        public long commentId { get; set; }
+        public long userId { get; set; }
     }
 }

@@ -7,11 +7,13 @@ import { useSelector } from 'react-redux';
 import texts from '../../../texts';
 import { FaCheckCircle } from 'react-icons/fa';
 import { GiCheckMark } from 'react-icons/gi';
+import { Oval } from 'react-loader-spinner';
 
 function NewComment({commentDataToEdit, postData, handleCreateComment, handleEditComment}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [message, setMessage] = useState(commentDataToEdit ? commentDataToEdit.message : '');
     const [emptyMsg, setEmptyMsg] = useState(false);
+    const [showLoader, setShowLoader] = useState(false);
     const commentInputRef = useRef(null);
 
     const createNewComment = () => {
@@ -19,13 +21,15 @@ function NewComment({commentDataToEdit, postData, handleCreateComment, handleEdi
             setEmptyMsg(true);
         }
         else {
+            setShowLoader(true);
             DiscussionsApi.createNewComment(postData.id, currentUser.id, message).then(newComment => {
-            if (newComment && newComment.id > 0) {
-                postData.comments.unshift(newComment);
-                commentInputRef.current.value = '';
+                if (newComment && newComment.id > 0) {
+                    postData.comments.unshift(newComment);
+                    commentInputRef.current.value = '';
                     setMessage('');
                     handleCreateComment();
                 }
+                setShowLoader(false);
             });
         }
     }
@@ -69,12 +73,27 @@ function NewComment({commentDataToEdit, postData, handleCreateComment, handleEdi
                     value={message}
                     onChange = {(e) => setMessage(e.target.value)} 
                 />
-                <span className='sendIcon' onClick={() => commentDataToEdit ? editComment() : createNewComment()}>
-                {commentDataToEdit && 
-                        <GiCheckMark size={20}  />
-                    }
-                    {!commentDataToEdit && 
-                        <IoMdSend size={20} />
+                <span className='sendDiv'>
+                    <span className='commentLoader'>
+                        {showLoader &&
+                            <Oval
+                            className='loaderSpinner'
+                            height={18}
+                            width={18}
+                            strokeWidth={2}
+                            strokeWidthSecondary={2}
+                        />
+                        }
+                    </span>
+                    {!showLoader &&
+                    <span className='sendIcon' onClick={() => commentDataToEdit ? editComment() : createNewComment()}>
+                        {commentDataToEdit && 
+                                <GiCheckMark size={20}  />
+                            }
+                            {!commentDataToEdit && 
+                                <IoMdSend size={20} />
+                            }
+                        </span>
                     }
                 </span>
             </span>

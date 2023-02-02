@@ -54,6 +54,29 @@ textarea {
   }
 }
 
+.errorBoundaryDiv {
+  display: flex;
+  justify-content: center;
+  
+  .error {
+    font-size: 14px;
+    background-color: $background-gray;
+    border-radius: 10px;
+  }
+}
+
+.loaderDiv {
+  display: flex;
+  justify-content: center;
+  .loaderSpinner {
+    width: 20;
+    color: $app-green;
+
+    &.commentLoader {
+      display: inline-flex;
+    }
+  }
+}
 
 .loginDiv {
   display: flex;
@@ -353,15 +376,23 @@ textarea {
           outline: none;
         }
       }
-  
-      .sendIcon {
-        position: absolute;
-        right: 12px;
-        bottom: 6px;
-        color: $app-green;
-  
-        &:hover {
-          cursor: pointer;
+      .sendDiv {
+        .commentLoader {
+          display: inline-flex;
+          position: relative;
+          right: -8px;
+          bottom: 3px;
+        }
+       
+        .sendIcon {
+          position: absolute;
+          right: 12px;
+          bottom: 6px;
+          color: $app-green;
+    
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
     }
@@ -510,14 +541,24 @@ textarea {
                 outline: none;
               }
             }
-            .sendIcon {
-              position: absolute;
-              bottom: 5px;
-              right: 10px;
-              color: $app-green;
 
-              &:hover {
-                cursor: pointer;
+            .sendDiv {
+              .commentLoader {
+                display: inline-flex;
+                position: relative;
+                right: -4px;
+                bottom: 3px;
+              }
+
+              .sendIcon {
+                position: absolute;
+                bottom: 6px;
+                right: 10px;
+                color: $app-green;
+
+                &:hover {
+                  cursor: pointer;
+                }
               }
             }
           }

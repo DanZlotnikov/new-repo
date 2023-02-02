@@ -9,21 +9,21 @@ function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
     const [subcommentEditCount, setSubcommentEditCount] = useState(0);
 
     const handleAddSubcomment = (message) => {
-        DiscussionsApi.addSubcomment(mainCommentData.id, currentUser.id, message).then(newSubcomment => {
+        return Promise.resolve(DiscussionsApi.addSubcomment(mainCommentData.id, currentUser.id, message).then(newSubcomment => {
             if (newSubcomment && newSubcomment.id > 0) {
                 mainCommentData.subcomments.push(newSubcomment);
                 addSubcomment();
             }
-        });
+        }));
     }
 
     const handleDeleteSubcomment = (subcommentId) => {
-        DiscussionsApi.deleteSubcomment(subcommentId, currentUser.id).then(success => {
+        return Promise.resolve(DiscussionsApi.deleteSubcomment(subcommentId, currentUser.id).then(success => {
             if (success) {
                 mainCommentData.subcomments = mainCommentData.subcomments.filter(c => c.id !== subcommentId);
                 deleteSubcomment();
             }
-        });
+        }));
     }
 
     const handleEditSubcomment = (subcommentId, message) => {

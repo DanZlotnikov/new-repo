@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
+using MyApp.Backend.Logic;
 using MyApp.Backend.Models.PostModels;
 using MyApp.Backend.Repositories.PostRepositories;
 
@@ -29,15 +30,15 @@ namespace MyApp.Backend.Controllers
         #region Post Requests
 
         [HttpPost("AddBrainToPopularItem")]
-        public bool AddBrainToPopularItem(AddBrainToKnowledgeItemParam param)
+        public bool AddBrainToPopularItem(AddBrainToPopularItemParam param)
         {
-            return PopularDataAccess.AddBrainToPopularItem(param.postId, param.itemId, param.userId);
+            return PopularLogic.AddBrainToPopularItem(param.itemId, param.userId);
         }
 
         [HttpPost("RemoveBrainFromPopularItem")]
-        public bool RemoveBrainFromPopularItem(RemoveBrainFromKnowledgeItemParam param)
+        public bool RemoveBrainFromPopularItem(RemoveBrainFromPopularItemParam param)
         {
-            return PopularDataAccess.RemoveBrainFromPopularItem(param.postId, param.itemId, param.userId);
+            return PopularLogic.RemoveBrainFromPopularItem(param.itemId, param.userId);
         }
 
         #endregion

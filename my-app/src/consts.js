@@ -19,7 +19,7 @@ export let PostBodySections = [
 ]
 
 export const PopularPlatformType = {
-    0: 'youtube',
-    1: 'spotify', 
-    2: 'tiktok'
+    1: 'youtube',
+    2: 'spotify', 
+    3: 'tiktok'
 }

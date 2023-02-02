@@ -119,7 +119,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             }
         }
 
-        public static bool AddBrainToComment(int commentId, int userId)
+        public static bool AddBrainToComment(long commentId, long userId)
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {

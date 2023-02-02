@@ -31,6 +31,14 @@ namespace MyApp.Backend.Controllers
             return PostLogic.GetPost(1);
         }
 
+        [HttpGet("GetPostsForUser")]
+        public List<PostModel> GetPostsForUser(int userId)
+        {
+            return new List<PostModel> {
+                PostLogic.GetPost(1)
+            };
+        }
+
         #endregion
     }
 }

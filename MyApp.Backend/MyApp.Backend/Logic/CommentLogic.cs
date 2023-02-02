@@ -67,12 +67,12 @@ namespace MyApp.Backend.Logic
 
         }
 
-        public static bool AddBrainToComment(int commentId, int userId)
+        public static bool AddBrainToComment(long commentId, long userId)
         {
             return CommentDataAccess.AddBrainToComment(commentId, userId);
         }
 
-        public static bool RemoveBrainFromComment(long commentId, int userId)
+        public static bool RemoveBrainFromComment(long commentId, long userId)
         {
             return CommentDataAccess.RemoveBrainFromComment(commentId, userId);
         }
