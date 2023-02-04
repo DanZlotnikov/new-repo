@@ -8,6 +8,7 @@ const texts = {
     knowledge: {
         itemListHeaderTitle: 'title',
         itemListHeaderPublished: 'published',
+        uploadFile: 'Upload a File'
     },
     popular: {
         

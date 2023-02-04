@@ -916,3 +916,33 @@ textarea {
     cursor: default;
   }
 }
+
+.fileUploadDiv {
+  margin-bottom: 30px;
+  display: block;
+  position: relative;
+
+  .uploadBtn {
+    background-color: $discussion-blue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 7px rgba(0,0,0,0.2);
+    cursor: pointer;
+
+    .defaultUploadBtn {
+      display: none;
+    }
+  }
+  
+  .iconCont {
+    position: absolute;
+  }
+  
+  .uploadIcon {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    color: $discussion-blue;
+  }
+}
