@@ -16,6 +16,7 @@ namespace MyApp.Backend.Logic
             {
                 foreach (DataRow row in table.Rows)
                 {
+                    string brainsUserIds = row["brains_user_ids"].ToString();
                     popularItems.Add(new PopularItemModel
                     {
                         Id = (long)row["id"],
@@ -29,9 +30,11 @@ namespace MyApp.Backend.Logic
                             IsVerified = (bool)row["uploader_is_verified"],
                             ProfileImgUrl = row["uploader_profile_img_url"].ToString(),
                         },
-                        BrainsCount = (int)row["brains_count"],
-                        PlatformType = (Enums.PopularPlatformType)(int)row["platform_type_id"]
-                    }); ;
+                        PlatformType = (Enums.PopularPlatformType)(int)row["platform_type_id"],
+                        BrainsUserIds = string.IsNullOrEmpty(brainsUserIds) ? new List<long>() : brainsUserIds.Split(',').Select(x => long.Parse(x)).ToList(),
+                        CreatedTime = (DateTime)row["created_time"],
+                        UpdatedTime = (DateTime)row["updated_time"],
+                    });
                 }
             }
             return popularItems;

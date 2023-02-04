@@ -16,6 +16,7 @@ namespace MyApp.Backend.Logic
             {
                 foreach (DataRow row in table.Rows)
                 {
+                    string brainsUserIds = row["brains_user_ids"].ToString();
                     comments.Add(new CommentModel
                     {
                         Id = (long)row["comment_id"],
@@ -29,8 +30,10 @@ namespace MyApp.Backend.Logic
                             ProfileImgUrl = row["author_profile_img_url"].ToString(),
                         },
                         Message = row["comment_message"].ToString(),
-                        BrainsCount = (int)row["comment_brains_count"],
                         Subcomments = SubcommentLogic.GetSubcomments((long)row["comment_id"]),
+                        BrainsUserIds = string.IsNullOrEmpty(brainsUserIds) ? new List<long>() : brainsUserIds.Split(',').Select(x => long.Parse(x)).ToList(),
+                        CreatedTime = (DateTime)row["comment_created_time"],
+                        UpdatedTime = (DateTime)row["comment_updated_time"],
                     });
                 }
             }
@@ -54,7 +57,7 @@ namespace MyApp.Backend.Logic
                     PostId = postId,
                     Author = UserLogic.GetUser(authorUserId),
                     Message = message,
-                    BrainsCount = 0,
+                    BrainsUserIds = new List<long>(),
                     CreatedTime = createdTime,
                     UpdatedTime = createdTime,
                     Subcomments = new List<SubcommentModel>()

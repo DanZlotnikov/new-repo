@@ -9,8 +9,8 @@
         public string? FileUrl { get; set; }
         public string? OriginalAuthors { get; set; }
         public DateTime PublishDate { get; set; }
-        public int BrainsCount { get; set; }
         public int HighlightsCount { get; set; }
+        public List<long> BrainsUserIds { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
     }

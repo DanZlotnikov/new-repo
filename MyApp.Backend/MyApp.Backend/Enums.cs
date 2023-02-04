@@ -4,9 +4,16 @@
     {
         public enum PopularPlatformType
         {
-            Youtube = 0,
-            Spotify = 1,
-            Tiktok = 2
+            Youtube = 1,
+            Spotify = 2,
+            Tiktok = 3
+        }
+
+        public enum BrainedObjectType
+        {
+            Comment = 1,
+            KnowledgeItem = 2,
+            PopularItem = 3
         }
     }
 }

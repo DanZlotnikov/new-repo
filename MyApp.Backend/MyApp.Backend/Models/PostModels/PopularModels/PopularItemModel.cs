@@ -9,6 +9,8 @@ namespace MyApp.Backend.Models.PostModels
         public User Uploader { get; set; }
         public PopularPlatformType PlatformType { get; set; }
         public string? IframeUrl { get; set; }
-        public int BrainsCount { get; set; }
+        public List<long> BrainsUserIds { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime UpdatedTime { get; set; }
     }
 }

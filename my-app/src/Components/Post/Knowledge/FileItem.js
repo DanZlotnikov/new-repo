@@ -6,14 +6,14 @@ import { useState } from 'react';
 
 function FileItem({item}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
-    const [itemBrained, setItemBrained] = useState(false);
+    const [itemBrained, setItemBrained] = useState(item.brainsUserIds.includes(currentUser.id));
     let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
 
     const handleBrainClick = () => {
         if (itemBrained) {
             KnowledgeApi.RemoveBrainFromKnowledgeItem(item.postId, item.id, currentUser.id).then(success => {
                 if (success) {
-                    item.brainsCount--;
+                    item.brainsUserIds = item.brainsUserIds.filter(x => x !== currentUser.id);
                     setItemBrained(false);
                 }
             });
@@ -21,7 +21,7 @@ function FileItem({item}) {
         else {
             KnowledgeApi.addBrainToKnowledgeItem(item.postId, item.id, currentUser.id).then(success => {
                 if (success) {
-                    item.brainsCount++;
+                    item.brainsUserIds.push(currentUser.id);
                     setItemBrained(true);
                 }
             });
@@ -53,7 +53,7 @@ function FileItem({item}) {
                     <span className={'brains ' + (itemBrained ? 'brained' : '')} onClick={handleBrainClick}>
                             <FaBrain className='counterIcon brainsIcon' size={18} />
                             <span className='counter-number'>
-                                {item.brainsCount}
+                                {item.brainsUserIds.length}
                             </span>
                         </span>
                         <span className='highlights'>

@@ -11,24 +11,24 @@ function ExistingComment({commentData}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser)
     const [subcommentsOpen, setSubcommentsOpen] = useState(false);
     const [subcommentsAddedByUser, setSubcommentsAddedByUser] = useState(commentData.subcomments.filter(s => s.author.id === currentUser.id).length);
-    const [commentBrained, setCommentBrained] = useState(false);
+    const [commentBrained, setCommentBrained] = useState(commentData.brainsUserIds.includes(currentUser.id));
     const [isEditingComment, setIsEditingComment] = useState(false);
     
     let authorFullName = commentData.author.firstName + ' ' + commentData.author.lastName;
 
     const handleEditComment = (commentId, message) => {
-        DiscussionsApi.editComment(commentId, message, currentUser.id).then(success => {
+        return Promise.resolve(DiscussionsApi.editComment(commentId, message, currentUser.id).then(success => {
             if (success) {
                 setIsEditingComment(false);
             }
-        });
-    }
+        }));
+    };
 
     const handleBrainClick = () => {
         if (commentBrained) {
             DiscussionsApi.removeBrainFromComment(commentData.postId, commentData.id, currentUser.id).then(success => {
                 if (success) {
-                    commentData.brainsCount--;
+                    commentData.brainsUserIds = commentData.brainsUserIds.filter(x => x !== currentUser.id);
                     setCommentBrained(false);
                 }
             });
@@ -36,25 +36,24 @@ function ExistingComment({commentData}) {
         else {
             DiscussionsApi.addBrainToComment(commentData.postId, commentData.id, currentUser.id).then(success => {
                 if (success) {
-                    commentData.brainsCount++;
+                    commentData.brainsUserIds.push(currentUser.id);
                     setCommentBrained(true);
                 }
             });
         }
-    }
+    };
 
     const addSubcomment = () => {
         setSubcommentsAddedByUser(subcommentsAddedByUser + 1);
         setSubcommentsOpen(true);
-    }
+    };
 
     const deleteSubcomment = () => {
         setSubcommentsAddedByUser(subcommentsAddedByUser - 1);
-    }
+    };
     
     AWS.config.update({
-        accessKeyId: 'AKIARPFWQQBPX4GOQI45',
-        secretAccessKey: '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',
+
     });
 
     return (
@@ -70,7 +69,7 @@ function ExistingComment({commentData}) {
                         <span className={'brains ' + (commentBrained ? 'brained' : '')} onClick={handleBrainClick}>
                             <FaBrain className='counterIcon brainsIcon' size={18}/>
                             <span className='counter-number '>
-                                {commentData.brainsCount}
+                                {commentData.brainsUserIds.length}
                             </span>
                         </span>
                         <span className={'comments ' + (subcommentsAddedByUser > 0 ? 'commented' : '')} onClick={() => setSubcommentsOpen(!subcommentsOpen)}>
@@ -112,7 +111,7 @@ function ExistingComment({commentData}) {
             </div>
         }
         </>
-    )
+    );
 }
 
 export default ExistingComment;

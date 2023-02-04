@@ -380,7 +380,7 @@ textarea {
         .commentLoader {
           display: inline-flex;
           position: relative;
-          right: -8px;
+          right: -12px;
           bottom: 3px;
         }
        
@@ -438,7 +438,7 @@ textarea {
 
     .editSpan, .deleteSubcomment  {
       &:hover {
-        color: $discussion-blue;
+        color: $app-green;
       }
     }
 
@@ -454,14 +454,14 @@ textarea {
         margin-right: 3px;
 
         &:hover {
-          color: $discussion-blue;
+          color: $app-green;
         }
       }
       .no {
         margin-left: 3px;
 
         &:hover {
-          color: $discussion-blue;
+          color: $app-green;
         }
       }
     }
@@ -605,7 +605,7 @@ textarea {
 
             .editSpan, .deleteSpan  {
               &:hover {
-                color: $discussion-blue;
+                color: $app-green;
               }
             }
 
@@ -621,14 +621,14 @@ textarea {
                 margin-right: 3px;
 
                 &:hover {
-                  color: $discussion-blue;
+                  color: $app-green;
                 }
               }
               .no {
                 margin-left: 3px;
  
                 &:hover {
-                  color: $discussion-blue;
+                  color: $app-green;
                 }
               }
             }

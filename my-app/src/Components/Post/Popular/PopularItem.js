@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 function PopularItem({item}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
-    const [itemBrained, setItemBrained] = useState(false);
+    const [itemBrained, setItemBrained] = useState(item.brainsUserIds.includes(currentUser.id));
     
     let platformIcon, platformName;
     let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
@@ -36,7 +36,7 @@ function PopularItem({item}) {
         if (itemBrained) {
             PopularApi.removeBrainFromPopularItem(item.postId, item.id, currentUser.id).then(success => {
                 if (success) {
-                    item.brainsCount--;
+                    item.brainsUserIds = item.brainsUserIds.filter(x => x !== currentUser.id);
                     setItemBrained(false);
                 }
             });
@@ -44,7 +44,7 @@ function PopularItem({item}) {
         else {
             PopularApi.addBrainToPopularItem(item.postId, item.id, currentUser.id).then(success => {
                 if (success) {
-                    item.brainsCount++;
+                    item.brainsUserIds.push(currentUser.id);
                     setItemBrained(true);
                 }
             });
@@ -74,7 +74,7 @@ function PopularItem({item}) {
                     <span className={'brains ' + (itemBrained ? 'brained' : '')} onClick={handleBrainClick}>
                         <FaBrain className='counterIcon brainsIcon' size={18}/>
                         <span className='counter-number'>
-                            {item.brainsCount}
+                            {item.brainsUserIds.length}
                         </span>
                     </span>
                     {/* <span className='comments'>

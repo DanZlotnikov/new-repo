@@ -39,11 +39,14 @@ function NewComment({commentDataToEdit, postData, handleCreateComment, handleEdi
             setEmptyMsg(true);
         }
         else {
-            handleEditComment(commentDataToEdit.id, message);
-            commentDataToEdit.message = message;
-            commentInputRef.current.value = '';
-            setMessage('');
-            setEmptyMsg(false);
+            setShowLoader(true);
+            handleEditComment(commentDataToEdit.id, message).then((res) => {
+                commentDataToEdit.message = message;
+                commentInputRef.current.value = '';
+                setMessage('');
+                setEmptyMsg(false);
+                setShowLoader(false);
+            });
         }
     }
     
@@ -88,7 +91,7 @@ function NewComment({commentDataToEdit, postData, handleCreateComment, handleEdi
                     {!showLoader &&
                     <span className='sendIcon' onClick={() => commentDataToEdit ? editComment() : createNewComment()}>
                         {commentDataToEdit && 
-                                <GiCheckMark size={20}  />
+                                <GiCheckMark size={20} />
                             }
                             {!commentDataToEdit && 
                                 <IoMdSend size={20} />

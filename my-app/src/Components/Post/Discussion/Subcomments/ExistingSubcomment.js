@@ -14,10 +14,9 @@ function ExistingSubcomment({subcommentData, handleEditSubcomment, handleDeleteS
     }
 
     const editSubcomment = (message) => {
-        handleEditSubcomment(subcommentData.id, message).then((res) => {
-            console.log(res);
+        return Promise.resolve(handleEditSubcomment(subcommentData.id, message).then((res) => {
             setIsEditingSubcomment(false);
-        });
+        }));
     }
 
     return (

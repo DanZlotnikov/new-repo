@@ -16,6 +16,7 @@ namespace MyApp.Backend.Logic
             {
                 foreach (DataRow row in table.Rows)
                 {
+                    string brainsUserIds = row["brains_user_ids"].ToString();
                     knowledgeItems.Add(new KnowledgeItemModel
                     {
                         Id = (long)row["id"],
@@ -31,9 +32,9 @@ namespace MyApp.Backend.Logic
                         },
                         FileUrl = row["file_url"].ToString(),
                         OriginalAuthors = row["original_authors"].ToString(),
-                        BrainsCount = (int)row["brains_count"],
                         HighlightsCount = (int)row["highlights_count"],
                         PublishDate = (DateTime)row["item_publish_date"],
+                        BrainsUserIds = string.IsNullOrEmpty(brainsUserIds) ? new List<long>() : brainsUserIds.Split(',').Select(x => long.Parse(x)).ToList(),
                         CreatedTime = (DateTime)row["created_time"],
                         UpdatedTime = (DateTime)row["updated_time"],
                     });

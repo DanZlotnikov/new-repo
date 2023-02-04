@@ -24,9 +24,12 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
     }
 
     const editSubcomment = () => {
-        handleEditSubcomment(message);
-        commentInputRef.current.value = '';
-        setMessage('');
+        setShowLoader(true);
+        handleEditSubcomment(message).then((res) => {
+            commentInputRef.current.value = '';
+            setMessage('');
+            setShowLoader(false);
+        });
     }
 
     return (
@@ -70,7 +73,7 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
                     {!showLoader &&
                         <span className='sendIcon' onClick={() => subcommentDataToEdit ? editSubcomment() : addSubcomment()}>
                             {subcommentDataToEdit && 
-                            <GiCheckMark size={20}  />
+                                <GiCheckMark size={20}  />
                             }
                             {!subcommentDataToEdit && 
                                 <IoMdSend size={20} />

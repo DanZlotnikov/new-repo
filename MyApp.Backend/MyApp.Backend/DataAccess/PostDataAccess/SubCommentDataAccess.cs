@@ -45,24 +45,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             }
             return table;
         }
-        public static bool EditComment(long postId, long commentId, string message)
-        {
-            return true;
-        }
-
-        public static CommentModel CreateNewComment(int postId, long authorUserId, string message)
-        {
-            return new CommentModel
-            {
-                Id = 100,
-                PostId = postId,
-                Author = UserLogic.GetUser(3),
-                Message = message,
-                Subcomments = new List<SubcommentModel>(),
-                BrainsCount = 0
-            };
-        }
-
+        
         public static SubcommentModel AddSubcomment(long postId, long mainCommentId, long authorUserId, string message)
         {
             return new SubcommentModel();

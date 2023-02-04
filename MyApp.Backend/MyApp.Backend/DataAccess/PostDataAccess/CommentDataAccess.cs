@@ -29,23 +29,27 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 command.CommandText =
                     @"  
                     SELECT                                                
-	                    c.id AS comment_id,                                
-	                    c.message AS comment_message,                      
-	                    c.brains_count AS comment_brains_count,            
-	                    c.created_time AS comment_created_time,            
-	                    c.updated_time AS comment_updated_time,            
-	                    u.id AS author_id,                         
-	                    u.first_name AS author_first_name,                 
-	                    u.last_name AS author_last_name,                   
-	                    u.profile_img_url AS author_profile_img_url,       
-	                    u.is_verified AS author_is_verified                
+                      c.id AS comment_id,                                
+                      c.message AS comment_message,                      
+                      c.created_time AS comment_created_time,            
+                      c.updated_time AS comment_updated_time,            
+                      u.id AS author_id,                         
+                      u.first_name AS author_first_name,                 
+                      u.last_name AS author_last_name,                   
+                      u.profile_img_url AS author_profile_img_url,       
+                      u.is_verified AS author_is_verified,
+                      GROUP_CONCAT(DISTINCT b.user_id) AS brains_user_ids
                     FROM comments c                                       
                     JOIN users u                                          
-	                    ON c.author_id = u.id    
+  	                    ON c.author_id = u.id   
+                    LEFT JOIN brains b
+	                    ON c.id = b.object_id AND b.object_type_id = ?comment_object_type
                     WHERE c.post_id = ?post_id
+                    GROUP BY c.id;
                     ";
                 command.Connection = connection;
                 command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("comment_object_type", Enums.BrainedObjectType.Comment);
                 MySqlDataAdapter da = new MySqlDataAdapter(command);
 
                 da.Fill(table);
@@ -125,13 +129,28 @@ namespace MyApp.Backend.Repositories.PostRepositories
             {
                 MySqlCommand command = new MySqlCommand();
                 command.CommandType = CommandType.Text;
-                command.CommandText = @"UPDATE comments SET brains_count = (brains_count + 1) WHERE id = ?comment_id";
+                command.CommandText = @"
+                                        INSERT INTO brains 
+                                        ( 
+                                            object_id, 
+                                            user_id, 
+                                            object_type_id
+                                        ) 
+                                        VALUES 
+                                        ( 
+                                            ?comment_id, 
+                                            ?user_id, 
+                                            ?comment_object_type
+                                        );";
                 command.Connection = connection;
                 command.Parameters.AddWithValue("comment_id", commentId);
+                command.Parameters.AddWithValue("user_id", userId);
+                command.Parameters.AddWithValue("comment_object_type", Enums.BrainedObjectType.Comment);
                 connection.Open();
                 command.ExecuteNonQuery();
+                return command.LastInsertedId > 0;
             }
-            return true;
+            return false;
         }
 
         public static bool RemoveBrainFromComment(long commentId, long userId)
@@ -140,13 +159,21 @@ namespace MyApp.Backend.Repositories.PostRepositories
             {
                 MySqlCommand command = new MySqlCommand();
                 command.CommandType = CommandType.Text;
-                command.CommandText = @"UPDATE comments SET brains_count = (brains_count - 1) WHERE id = ?comment_id";
+                command.CommandText = @"DELETE FROM brains 
+                                        WHERE
+                                            object_id = ?comment_id AND 
+                                            user_id = ?user_id AND 
+                                            object_type_id = ?comment_object_type;
+                                        ";
                 command.Connection = connection;
                 command.Parameters.AddWithValue("comment_id", commentId);
+                command.Parameters.AddWithValue("user_id", userId);
+                command.Parameters.AddWithValue("comment_object_type", Enums.BrainedObjectType.Comment);
                 connection.Open();
                 command.ExecuteNonQuery();
+                return true;
             }
-            return true;
+            return false;
         }
 
         public static long AddSubcomment(long mainCommentId, long authorUserId, string message, DateTime createdTime)
