@@ -22,6 +22,16 @@ textarea {
   -webkit-font-smoothing: antialiased;
 }
 
+input {
+  background: #eee;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  outline: none;
+}
+
 .header {
   background: linear-gradient(to right, $app-green, #5ece41) no-repeat 0 0/cover;
   padding: 10px;
@@ -160,16 +170,6 @@ textarea {
         .forgotPassword {
           margin-bottom: 20px;
         }
-      }
-
-      input {
-        background: #eee;
-        border: none;
-        border-radius: 50px;
-        padding: 12px 15px;
-        margin: 8px 0;
-        width: 100%;
-        outline: none;
       }
     }
   }
@@ -640,6 +640,49 @@ textarea {
 }
 
 .knowledgeSectionDiv {
+  .modalContainer {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  
+    .uploadFileModal {
+      background-color: white;
+      position: relative;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      
+      .closeButton {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        background-color: white;
+        border: 0;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      
+      input {
+        width: 20%;
+        margin-right: 10px;
+      }
+
+      button {
+        padding: 0.5rem 1rem;
+        border: 1px solid gray;
+        border-radius: 5px;
+        background-color: lightgray;
+      }
+    }
+  }
+
   .fileListDiv {
     background-color: $background-gray;
     font-size: 13px;
@@ -917,24 +960,28 @@ textarea {
   }
 }
 
-.fileUploadDiv {
+.paperUploadDiv {
   margin-bottom: 30px;
   display: block;
   position: relative;
 
   .uploadBtn {
-    background-color: $discussion-blue;
-    color: white;
     padding: 10px 20px;
     border-radius: 15px;
     box-shadow: 0px 0px 7px rgba(0,0,0,0.2);
+    background-color: $discussion-blue;
+    color: white;
     cursor: pointer;
-
-    .defaultUploadBtn {
-      display: none;
+    
+    &.uploaded {
+      background-color: white;
+      color: $discussion-blue;  
     }
   }
-  
+
+  .defaultUploadBtn {
+    display: none;
+  }
   .iconCont {
     position: absolute;
   }

@@ -8,7 +8,11 @@ const texts = {
     knowledge: {
         itemListHeaderTitle: 'title',
         itemListHeaderPublished: 'published',
-        uploadFile: 'Upload a File'
+        uploadItem: 'Add a Reference',
+        itemUploadModal: {
+            header: 'File Info',
+            paperName: 'Paper name'
+        },
     },
     popular: {
         
