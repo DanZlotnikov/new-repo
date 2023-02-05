@@ -1,4 +1,7 @@
 const texts = {
+    general: {
+        save: 'Save',
+    },
     discussions: {
         commentEditHint: '[Editing]',
         commentEmptyHint: '[Cannot be Empty]',
@@ -10,8 +13,11 @@ const texts = {
         itemListHeaderPublished: 'published',
         uploadItem: 'Add a Reference',
         itemUploadModal: {
-            header: 'File Info',
-            paperName: 'Paper name'
+            header: 'New Reference',
+            title: 'Title',
+            originalAuthors: 'Original Authors',
+            publishDate: 'Publish Date',
+            modalFieldsError: 'Fill out all the fields'
         },
     },
     popular: {

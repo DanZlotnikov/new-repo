@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import texts from '../../texts';
 import { FiUpload } from 'react-icons/fi';
 
-function FileUploadWidget({openFileUploadModal}) {
-  const [file, setFile] = useState(null);
-
+function FileUploadWidget({ openFileUploadModal, file, setFile }) {
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
-    openFileUploadModal()
+    event.target.value = null;
+    openFileUploadModal();
   };
 
   const handleFileInputClick = (event) => {
