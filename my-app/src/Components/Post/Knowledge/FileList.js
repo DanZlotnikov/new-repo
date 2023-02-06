@@ -1,5 +1,5 @@
 import texts from '../../../texts';
-import FileItem from './FileItem';
+import KnowledgeItem from './KnowledgeItem';
 
 function FileList({items}) {
     return (
@@ -15,7 +15,7 @@ function FileList({items}) {
                 </span>  
             </div>
             {items.map((item) => 
-            <FileItem key={item.id} item={item} />
+                <KnowledgeItem key={item.id} item={item} />
             )}
         </div>
     )

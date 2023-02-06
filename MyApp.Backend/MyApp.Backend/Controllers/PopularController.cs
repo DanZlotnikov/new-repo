@@ -41,6 +41,13 @@ namespace MyApp.Backend.Controllers
             return PopularLogic.RemoveBrainFromPopularItem(param.itemId, param.userId);
         }
 
+
+        [HttpPost("UploadPopularItem")]
+        public PopularItemModel UploadPopularItem(UploadPopularItemParam param)
+        {
+            return PopularLogic.UploadPopularItem(param.postId, param.uploaderId, param.url, param.platformTypeId);
+        }
+
         #endregion
     }
 }

@@ -104,5 +104,47 @@ namespace MyApp.Backend.Repositories.PostRepositories
             }
             return false;
         }
+
+        public static long UploadPopularItem(long postId, long uploaderId, string url, int platformTypeId, DateTime createdTime)
+        {
+            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
+            {
+                MySqlCommand command = new MySqlCommand();
+                command.CommandType = CommandType.Text;
+                command.CommandText = @"
+                                        INSERT INTO popular_items 
+                                        ( 
+                                            post_id,
+                                            uploader_id, 
+                                            platform_type_id,
+                                            iframe_url,
+                                            created_time,
+                                            updated_time
+                                        ) 
+                                        VALUES 
+                                        ( 
+                                            ?post_id,
+                                            ?uploader_id, 
+                                            ?platform_type_id,
+                                            ?iframe_url,
+                                            ?created_time,
+                                            ?updated_time
+                                        );";
+                command.Connection = connection;
+                command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("uploader_id", uploaderId);
+                command.Parameters.AddWithValue("platform_type_id", platformTypeId);
+                command.Parameters.AddWithValue("iframe_url", url);
+                command.Parameters.AddWithValue("created_time", createdTime);
+                command.Parameters.AddWithValue("updated_time", createdTime);
+                connection.Open();
+                command.ExecuteNonQuery();
+                if (command.LastInsertedId > 0)
+                {
+                    return command.LastInsertedId;
+                }
+            }
+            return 0;
+        }
     }
 }

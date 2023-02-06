@@ -109,5 +109,53 @@ namespace MyApp.Backend.Repositories.PostRepositories
             }
             return false;
         }
+
+        public static long UploadKnowledgeItem(long postId, long uploaderId, string title, string fileUrl, string originalAuthors, DateTime publishDate, DateTime createdTime)
+        {
+            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
+            {
+                MySqlCommand command = new MySqlCommand();
+                command.CommandType = CommandType.Text;
+                command.CommandText = @"
+                                        INSERT INTO knowledge_items 
+                                        ( 
+                                            post_id,
+                                            uploader_id, 
+                                            title,
+                                            file_url,
+                                            item_publish_date,
+                                            original_authors,
+                                            created_time,
+                                            updated_time
+                                        ) 
+                                        VALUES 
+                                        ( 
+                                            ?post_id,
+                                            ?uploader_id, 
+                                            ?title,
+                                            ?file_url,
+                                            ?item_publish_date,
+                                            ?original_authors,
+                                            ?created_time,
+                                            ?updated_time
+                                        );";
+                command.Connection = connection;
+                command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("uploader_id", uploaderId);
+                command.Parameters.AddWithValue("title", title);
+                command.Parameters.AddWithValue("file_url", fileUrl);
+                command.Parameters.AddWithValue("item_publish_date", publishDate);
+                command.Parameters.AddWithValue("original_authors", originalAuthors);
+                command.Parameters.AddWithValue("created_time", createdTime);
+                command.Parameters.AddWithValue("updated_time", createdTime);
+                connection.Open();
+                command.ExecuteNonQuery();
+                if (command.LastInsertedId > 0)
+                {
+                    return command.LastInsertedId;
+                }
+            }
+            return 0;
+        }
     }
 }

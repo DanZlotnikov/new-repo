@@ -1,16 +1,27 @@
 import { useState } from 'react';
 import FileList from './FileList';
-import UploadFileModal from './UploadFileModal';
+import Modal from '../../Common/Modal';
 import FileUploadWidget from '../../Common/FileUploadWidget';
+import KnowledgeApi from '../../../api/KnowledgeApi';
+import { useSelector } from 'react-redux';
+import dateFormat from 'dateformat';
+import UploadKnowledgeItemForm from './UploadKnowledgeItemForm';
 
-function KnowledgeSection({postData}) {
+function KnowledgeSection({post}) {
+    const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [showModal, setShowModal] = useState(false);
     const [file, setFile] = useState(null);
+    const [createdItems, setCreatedItems] = useState(0);
 
-    const createNewItem = (title, originalAuthors, publishDate) => {
+    const handleUploadItem = (title, originalAuthors, publishDate) => {
         setShowModal(false);
         setFile(null);
-        console.log(title, originalAuthors, publishDate);
+        KnowledgeApi.UploadKnowledgeItem(post.id, currentUser.id, title, originalAuthors, dateFormat(publishDate, 'dd-mm-yyyy'), file).then(newItem => {
+            if (newItem.id) {
+                post.knowledgeItems.push(newItem);
+                setCreatedItems(createdItems + 1);
+            }
+        });
     }
 
     const handleCancelModal = () => {
@@ -22,9 +33,9 @@ function KnowledgeSection({postData}) {
         <div className='knowledgeSectionDiv'>
             <FileUploadWidget openFileUploadModal={() => setShowModal(true)} file={file} setFile={setFile} />
             {showModal && 
-                <UploadFileModal onCancel={handleCancelModal} onSave={createNewItem}/>
+                <Modal renderComponent={<UploadKnowledgeItemForm handleUploadItem={handleUploadItem} fileName={file.name} />} onCancel={handleCancelModal} />
             }
-            <FileList items={postData.knowledgeItems}/>
+            <FileList items={post.knowledgeItems}/>
         </div>
     )
 }

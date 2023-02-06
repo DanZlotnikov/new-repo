@@ -10,6 +10,9 @@ export const Colors = {
     brainPink: '#f03268',
     markerOrange: '#f28e29',
     appGreen: '#4cb45a',
+    youtubeRed: 'red',
+    spotifyGreen: '#1DB954',
+    tiktokBlack: 'black'
 }
 
 export let PostBodySections = [
@@ -18,8 +21,8 @@ export let PostBodySections = [
     { key: 2, component: <PopularSection />, icon: <FaFire />, iconColor: Colors.brainPink, dataAttributeName: 'popularItems' },
 ]
 
-export const PopularPlatformType = {
-    1: 'youtube',
-    2: 'spotify', 
-    3: 'tiktok'
-}
+export const PopularPlatformType = [
+    { val: 1, name: 'YouTube' },
+    { val: 2, name: 'Spotify' },
+    { val: 3, name: 'Tiktok' },
+]

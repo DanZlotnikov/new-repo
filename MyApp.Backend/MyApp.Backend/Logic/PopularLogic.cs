@@ -48,6 +48,28 @@ namespace MyApp.Backend.Logic
         public static bool RemoveBrainFromPopularItem(long itemId, long userId)
         {
             return PopularDataAccess.RemoveBrainFromPopularItem(itemId, userId);
+        } 
+        
+        public static PopularItemModel UploadPopularItem(long postId, long uploaderId, string url, int platformTypeId)
+        {
+            PopularItemModel item = new PopularItemModel();
+            DateTime now = DateTime.Now;
+            long newItemId = PopularDataAccess.UploadPopularItem(postId, uploaderId, url, platformTypeId, now);
+            if (newItemId > 0)
+            {
+                item = new PopularItemModel
+                {
+                    Id = newItemId,
+                    PostId = postId,
+                    Uploader = UserLogic.GetUser(uploaderId),
+                    BrainsUserIds = new List<long>(),
+                    IframeUrl = url,
+                    PlatformType = (Enums.PopularPlatformType)platformTypeId,
+                    CreatedTime = now,
+                    UpdatedTime = now
+                };
+            }
+            return item;
         }
     }
 }

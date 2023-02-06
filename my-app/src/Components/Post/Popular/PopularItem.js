@@ -12,21 +12,20 @@ function PopularItem({item}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [itemBrained, setItemBrained] = useState(item.brainsUserIds.includes(currentUser.id));
     
-    let platformIcon, platformName;
+    let platformIcon;
+    let platformName = PopularPlatformType.find(x => x.val === item.platformType).name.toLowerCase();
     let uploaderFullName = item.uploader.firstName + ' ' + item.uploader.lastName;
-
-    switch(PopularPlatformType[item.platformType]) {
+    
+    
+    switch(platformName) {
         case 'youtube':
             platformIcon = youtubeIcon;
-            platformName = PopularPlatformType[item.platformType];
             break;
         case 'spotify':
             platformIcon = spotifyIcon;
-            platformName = PopularPlatformType[item.platformType];
             break;
         case 'tiktok':
             platformIcon = tiktokIcon;
-            platformName = PopularPlatformType[item.platformType];
             break;
         default:
             break;
@@ -34,7 +33,7 @@ function PopularItem({item}) {
 
     const handleBrainClick = () => {
         if (itemBrained) {
-            PopularApi.removeBrainFromPopularItem(item.postId, item.id, currentUser.id).then(success => {
+            PopularApi.RemoveBrainFromPopularItem(item.postId, item.id, currentUser.id).then(success => {
                 if (success) {
                     item.brainsUserIds = item.brainsUserIds.filter(x => x !== currentUser.id);
                     setItemBrained(false);
@@ -42,7 +41,7 @@ function PopularItem({item}) {
             });
         }
         else {
-            PopularApi.addBrainToPopularItem(item.postId, item.id, currentUser.id).then(success => {
+            PopularApi.AddBrainToPopularItem(item.postId, item.id, currentUser.id).then(success => {
                 if (success) {
                     item.brainsUserIds.push(currentUser.id);
                     setItemBrained(true);
@@ -52,39 +51,36 @@ function PopularItem({item}) {
     }
 
     return (
-        <div className={'itemDiv ' + platformName} >
-            <img src={platformIcon} className={'itemTypeImg ' + platformName} title={platformName} alt={platformName}/>
+        <div className={'itemDiv ' + platformName}>
+            <img src={item.uploader.profileImgUrl} className={`uploaderImg ${platformName}`} title={uploaderFullName} alt={uploaderFullName}></img>
+            <span className={`reactionCounters ${platformName}`}>
+                <span className={'brains ' + (itemBrained ? 'brained' : '')} onClick={handleBrainClick}>
+                    <FaBrain className='counterIcon brainsIcon' size={18}/>
+                    <span className='counter-number'>
+                        {item.brainsUserIds.length}
+                    </span>
+                </span>
+                {/* <span className='comments'>
+                    <FaComment className='counterIcon commentsIcon' size={16}/>
+                    <span className='counter-number'>
+                        {item.commentsCount}
+                    </span>
+                </span> */}
+            </span>
             <div className='thumbnail'>
                 {platformName === 'tiktok' ? 
                     <TikTok url={item.iframeUrl} />
-                :
+                    :
                     <iframe 
-                        className={'thumbnailIframe ' + platformName} 
-                        src={item.iframeUrl}
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        scrolling="no"
+                    className={'thumbnailIframe ' + platformName} 
+                    src={item.iframeUrl}
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    scrolling="no"
                     />
                 }
-                
-            </div>
-            <div className={'footer ' + platformName}>
-                <span className='reactionCounters'>
-                    <span className={'brains ' + (itemBrained ? 'brained' : '')} onClick={handleBrainClick}>
-                        <FaBrain className='counterIcon brainsIcon' size={18}/>
-                        <span className='counter-number'>
-                            {item.brainsUserIds.length}
-                        </span>
-                    </span>
-                    {/* <span className='comments'>
-                        <FaComment className='counterIcon commentsIcon' size={16}/>
-                        <span className='counter-number'>
-                            {item.commentsCount}
-                        </span>
-                    </span> */}
-                </span>
-                <img src={item.uploader.profileImgUrl} className='uploaderImg' title={uploaderFullName} alt={uploaderFullName}></img>
+                <img src={platformIcon} className={'itemTypeImg ' + platformName} title={platformName} alt={platformName}/>
             </div>
         </div>
     )

@@ -16,7 +16,7 @@ function ExistingComment({commentData}) {
     let authorFullName = commentData.author.firstName + ' ' + commentData.author.lastName;
 
     const handleEditComment = (commentId, message) => {
-        return Promise.resolve(DiscussionsApi.editComment(commentId, message, currentUser.id).then(success => {
+        return Promise.resolve(DiscussionsApi.EditComment(commentId, message, currentUser.id).then(success => {
             if (success) {
                 setIsEditingComment(false);
             }
@@ -25,7 +25,7 @@ function ExistingComment({commentData}) {
 
     const handleBrainClick = () => {
         if (commentBrained) {
-            DiscussionsApi.removeBrainFromComment(commentData.postId, commentData.id, currentUser.id).then(success => {
+            DiscussionsApi.RemoveBrainFromComment(commentData.postId, commentData.id, currentUser.id).then(success => {
                 if (success) {
                     commentData.brainsUserIds = commentData.brainsUserIds.filter(x => x !== currentUser.id);
                     setCommentBrained(false);
@@ -33,7 +33,7 @@ function ExistingComment({commentData}) {
             });
         }
         else {
-            DiscussionsApi.addBrainToComment(commentData.postId, commentData.id, currentUser.id).then(success => {
+            DiscussionsApi.AddBrainToComment(commentData.postId, commentData.id, currentUser.id).then(success => {
                 if (success) {
                     commentData.brainsUserIds.push(currentUser.id);
                     setCommentBrained(true);

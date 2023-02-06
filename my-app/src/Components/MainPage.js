@@ -12,7 +12,7 @@ function MainPage() {
     /* eslint-disable */
     useEffect(() => {
         if (!didMount.current) { // this will only run on first render
-            PostsApi.getPostsForUser(currentUser.id).then((postsData) => {
+            PostsApi.GetPostsForUser(currentUser.id).then((postsData) => {
                 setPosts(postsData);
             });
             return;
@@ -32,7 +32,7 @@ function MainPage() {
                     <div></div>
                     {posts.map((post) => (
                         <span key={post.id}>
-                            <Post postData={post} />
+                            <Post post={post} />
                         </span>
                     ))}
                 </div>

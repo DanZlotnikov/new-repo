@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
 using MyApp.Backend.Logic;
 using MyApp.Backend.Models.PostModels;
+using MyApp.Backend.Models.PostModels.KnowledgeModels;
 using MyApp.Backend.Repositories.PostRepositories;
 
 namespace MyApp.Backend.Controllers
@@ -40,6 +41,13 @@ namespace MyApp.Backend.Controllers
         {
             return KnowledgeLogic.RemoveBrainFromKnowledgeItem(param.itemId, param.userId);
         }
+
+        [HttpPost("UploadKnowledgeItem")]
+        public KnowledgeItemModel UploadKnowledgeItem([FromForm] UploadKnowledgeItemParam param)
+        {
+            IFormFile file = Request.Form.Files.FirstOrDefault();
+            return KnowledgeLogic.UploadKnowledgeItem(param.postId, param.uploaderId, param.title, param.originalAuthors, DateTime.Parse(param.publishDate), file);
+        }   
 
         #endregion
     }

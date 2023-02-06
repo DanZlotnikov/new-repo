@@ -1,6 +1,9 @@
 const texts = {
     general: {
         save: 'Save',
+        upload: 'Upload',
+        fileName: 'File name',
+        add: 'Add'
     },
     discussions: {
         commentEditHint: '[Editing]',
@@ -17,12 +20,16 @@ const texts = {
             title: 'Title',
             originalAuthors: 'Original Authors',
             publishDate: 'Publish Date',
-            modalFieldsError: 'Fill out all the fields'
+            modalFieldsError: 'Fill out all the fields',
         },
     },
     popular: {
-        
-    }
+        addItem: 'Add Item',
+        itemUploadModal: {
+            header: 'New Item',
+            url: 'URL',
+        },
+    },
 };
 
 export default texts;

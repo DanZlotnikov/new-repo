@@ -2,6 +2,7 @@
 using System.Data;
 using MyApp.Backend.Models.PostModels.KnowledgeModels;
 using MyApp.Backend.Repositories.PostRepositories;
+using MyApp.Backend.Repositories;
 
 namespace MyApp.Backend.Logic
 {
@@ -51,6 +52,41 @@ namespace MyApp.Backend.Logic
         public static bool RemoveBrainFromKnowledgeItem(long itemId, long userId)
         {
             return KnowledgeDataAccess.RemoveBrainFromKnowledgeItem(itemId, userId);
+        }
+
+        public static KnowledgeItemModel UploadKnowledgeItem(long postId, long uploaderId, string title, string originalAuthors, DateTime publishDate, IFormFile file)
+        {
+            KnowledgeItemModel item = new KnowledgeItemModel();
+            if (file != null)
+            {
+                DateTime now = DateTime.Now;
+                string filePath = "C:\\Projects\\new-repo\\my-app\\src\\New folder\\" + file.FileName;
+                string fileUrl = "http://localhost:8080/" + file.FileName;
+                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    file.CopyTo(fs);
+                    fs.Close();
+                }
+                long newItemId = KnowledgeDataAccess.UploadKnowledgeItem(postId, uploaderId, title, fileUrl, originalAuthors, publishDate, now);
+                if (newItemId > 0)
+                {
+                    item = new KnowledgeItemModel
+                    {
+                        Id = newItemId,
+                        PostId = postId,
+                        Title = title,
+                        Uploader = UserLogic.GetUser(uploaderId),
+                        FileUrl = fileUrl,
+                        OriginalAuthors = originalAuthors,
+                        PublishDate = publishDate,
+                        BrainsUserIds = new List<long>(),
+                        HighlightsCount = 0,
+                        CreatedTime = now,
+                        UpdatedTime = now
+                    };
+                }
+            }
+            return item;
         }
     }
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { config } from '../config';
 
 const PostsApi = {
-  getPostsForUser: (id) => {
+  GetPostsForUser: (id) => {
     return axios.get(`${config.apiBaseUrl}/Posts/GetPostsForUser`, {
       params: {userId: id}
     })

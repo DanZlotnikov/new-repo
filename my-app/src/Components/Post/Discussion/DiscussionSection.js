@@ -2,7 +2,7 @@ import NewComment from './NewComment';
 import ExistingComment from './ExistingComment'
 import { useState } from 'react';
 
-function DiscussionSection({postData}) {
+function DiscussionSection({post}) {
     const [newCommentsAdded, setNewCommentsAdded] = useState(0);
 
     const handleCreateComment = () => {
@@ -11,9 +11,9 @@ function DiscussionSection({postData}) {
 
     return (
         <div className='discussionSectionDiv'>
-            <NewComment postData={postData} handleCreateComment={handleCreateComment} />
+            <NewComment post={post} handleCreateComment={handleCreateComment} />
             <div className='existingCommentsDiv'>
-                {postData.comments.map((comment) => (
+                {post.comments.map((comment) => (
                     <span key={comment.id}>
                         <ExistingComment commentData={comment} />
                     </span>

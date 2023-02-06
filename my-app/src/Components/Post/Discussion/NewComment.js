@@ -9,7 +9,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { GiCheckMark } from 'react-icons/gi';
 import { Oval } from 'react-loader-spinner';
 
-function NewComment({commentDataToEdit, postData, handleCreateComment, handleEditComment}) {
+function NewComment({commentDataToEdit, post, handleCreateComment, handleEditComment}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [message, setMessage] = useState(commentDataToEdit ? commentDataToEdit.message : '');
     const [emptyMsg, setEmptyMsg] = useState(false);
@@ -22,9 +22,9 @@ function NewComment({commentDataToEdit, postData, handleCreateComment, handleEdi
         }
         else {
             setShowLoader(true);
-            DiscussionsApi.createNewComment(postData.id, currentUser.id, message).then(newComment => {
+            DiscussionsApi.CreateNewComment(post.id, currentUser.id, message).then(newComment => {
                 if (newComment && newComment.id > 0) {
-                    postData.comments.unshift(newComment);
+                    post.comments.unshift(newComment);
                     commentInputRef.current.value = '';
                     setMessage('');
                     handleCreateComment();

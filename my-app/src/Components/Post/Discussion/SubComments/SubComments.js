@@ -9,7 +9,7 @@ function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
     const [subcommentEditCount, setSubcommentEditCount] = useState(0);
 
     const handleAddSubcomment = (message) => {
-        return Promise.resolve(DiscussionsApi.addSubcomment(mainCommentData.id, currentUser.id, message).then(newSubcomment => {
+        return Promise.resolve(DiscussionsApi.AddSubcomment(mainCommentData.id, currentUser.id, message).then(newSubcomment => {
             if (newSubcomment && newSubcomment.id > 0) {
                 mainCommentData.subcomments.push(newSubcomment);
                 addSubcomment();
@@ -18,7 +18,7 @@ function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
     }
 
     const handleDeleteSubcomment = (subcommentId) => {
-        return Promise.resolve(DiscussionsApi.deleteSubcomment(subcommentId, currentUser.id).then(success => {
+        return Promise.resolve(DiscussionsApi.DeleteSubcomment(subcommentId, currentUser.id).then(success => {
             if (success) {
                 mainCommentData.subcomments = mainCommentData.subcomments.filter(c => c.id !== subcommentId);
                 deleteSubcomment();
@@ -32,7 +32,7 @@ function Subcomments({mainCommentData, addSubcomment, deleteSubcomment}) {
             ret = Promise.resolve(handleDeleteSubcomment(subcommentId));
         }
         else {
-            ret = Promise.resolve(DiscussionsApi.editSubcomment(subcommentId, message, currentUser.id).then(success => {
+            ret = Promise.resolve(DiscussionsApi.EditSubcomment(subcommentId, message, currentUser.id).then(success => {
                 if (success) {
                     mainCommentData.subcomments.find(s => s.id === subcommentId).message = message;
                     setSubcommentEditCount(subcommentEditCount + 1);
