@@ -357,16 +357,18 @@ input {
 
     .itemAdditionBtn {
       margin-right: 10px;
-      background-color: $background-white;
       padding: 7px;
       padding-left: 9px;
       padding-right: 10px;
       border-radius: 5px;
       cursor: pointer;
+      
+      .fileUploadDiv {
+        margin-bottom: 0px;
+      }
 
       &:hover {
         background-color: $background-gray;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       }
     }
   }
@@ -785,71 +787,7 @@ input {
 }
 
 .knowledgeSectionDiv {
-  .uploadItemForm {
-    .uploadFileHeader {
-      margin-bottom: 20px;
-      color: $text-gray;
-
-      .headerText {
-        margin-top: 25px;
-        font-weight: bold;
-        font-size: 20px;
-      }
-
-      .fileName {
-        margin-top: 5px;
-        font-weight: bold;
-        font-size: 16px;
-        color: $discussion-blue;
-      }
-    }
-
-    .uploadFileForm {
-      border-top: 1px solid $text-gray;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 400px;
-      padding: 20px 40px;
-      padding-top: 10px;
-
-      .inputDiv {
-        width: 100%;
-        margin-top: 20px;
-
-        .textInput {
-          margin-bottom: 30px;
-          height: 30px;
-          width: 100%;
-        }
-      }
-
-      .datePickerDiv {
-        width: 100%;
-        margin-top: 20px;
-      }
-
-      .uploadButton {
-        width: 100%;
-        background-color: $facebook-blue;
-        color: #fff;
-        padding: 20px 20px;
-        border-radius: 5px;
-        border: 0px;
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        transition: transform 80ms ease-in;
-        margin-top: 30px;
-        cursor: pointer;
-      }
-      .errorDiv {
-        color: $site-red;
-        margin-top: 10px;
-      }
-    }
-  }
+  
 
   .fileListDiv {
     background-color: $background-gray;
@@ -927,77 +865,7 @@ input {
     }
   }
 
-  .uploadItemForm {
-    .uploadFileHeader {
-      margin-bottom: 20px;
-      color: $text-gray;
-
-      .headerText {
-        margin-top: 25px;
-        font-weight: bold;
-        font-size: 20px;
-      }
-
-      .fileName {
-        margin-top: 5px;
-        font-weight: bold;
-        font-size: 16px;
-        color: $discussion-blue;
-      }
-    }
-
-    .uploadFileForm {
-      border-top: 1px solid $text-gray;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 400px;
-      padding: 20px 40px;
-      padding-top: 10px;
-
-      .inputDiv {
-        width: 100%;
-        margin-top: 20px;
-
-        .textInput {
-          margin-bottom: 30px;
-          height: 30px;
-          width: 100%;
-        }
-
-        .platformSelect {
-          width: 100%;
-
-          .platformName {
-            position: relative;
-            margin-inline-start: -30px;
-            top: -4px;
-          }
-        }
-      }
-
-      .uploadButton {
-        width: 100%;
-        background-color: $site-red;
-        color: #fff;
-        padding: 20px 20px;
-        border-radius: 5px;
-        border: 0px;
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        transition: transform 80ms ease-in;
-        margin-top: 30px;
-        cursor: pointer;
-      }
-      
-      .errorDiv {
-        color: $site-red;
-        margin-top: 10px;
-      }
-    }
-  }
+ 
   .allItemsDiv {
     padding-left: 5%;
     padding-right: 5%;
@@ -1255,5 +1123,143 @@ input {
     width: 25px;
     height: 25px;
     color: $discussion-blue;
+  }
+}
+
+.uploadKnowledgeItemForm {
+  .uploadFileHeader {
+    margin-bottom: 20px;
+    color: $text-gray;
+
+    .headerText {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .fileName {
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 16px;
+      color: $discussion-blue;
+    }
+  }
+
+  .uploadFileForm {
+    border-top: 1px solid $text-gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 20px 40px;
+    padding-top: 10px;
+
+    .inputDiv {
+      width: 100%;
+      margin-top: 20px;
+
+      .textInput {
+        margin-bottom: 30px;
+        height: 30px;
+        width: 100%;
+      }
+    }
+
+    .datePickerDiv {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .uploadButton {
+      width: 100%;
+      background-color: $facebook-blue;
+      color: #fff;
+      padding: 20px 20px;
+      border-radius: 5px;
+      border: 0px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 80ms ease-in;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+    .errorDiv {
+      color: $site-red;
+      margin-top: 10px;
+    }
+  }
+}
+
+.uploadPopularItemForm {
+  .uploadFileHeader {
+    margin-bottom: 20px;
+    color: $text-gray;
+
+    .headerText {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .fileName {
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 16px;
+      color: $discussion-blue;
+    }
+  }
+
+  .uploadFileForm {
+    border-top: 1px solid $text-gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 20px 40px;
+    padding-top: 10px;
+
+    .inputDiv {
+      width: 100%;
+      margin-top: 20px;
+
+      .textInput {
+        margin-bottom: 30px;
+        height: 30px;
+        width: 100%;
+      }
+
+      .platformSelect {
+        width: 100%;
+
+        .platformName {
+          position: relative;
+          margin-inline-start: -30px;
+          top: -4px;
+        }
+      }
+    }
+
+    .uploadButton {
+      width: 100%;
+      background-color: $site-red;
+      color: #fff;
+      padding: 20px 20px;
+      border-radius: 5px;
+      border: 0px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 80ms ease-in;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+    
+    .errorDiv {
+      color: $site-red;
+      margin-top: 10px;
+    }
   }
 }

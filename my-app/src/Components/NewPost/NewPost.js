@@ -10,27 +10,29 @@ import { IoMdSend } from 'react-icons/io';
 import FileUploadWidget from '../Common/FileUploadWidget';
 import UploadKnowledgeItemForm from '../Post/Knowledge/UploadKnowledgeItemForm';
 import Modal from '../Common/Modal';
+import UploadPopularItemForm from '../Post/Popular/UploadPopularItemForm';
 
 function NewPost() {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const postTextInputRef = useRef(null);
     const [message, setMessage] = useState('');
     const [showLoader, setShowLoader] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showKnowldegeModal, setShowKnowldegeModal] = useState(false);
+    const [showPopularModal, setShowPopularModal] = useState(false);
     const [file, setFile] = useState(null);
 
     const createNewPost = () => {
 
     }
     
-    const handleUploadItem = (title, originalAuthors, publishDate) => {
-        setShowModal(false);
+    const handleUploadKnowledgeItem = (title, originalAuthors, publishDate) => {
+        setShowKnowldegeModal(false);
         setFile(null);
     }
 
-    const handleCancelModal = () => {
+    const handleUploadPopularItem = (title, originalAuthors, publishDate) => {
+        setShowPopularModal(false);
         setFile(null);
-        setShowModal(false);
     }
 
     return (
@@ -67,12 +69,14 @@ function NewPost() {
                 </span>
             </div>
             <div className='itemAdditionDiv'>
-                <span className='itemAdditionBtn'><PostSectionCard icon={<FaBookOpen />} iconColor={Colors.discussionBlue} /></span>
-                <span className='itemAdditionBtn'><PostSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
+                <span className='itemAdditionBtn'><FileUploadWidget uploadButtonIcon={<PostSectionCard icon={<FaBookOpen />} iconColor={Colors.discussionBlue} />} openFileUploadModal={() => setShowKnowldegeModal(true)} file={file} setFile={setFile} /></span>
+                <span onClick={() => setShowPopularModal(true)} className='itemAdditionBtn'><PostSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
             </div>
-            <FileUploadWidget openFileUploadModal={() => setShowModal(true)} file={file} setFile={setFile} />
-            {showModal && 
-                <Modal renderComponent={<UploadKnowledgeItemForm handleUploadItem={handleUploadItem} fileName={file.name} />} onCancel={handleCancelModal} />
+            {showKnowldegeModal && 
+                <Modal renderComponent={<UploadKnowledgeItemForm handleUploadItem={handleUploadKnowledgeItem} fileName={file.name} />} onCancel={() => setShowKnowldegeModal(false)} />
+            }
+             {showPopularModal && 
+                <Modal renderComponent={<UploadPopularItemForm handleUploadItem={handleUploadPopularItem} />} onCancel={() => setShowPopularModal(false)} />
             }
         </div>
     )

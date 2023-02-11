@@ -22,7 +22,7 @@ function UploadKnowledgeItemForm({fileName, handleUploadItem}) {
     }
 
     return (
-    <div className='uploadItemForm'>
+    <div className='uploadKnowledgeItemForm'>
         <div className='uploadFileHeader'>
           <div className='headerText'>
             {texts.knowledge.itemUploadModal.header}

@@ -21,7 +21,7 @@ function UploadPopularItemForm({handleUploadItem}) {
   }
 
   return (
-    <div className='uploadItemForm'>
+    <div className='uploadPopularItemForm'>
         <div className='uploadFileHeader'>
           <div className='headerText'>
             {texts.popular.itemUploadModal.header}
