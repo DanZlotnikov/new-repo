@@ -3,7 +3,14 @@ const texts = {
         save: 'Save',
         upload: 'Upload',
         fileName: 'File name',
-        add: 'Add'
+        add: 'Add',
+        welcome: 'Welcome',
+        signInExplanation: 'Sign in using one of your social media accounts',
+        createAccount: 'Create account',
+        comingSoon: 'Coming soon...'
+    },
+    newPost: {
+        newPostInputPlaceholder: 'What do you want to discuss'
     },
     discussions: {
         commentEditHint: '[Editing]',

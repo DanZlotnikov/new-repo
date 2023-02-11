@@ -17,7 +17,7 @@ function Modal({renderComponent, onCancel}) {
   return (
     <div className={`modalContainer ${isOpen ? 'open' : ''}`}>
       <div className={`modalBody ${isOpen ? 'open' : ''}`}>
-        <img className='userProfileImg' src={currentUser.profileImgUrl} alt='Dan Zlotnikov'/>
+        <img className='userProfileImg' src={currentUser.profileImgUrl} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
         <button className="closeButton" onClick={handleCancel}>
           &times;
         </button>

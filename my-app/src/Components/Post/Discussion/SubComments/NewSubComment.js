@@ -1,13 +1,14 @@
 import { useState, useRef } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import profilePicDan from '../../../../New folder/profile_pic_dan.jpg'
 import { FaCheckCircle } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 import { GiCheckMark } from 'react-icons/gi';
 import texts from '../../../../texts';
 import { Oval } from 'react-loader-spinner';
+import { useSelector } from 'react-redux';
 
 function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSubcomment}) {
+    const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [message, setMessage] = useState(subcommentDataToEdit ? subcommentDataToEdit.message : '');
     const commentInputRef = useRef(null);
     const [showLoader, setShowLoader] = useState(false);
@@ -34,12 +35,12 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
 
     return (
         <div className='newSubcommentDiv'>
-            <img className='userProfileImg subcommentProfileImg' src={profilePicDan} title='Dan Zlotnikov' alt='Dan Zlotnikov' />
+            <img className='userProfileImg subcommentProfileImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
             <span className='newSubcomment'>
                 { subcommentDataToEdit && 
                     <span className='subcommentAuthorName'>
                         {subcommentDataToEdit.author.firstName + ' ' + subcommentDataToEdit.author.lastName}
-                        {subcommentDataToEdit.author.verified &&  
+                        {subcommentDataToEdit.author.isVerified &&  
                             <span className='checkmarkIcon'>
                                 <FaCheckCircle size={13}/>
                             </span>

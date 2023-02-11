@@ -60,7 +60,7 @@ namespace MyApp.Backend.Logic
             if (file != null)
             {
                 DateTime now = DateTime.Now;
-                string filePath = "C:\\Projects\\new-repo\\my-app\\src\\New folder\\" + file.FileName;
+                string filePath = $"C:\\Projects\\new-repo\\my-app\\src\\New folder\\{file.FileName}";
                 string fileUrl = "http://localhost:8080/" + file.FileName;
                 using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                 {

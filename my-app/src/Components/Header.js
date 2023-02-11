@@ -27,9 +27,9 @@ function Header() {
             {currentUser.isLoggedIn && 
             <>
             <span className='userHeader'>
-                <img className='userProfileImg' src={currentUser.profileImgUrl} alt='Dan Zlotnikov'/>
+                <img className='userProfileImg' src={currentUser.profileImgUrl} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
                 <span className='userName'>
-                    {currentUser.fullName}
+                    {`${currentUser.firstName} ${currentUser.lastName}`}
                 </span>
             </span>
             <span className='logout'><MdLogout size={20} onClick={handleLogout}/></span>

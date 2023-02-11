@@ -26,3 +26,4 @@ C:\Projects\new-repo\MyApp.Backend\MyApp.Backend\obj\Debug\net6.0\MyApp.Backend.
 C:\Projects\new-repo\MyApp.Backend\MyApp.Backend\obj\Debug\net6.0\MyApp.Backend.genruntimeconfig.cache
 C:\Projects\new-repo\MyApp.Backend\MyApp.Backend\obj\Debug\net6.0\ref\MyApp.Backend.dll
 C:\Projects\new-repo\MyApp.Backend\MyApp.Backend\bin\Debug\net6.0\MySqlConnector.dll
+C:\Projects\new-repo\MyApp.Backend\MyApp.Backend\bin\Debug\net6.0\Newtonsoft.Json.dll

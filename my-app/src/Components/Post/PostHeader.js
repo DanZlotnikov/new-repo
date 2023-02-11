@@ -11,7 +11,7 @@ function PostHeader({post}) {
                         <span className='userName'>
                             {post.author.firstName} {post.author.lastName}
                         </span>
-                        {post.author.verified &&  
+                        {post.author.isVerified &&  
                             <span className='checkmarkIcon'>
                                 <FaCheckCircle size={13}/>
                             </span>

@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import profilePicDan from '../../../New folder/profile_pic_dan.jpg';
 import { IoMdSend  } from 'react-icons/io';
 import DiscussionsApi from '../../../api/DiscussionsApi';
 import { useSelector } from 'react-redux';
@@ -52,11 +51,11 @@ function NewComment({commentDataToEdit, post, handleCreateComment, handleEditCom
     
     return (
         <div className='newCommentCont'>
-            <img className='userProfileImg newCommentProfileImg' src={profilePicDan} title='Dan Zlotnikov' alt='Dan Zlotnikov'/>
+            <img className='userProfileImg newCommentProfileImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
             { commentDataToEdit && 
                 <span className='commentAuthorName'>
                     {commentDataToEdit.author.firstName + ' ' + commentDataToEdit.author.lastName}
-                    {commentDataToEdit.author.verified &&  
+                    {commentDataToEdit.author.isVerified &&  
                         <span className='checkmarkIcon'>
                             <FaCheckCircle size={13}/>
                         </span>

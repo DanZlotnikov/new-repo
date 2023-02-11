@@ -15,5 +15,11 @@
             KnowledgeItem = 2,
             PopularItem = 3
         }
+
+        public enum SsoType
+        {
+            Facebook = 1,
+            Google = 2,
+        }
     }
 }

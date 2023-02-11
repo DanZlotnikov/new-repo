@@ -2,18 +2,20 @@ import React from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 import { config } from '../config';
-import { Navigate  } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { facebookLogin, googleLogin, setProfileImgUrl } from '../redux/authReducer';
+import { ssoLogin } from '../redux/authReducer';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
-import axios from 'axios';
+import texts from '../texts';
+import AuthApi from '../api/AuthApi';
+import { SsoType } from '../consts';
 
 const LoginPage = () => {
     const currentUser = useSelector((state) => state.authReducer.currentUser)
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         function start() {
             gapi.client.init({
@@ -29,28 +31,31 @@ const LoginPage = () => {
         return <Navigate to="/" />
     }
 
-    const handleFacebookLogin = (response) => {
-        dispatch(facebookLogin(response));
-        axios.get(`http://graph.facebook.com/${response.id}/picture`, {
-        params: {
-          redirect: false,
-          access_token: response.accessToken
-        }})
-        .then(response => {
-          dispatch(setProfileImgUrl(response.data.data.url));
-        });
+    const handleFacebookLogin = (fbResponse) => {
+        let nameArr = fbResponse.name.split(' ');
+        AuthApi.Login(SsoType.Facebook, fbResponse.id, fbResponse.accessToken, nameArr[0], nameArr[1]).then(response => dispatch(ssoLogin(response)));
+        
+        // axios.get(`http://graph.facebook.com/${response.id}/picture`, {
+        // params: {
+        //   redirect: false,
+        //   access_token: response.accessToken
+        // }})
+        // .then(response => {
+        //   dispatch(setProfileImgUrl(response.data.data.url));
+        // });
     };
 
-    const handleGoogleLogin = (response) => {
-        dispatch(googleLogin(response));
+    const handleGoogleLogin = (googleResponse) => {
+        AuthApi.Login(SsoType.Google, googleResponse.googleId, googleResponse.accessToken, googleResponse.profileObj.givenName, googleResponse.profileObj.familyName).then(response => dispatch(ssoLogin(response)));
     };
 
     return (
         <div className='loginDiv'>
             <div className='container'>
-                <div className='formContainer signInContainer'>
+                <div className='signInContainer'>
                     <div className='loginForm'>
-                        <h1 className='signinHeader'>Welcome</h1>
+                        <h1 className='signinHeader'>{texts.general.welcome}</h1>
+                        <span className='signInExplanation'>{texts.general.signInExplanation}</span>
                         <div className='socialContainer'>
                         <FacebookLogin
                             appId={config.facebookAppId}
@@ -80,23 +85,22 @@ const LoginPage = () => {
                             )}
                         />
                         </div>
-                        <span> Or sign in using E-Mail Address</span>
+                        {/* <span> Or sign in using E-Mail Address</span>
                         <label>
                             <input type='email' placeholder='Email'/>
                         </label>
                         <label>
                             <input type='password' placeholder='Password'/>
                         </label>
-                        <span className='forgotPassword'>Forgot your password?</span>
-                        <button className='signIn'>Sign In</button>
+                        <span className='forgotPassword'>Forgot your password?</span> */}
+                        {/* <button className='signIn'>Sign In</button> */}
                     </div>
                 </div>
                 <div className='overlayContainer'>
                     <div className='overlay'>
                         <div className='createAccountDiv'>
-                            <h1>Create Account!</h1>
-                            <p>Sign up if you still don't have an account... </p>
-                            <button>Sign Up</button>
+                            <h1>{texts.general.createAccount}</h1>
+                            <p>{texts.general.comingSoon}</p>
                         </div>
                     </div>
                 </div>

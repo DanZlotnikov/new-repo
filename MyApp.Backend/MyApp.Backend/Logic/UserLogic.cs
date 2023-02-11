@@ -1,7 +1,8 @@
 ﻿using MyApp.Backend.Models;
 using MyApp.Backend.Repositories;
-using MySqlConnector;
+using Newtonsoft.Json;
 using System.Data;
+using System.Dynamic;
 
 namespace MyApp.Backend.Logic
 {
@@ -23,5 +24,59 @@ namespace MyApp.Backend.Logic
             }
             return user;
         }
+
+        public static User GetUserBySsoId(string ssoUserId)
+        {
+            User user = new User();
+            DataTable table = UserDataAccess.GetUserBySsoId(ssoUserId);
+
+            if (table.Rows.Count > 0)
+            {
+                DataRow row = table.Rows[0];
+                user.Id = (long)row["user_id"];
+                user.firstName = row["first_name"].ToString();
+                user.LastName = row["last_name"].ToString();
+                user.IsVerified = (bool)row["is_verified"];
+                user.ProfileImgUrl = row["profile_img_url"].ToString();
+                if (string.IsNullOrEmpty(user.ProfileImgUrl))
+                {
+                    user.ProfileImgUrl = ConfigrationHelper.AppSetting("DefaultProfileImageUrl");
+                }
+            }
+            return user;
+        }
+
+        public async static Task<long> CreateNewUserBySsoId(Enums.SsoType ssoType, string ssoUserId, string ssoAccessToken, string firstName, string lastName)
+        {
+            var externalProfileImgUrl = GetProfileImageUrl(ssoType, ssoAccessToken, ssoUserId).Result;
+            long newUserId = UserDataAccess.CreateUser(firstName, lastName, DateTime.Now, (int)ssoType, ssoUserId);
+            string internalProfileImgUrl = $"C:\\Projects\\new-repo\\my-app\\src\\New folder\\{newUserId}_profile_img_url";
+            UserDataAccess.UpdateUserProfileImg(newUserId, $"http://localhost:8080/{newUserId}_profile_img_url");
+            await Utils.SaveImageInternally(internalProfileImgUrl, externalProfileImgUrl);
+            return newUserId;
+        }
+
+        private static async Task<string> GetProfileImageUrl(Enums.SsoType ssoType, string accessToken, string userId)
+        {
+            var client = new HttpClient();
+            if (ssoType == Enums.SsoType.Facebook)
+            {
+                var response = await client.GetAsync($"{ConfigrationHelper.AppSetting("SSO:FacebookGraphUrl")}/{userId}/picture?access_token={accessToken}&type=large");
+                var imageUrl = response.RequestMessage.RequestUri.ToString();
+                return imageUrl;
+            }
+            else if (ssoType == Enums.SsoType.Google)
+            {
+                var response = await client.GetAsync($"{ConfigrationHelper.AppSetting("SSO:GoogleApiUserinfoUrl")}?access_token={accessToken}");
+                var jsonStr = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<dynamic>(jsonStr).picture;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        
     }
 }

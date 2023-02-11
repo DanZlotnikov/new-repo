@@ -76,7 +76,7 @@ function ExistingComment({commentData}) {
                     </span>
                     <span className='commentAuthorName'>
                         {commentData.author.firstName + ' ' + commentData.author.lastName}
-                        {commentData.author.verified &&  
+                        {commentData.author.isVerified &&  
                             <span className='checkmarkIcon'>
                                 <FaCheckCircle size={13}/>
                             </span>

@@ -79,7 +79,6 @@ namespace MyApp.Backend.Repositories.PostRepositories
                                             ?message,
                                             ?created_time,
                                             ?updated_time
-
                                         );";
                 command.Connection = connection;
                 command.Parameters.AddWithValue("post_id", postId);

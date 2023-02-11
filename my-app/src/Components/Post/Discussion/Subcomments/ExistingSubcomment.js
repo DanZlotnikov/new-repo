@@ -30,7 +30,7 @@ function ExistingSubcomment({subcommentData, handleEditSubcomment, handleDeleteS
                     <span className='subcomment'>
                         <span className='subcommentAuthorName'>
                             {subcommentData.author.firstName + ' ' + subcommentData.author.lastName}
-                            {subcommentData.author.verified &&  
+                            {subcommentData.author.isVerified &&  
                                 <span className='checkmarkIcon'>
                                     <FaCheckCircle size={13}/>
                                 </span>

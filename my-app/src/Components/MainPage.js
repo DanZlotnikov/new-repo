@@ -3,6 +3,7 @@ import Post  from './Post/Post.js';
 import PostsApi from '../api/PostApi.js';
 import { InfinitySpin  } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
+import NewPost from './NewPost/NewPost.js';
 
 function MainPage() {
     const didMount = useRef(false);
@@ -29,12 +30,14 @@ function MainPage() {
             }
             {posts && 
                 <div className='mainPage'>
-                    <div></div>
-                    {posts.map((post) => (
-                        <span key={post.id}>
-                            <Post post={post} />
-                        </span>
-                    ))}
+                    <NewPost />
+                    <div className='postsDiv'>
+                        {posts.map((post) => (
+                            <span key={post.id}>
+                                <Post post={post} />
+                            </span>
+                        ))}
+                    </div>
                 </div>
             }
         </div>
