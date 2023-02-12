@@ -339,7 +339,7 @@ input {
         .sendIcon {
           position: absolute;
           right: 12px;
-          bottom: 6px;
+          bottom: 8px;
           color: $app-green;
     
           &:hover {
@@ -354,21 +354,42 @@ input {
   .itemAdditionDiv {
     display: flex;
     margin-top: 10px;
+    margin-inline-start: 50px;
 
-    .itemAdditionBtn {
-      margin-right: 10px;
-      padding: 7px;
-      padding-left: 9px;
-      padding-right: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      
-      .fileUploadDiv {
-        margin-bottom: 0px;
+    .knowledgeItemAddition, .popularItemAddition {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .itemAdditionBtn {
+        display: inline-flex;
+        margin-inline-end: 10px;
+        padding: 7px;
+        padding-left: 9px;
+        padding-right: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        
+        .fileUploadDiv {
+          margin-bottom: 0px;
+        }
+
+        &:hover {
+          background-color: $background-gray;
+        }
+
+        &.uploadedKnowledge {
+          background-color: $background-blue;
+        }
+
+        &.uploadedPopular {
+          background-color: $background-pink;
+        }
       }
 
-      &:hover {
-        background-color: $background-gray;
+      .knowledgeFileName, .popularUrl {
+        font-size: 12px;
+        width: 50px;
+        margin-top: 5px;
       }
     }
   }

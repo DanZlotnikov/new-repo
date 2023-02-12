@@ -19,22 +19,44 @@ function NewPost() {
     const [showLoader, setShowLoader] = useState(false);
     const [showKnowldegeModal, setShowKnowldegeModal] = useState(false);
     const [showPopularModal, setShowPopularModal] = useState(false);
-    const [file, setFile] = useState(null);
+    const [knowledgeFile, setKnowledgeFile] = useState(null);
+    const [knowledgeItemInfo, setKnowledgeItemInfo] = useState({info: {
+        title: null, 
+        originalAuthors: null, 
+        publishDate: null
+    }});
+    const [popularItemInfo, setPopularItemInfo] = useState({info: {
+        url: null, 
+        platformType: null, 
+    }});
 
     const createNewPost = () => {
 
     }
     
     const handleUploadKnowledgeItem = (title, originalAuthors, publishDate) => {
+        setKnowledgeItemInfo({...knowledgeItemInfo, info: {
+                title: title,
+                originalAuthors: originalAuthors,
+                publishDate: publishDate
+            }
+        });
         setShowKnowldegeModal(false);
-        setFile(null);
     }
 
-    const handleUploadPopularItem = (title, originalAuthors, publishDate) => {
+    const handleUploadPopularItem = (url, platformType) => {
+        setPopularItemInfo({...popularItemInfo, info: {
+                url: url,
+                platformType: platformType
+            }
+        });
         setShowPopularModal(false);
-        setFile(null);
     }
 
+    const cancelKnowledgeModal = () => {
+        setKnowledgeFile(null);
+        setShowKnowldegeModal(false);
+    }
     return (
         <div className='newPostDiv'>
             <div className='newPost'>
@@ -69,11 +91,19 @@ function NewPost() {
                 </span>
             </div>
             <div className='itemAdditionDiv'>
-                <span className='itemAdditionBtn'><FileUploadWidget uploadButtonIcon={<PostSectionCard icon={<FaBookOpen />} iconColor={Colors.discussionBlue} />} openFileUploadModal={() => setShowKnowldegeModal(true)} file={file} setFile={setFile} /></span>
-                <span onClick={() => setShowPopularModal(true)} className='itemAdditionBtn'><PostSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
+                <span className='knowledgeItemAddition'>
+                    <span className={`itemAdditionBtn ${knowledgeFile ? 'uploadedKnowledge' : ''}`}>
+                        <FileUploadWidget uploadButtonIcon={<PostSectionCard icon={<FaBookOpen />} iconColor={Colors.discussionBlue} />} openFileUploadModal={() => setShowKnowldegeModal(true)} file={knowledgeFile} setFile={setKnowledgeFile} />
+                    </span>
+                    {knowledgeFile && <span className='knowledgeFileName ellipsis'>{knowledgeFile.name}</span>}
+                </span>
+                <span className='popularItemAddition' >
+                    <span onClick={() => setShowPopularModal(true)} className={`itemAdditionBtn ${popularItemInfo.info.url ? 'uploadedPopular' : ''}`}><PostSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
+                    {popularItemInfo.info.url && <span className='popularUrl ellipsis'>{popularItemInfo.info.url}</span>}
+                </span>
             </div>
             {showKnowldegeModal && 
-                <Modal renderComponent={<UploadKnowledgeItemForm handleUploadItem={handleUploadKnowledgeItem} fileName={file.name} />} onCancel={() => setShowKnowldegeModal(false)} />
+                <Modal renderComponent={<UploadKnowledgeItemForm handleUploadItem={handleUploadKnowledgeItem} fileName={knowledgeFile.name} />} onCancel={cancelKnowledgeModal} />
             }
              {showPopularModal && 
                 <Modal renderComponent={<UploadPopularItemForm handleUploadItem={handleUploadPopularItem} />} onCancel={() => setShowPopularModal(false)} />
