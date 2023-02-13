@@ -153,7 +153,7 @@ namespace MyApp.Backend.Repositories
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {
-                DateTime now = DateTime.Now;
+                DateTime now = DateTime.UtcNow;
                 MySqlCommand command = new MySqlCommand();
                 command.CommandType = CommandType.Text;
                 command.CommandText = @"

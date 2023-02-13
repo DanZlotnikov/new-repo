@@ -27,7 +27,7 @@ namespace MyApp.Backend.Controllers
         }
 
         [HttpGet("GetTopic")]
-        public TopicModel GetTopicById(int id)
+        public TopicModel GetTopicById(long id)
         {
             return TopicLogic.GetTopic(1);
         }
@@ -35,20 +35,18 @@ namespace MyApp.Backend.Controllers
         [HttpGet("GetTopicsForUser")]
         public List<TopicModel> GetTopicsForUser(int userId)
         {
-            return new List<TopicModel> {
-                TopicLogic.GetTopic(1)
-            };
+            return TopicLogic.GetTopicsForUser(userId);
         }
 
         #endregion
 
         #region POST requests
 
-
         [HttpPost("CreateNewTopic")]
-        public CommentModel CreateNewComment(CreateNewCommentParam param)
+        public TopicModel CreateNewTopic([FromForm] CreateNewTopicParam param)
         {
-            return CommentLogic.CreateNewComment(param.topicId, param.authorUserId, param.message);
+            IFormFile file = Request.Form.Files.FirstOrDefault();
+            return TopicLogic.CreateNewTopic(param, file);
         }
 
 

@@ -53,7 +53,7 @@ namespace MyApp.Backend.Logic
         public static PopularItemModel UploadPopularItem(long topicId, long uploaderId, string url, int platformTypeId)
         {
             PopularItemModel item = new PopularItemModel();
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.UtcNow;
             long newItemId = PopularDataAccess.UploadPopularItem(topicId, uploaderId, url, platformTypeId, now);
             if (newItemId > 0)
             {

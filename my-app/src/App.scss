@@ -333,7 +333,7 @@ input {
           display: inline-flex;
           position: relative;
           right: -12px;
-          bottom: 3px;
+          bottom: 9px;
         }
        
         .sendIcon {
@@ -360,6 +360,7 @@ input {
       display: flex;
       flex-direction: column;
       align-items: center;
+      
       .itemAdditionBtn {
         display: inline-flex;
         margin-inline-end: 10px;
@@ -367,6 +368,7 @@ input {
         padding-left: 9px;
         padding-right: 10px;
         border-radius: 5px;
+        background-color: $background-gray;
         cursor: pointer;
         
         .fileUploadDiv {
@@ -374,7 +376,6 @@ input {
         }
 
         &:hover {
-          background-color: $background-gray;
         }
 
         &.uploadedKnowledge {
@@ -396,14 +397,15 @@ input {
 }
 
 .topicsDiv {
-  padding: 20px;
-  background-color: $background-white;
-  border-radius: 5px;
-  box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
+  min-height: 100vh;
   
   .topicDiv {
-    min-height: 100vh;
-  
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: $background-white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
+
     .topicHeaderDiv {
       display: flex;
   
@@ -568,7 +570,7 @@ input {
   
   .commentDiv {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 22px;
     
     .existingComment {
       border: 0;
@@ -1100,7 +1102,7 @@ input {
   }
 
   .comments:hover:not(.commented) {
-    background-color: $background-blue;
+    background-color: $background-green;
     color: $text-gray;
     
     .counterIcon {

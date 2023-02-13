@@ -100,7 +100,7 @@ namespace MyApp.Backend.Repositories.TopicRepositories
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {
-                DateTime now = DateTime.Now;
+                DateTime now = DateTime.UtcNow;
                 MySqlCommand command = new MySqlCommand();
                 command.CommandType = CommandType.Text;
                 command.CommandText = @"
@@ -114,7 +114,7 @@ namespace MyApp.Backend.Repositories.TopicRepositories
                 command.Connection = connection;
                 command.Parameters.AddWithValue("comment_id", commentId);
                 command.Parameters.AddWithValue("message", message);
-                command.Parameters.AddWithValue("updated_time", DateTime.Now);
+                command.Parameters.AddWithValue("updated_time", DateTime.UtcNow);
                 command.Parameters.AddWithValue("editing_user_id", editingUserId);
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -237,7 +237,7 @@ namespace MyApp.Backend.Repositories.TopicRepositories
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {
-                DateTime now = DateTime.Now;
+                DateTime now = DateTime.UtcNow;
                 MySqlCommand command = new MySqlCommand();
                 command.CommandType = CommandType.Text;
                 command.CommandText = @"
@@ -251,7 +251,7 @@ namespace MyApp.Backend.Repositories.TopicRepositories
                 command.Connection = connection;
                 command.Parameters.AddWithValue("subcomment_id", subcommentId);
                 command.Parameters.AddWithValue("message", message);
-                command.Parameters.AddWithValue("updated_time", DateTime.Now);
+                command.Parameters.AddWithValue("updated_time", DateTime.UtcNow);
                 command.Parameters.AddWithValue("editing_user_id", editingUserId);
                 connection.Open();
                 command.ExecuteNonQuery();

@@ -33,9 +33,9 @@ function MainPage() {
                     <NewTopic />
                     <div className='topicsDiv'>
                         {topics.map((topic) => (
-                            <span key={topic.id}>
+                            <div key={topic.id}>
                                 <Topic topic={topic} />
-                            </span>
+                            </div>
                         ))}
                     </div>
                 </div>

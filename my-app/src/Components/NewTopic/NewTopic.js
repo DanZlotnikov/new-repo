@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import TopicSectionCard from '../Common/TopicSectionCard';
-import { FaBookOpen, FaFire, FaComments, FaCheckCircle } from 'react-icons/fa';
+import { FaBookOpen, FaFire } from 'react-icons/fa';
 import { Colors } from '../../consts';
 import { TextareaAutosize } from '@mui/material';
 import texts from '../../texts';
@@ -11,6 +11,7 @@ import FileUploadWidget from '../Common/FileUploadWidget';
 import UploadKnowledgeItemForm from '../Topic/Knowledge/UploadKnowledgeItemForm';
 import Modal from '../Common/Modal';
 import UploadPopularItemForm from '../Topic/Popular/UploadPopularItemForm';
+import TopicApi from '../../api/TopicApi';
 
 function NewTopic() {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
@@ -20,22 +21,26 @@ function NewTopic() {
     const [showKnowldegeModal, setShowKnowldegeModal] = useState(false);
     const [showPopularModal, setShowPopularModal] = useState(false);
     const [knowledgeFile, setKnowledgeFile] = useState(null);
-    const [knowledgeItemInfo, setKnowledgeItemInfo] = useState({info: {
-        title: null, 
-        originalAuthors: null, 
-        publishDate: null
+    const [knowledgeItem, setKnowledgeItem] = useState({
+        info: {
+            title: '', 
+            originalAuthors: '', 
+            publishDate: ''
     }});
-    const [popularItemInfo, setPopularItemInfo] = useState({info: {
-        url: null, 
-        platformType: null, 
+    const [popularItem, setPopularItem] = useState({
+        info: {
+            url: '', 
+            platformType: 0,
     }});
 
     const createNewTopic = () => {
-
+        if (!message) return;
+        setShowLoader(true);
+        TopicApi.CreateNewTopic(currentUser.id, message, knowledgeItem, knowledgeFile, popularItem);
     }
     
     const handleUploadKnowledgeItem = (title, originalAuthors, publishDate) => {
-        setKnowledgeItemInfo({...knowledgeItemInfo, info: {
+        setKnowledgeItem({...knowledgeItem, info: {
                 title: title,
                 originalAuthors: originalAuthors,
                 publishDate: publishDate
@@ -45,7 +50,7 @@ function NewTopic() {
     }
 
     const handleUploadPopularItem = (url, platformType) => {
-        setPopularItemInfo({...popularItemInfo, info: {
+        setPopularItem({...popularItem, info: {
                 url: url,
                 platformType: platformType
             }
@@ -83,7 +88,7 @@ function NewTopic() {
                             }
                         </span>
                         {!showLoader &&
-                        <span className='sendIcon' onClick={createNewTopic()}>
+                        <span className='sendIcon' onClick={() => createNewTopic()}>
                             <IoMdSend size={20} />
                         </span>
                         }
@@ -98,8 +103,8 @@ function NewTopic() {
                     {knowledgeFile && <span className='knowledgeFileName ellipsis'>{knowledgeFile.name}</span>}
                 </span>
                 <span className='popularItemAddition' >
-                    <span onClick={() => setShowPopularModal(true)} className={`itemAdditionBtn ${popularItemInfo.info.url ? 'uploadedPopular' : ''}`}><TopicSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
-                    {popularItemInfo.info.url && <span className='popularUrl ellipsis'>{popularItemInfo.info.url}</span>}
+                    <span onClick={() => setShowPopularModal(true)} className={`itemAdditionBtn ${popularItem.info.url ? 'uploadedPopular' : ''}`}><TopicSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
+                    {popularItem.info.url && <span className='popularUrl ellipsis'>{popularItem.info.url}</span>}
                 </span>
             </div>
             {showKnowldegeModal && 

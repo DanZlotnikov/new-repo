@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { config } from '../config';
+import formData from 'form-data';
+import dateFormat from 'dateformat';
 
 const TopicApi = {
   GetTopicsForUser: (userId) => {
@@ -8,14 +10,17 @@ const TopicApi = {
     })
     .then(response => response.data);
   },
-  CreateNewTopic: (userId, message, knowledgeItemInfo, popularItemInfo) => {
-    return axios.get(`${config.apiBaseUrl}/Topics/CreateNewTopic`, {
-      userId: userId,
-      message: message,
-      knowledgeItemInfo: knowledgeItemInfo,
-      popularItemInfo: popularItemInfo
-    })
-    .then(response => response.data);
+  CreateNewTopic: (authorId, message, knowledgeItem, knowledgeFile, popularItem) => {
+    const form = new formData();
+    form.append('authorId', authorId);
+    form.append('message', message);
+    form.append('knowledgeItemTitle', knowledgeItem.info.title);
+    form.append('knowledgeItemOriginalAuthors', knowledgeItem.info.originalAuthors);
+    form.append('knowledgeItemPublishDate', dateFormat(knowledgeItem.info.publishDate, 'dd-mm-yyyy'));
+    form.append('knowledgeFile', knowledgeFile);
+    form.append('popularItemUrl', popularItem.info.url);
+    form.append('popularItemPlatformType', popularItem.info.platformType);
+    return axios.post(`${config.apiBaseUrl}/Topics/CreateNewTopic`, form, {'Content-Type': 'multipart/form-data'}).then(response => response.data);
   },
 }
 

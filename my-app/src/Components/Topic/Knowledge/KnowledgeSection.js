@@ -4,7 +4,6 @@ import Modal from '../../Common/Modal';
 import FileUploadWidget from '../../Common/FileUploadWidget';
 import KnowledgeApi from '../../../api/KnowledgeApi';
 import { useSelector } from 'react-redux';
-import dateFormat from 'dateformat';
 import UploadKnowledgeItemForm from './UploadKnowledgeItemForm';
 
 function KnowledgeSection({topic}) {
@@ -16,7 +15,7 @@ function KnowledgeSection({topic}) {
     const handleUploadItem = (title, originalAuthors, publishDate) => {
         setShowModal(false);
         setFile(null);
-        KnowledgeApi.UploadKnowledgeItem(topic.id, currentUser.id, title, originalAuthors, dateFormat(publishDate, 'dd-mm-yyyy'), file).then(newItem => {
+        KnowledgeApi.UploadKnowledgeItem(topic.id, currentUser.id, title, originalAuthors, publishDate, file).then(newItem => {
             if (newItem.id) {
                 topic.knowledgeItems.push(newItem);
                 setCreatedItems(createdItems + 1);

@@ -59,7 +59,7 @@ namespace MyApp.Backend.Logic
             KnowledgeItemModel item = new KnowledgeItemModel();
             if (file != null)
             {
-                DateTime now = DateTime.Now;
+                DateTime now = DateTime.UtcNow;
                 string filePath = $"C:\\Projects\\new-repo\\my-app\\src\\New folder\\{file.FileName}";
                 string fileUrl = "http://localhost:8080/" + file.FileName;
                 using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))

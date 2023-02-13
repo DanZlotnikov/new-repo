@@ -47,7 +47,7 @@ namespace MyApp.Backend.Logic
 
         public static CommentModel CreateNewComment(long topicId, long authorUserId, string message)
         {
-            DateTime createdTime = DateTime.Now;
+            DateTime createdTime = DateTime.UtcNow;
             long createdId = CommentDataAccess.CreateNewComment(topicId, authorUserId, message, createdTime);
             if (createdId > 0)
             {
@@ -82,7 +82,7 @@ namespace MyApp.Backend.Logic
 
         public static SubcommentModel AddSubcomment(long mainCommentId, long authorUserId, string message)
         {
-            DateTime createdTime = DateTime.Now;
+            DateTime createdTime = DateTime.UtcNow;
             long createdId = CommentDataAccess.AddSubcomment(mainCommentId, authorUserId, message, createdTime);
             if (createdId > 0)
             {

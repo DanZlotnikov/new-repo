@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { config } from '../config';
 import formData from 'form-data';
+import dateFormat from 'dateformat';
 
 const KnowledgeApi = {
   AddBrainToKnowledgeItem: (topicId, itemId, userId) => {
@@ -25,7 +26,7 @@ const KnowledgeApi = {
     form.append('uploaderId', uploaderId);
     form.append('title', title);
     form.append('originalAuthors', originalAuthors);
-    form.append('publishDate', publishDate);
+    form.append('publishDate', dateFormat(publishDate, 'dd-mm-yyyy'));
     form.append('file', file);
     return axios.post(`${config.apiBaseUrl}/Knowledge/UploadKnowledgeItem`, form, {'Content-Type': 'multipart/form-data'}).then(response => response.data);
   },

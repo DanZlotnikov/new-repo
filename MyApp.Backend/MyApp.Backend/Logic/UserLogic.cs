@@ -49,7 +49,7 @@ namespace MyApp.Backend.Logic
         public async static Task<long> CreateNewUserBySsoId(Enums.SsoType ssoType, string ssoUserId, string ssoAccessToken, string firstName, string lastName)
         {
             var externalProfileImgUrl = GetProfileImageUrl(ssoType, ssoAccessToken, ssoUserId).Result;
-            long newUserId = UserDataAccess.CreateUser(firstName, lastName, DateTime.Now, (int)ssoType, ssoUserId);
+            long newUserId = UserDataAccess.CreateUser(firstName, lastName, DateTime.UtcNow, (int)ssoType, ssoUserId);
             string internalProfileImgUrl = $"C:\\Projects\\new-repo\\my-app\\src\\New folder\\{newUserId}_profile_img_url";
             UserDataAccess.UpdateUserProfileImg(newUserId, $"http://localhost:8080/{newUserId}_profile_img_url");
             await Utils.SaveImageInternally(internalProfileImgUrl, externalProfileImgUrl);
