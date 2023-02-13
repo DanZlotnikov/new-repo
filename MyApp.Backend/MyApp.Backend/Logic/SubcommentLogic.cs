@@ -1,9 +1,9 @@
 ﻿using MyApp.Backend.Models;
-using MyApp.Backend.Models.PostModels;
+using MyApp.Backend.Models.TopicModels;
 using System.Data;
-using MyApp.Backend.Models.PostModels.DiscussionModels;
-using MyApp.Backend.Models.PostModels.KnowledgeModels;
-using MyApp.Backend.Repositories.PostRepositories;
+using MyApp.Backend.Models.TopicModels.DiscussionModels;
+using MyApp.Backend.Models.TopicModels.KnowledgeModels;
+using MyApp.Backend.Repositories.TopicRepositories;
 
 namespace MyApp.Backend.Logic
 {

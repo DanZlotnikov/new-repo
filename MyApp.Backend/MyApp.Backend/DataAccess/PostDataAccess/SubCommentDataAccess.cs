@@ -1,9 +1,9 @@
 ﻿using MyApp.Backend.Logic;
-using MyApp.Backend.Models.PostModels.DiscussionModels;
+using MyApp.Backend.Models.TopicModels.DiscussionModels;
 using MySqlConnector;
 using System.Data;
 
-namespace MyApp.Backend.Repositories.PostRepositories
+namespace MyApp.Backend.Repositories.TopicRepositories
 {
     public class SubCommentDataAccess : BaseDataAccess
     {
@@ -46,17 +46,17 @@ namespace MyApp.Backend.Repositories.PostRepositories
             return table;
         }
         
-        public static SubcommentModel AddSubcomment(long postId, long mainCommentId, long authorUserId, string message)
+        public static SubcommentModel AddSubcomment(long topicId, long mainCommentId, long authorUserId, string message)
         {
             return new SubcommentModel();
         }
 
-        public static bool DeleteSubcomment(long postId, long mainCommentId, long subcommentId, long removingUserId)
+        public static bool DeleteSubcomment(long topicId, long mainCommentId, long subcommentId, long removingUserId)
         {
             return true;
         }
 
-        public static bool EditSubcomment(long postId, long mainCommentId, long subcommentId, string message)
+        public static bool EditSubcomment(long topicId, long mainCommentId, long subcommentId, string message)
         {
             return true;
         }

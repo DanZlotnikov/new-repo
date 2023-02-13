@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
 using MyApp.Backend.Logic;
-using MyApp.Backend.Models.PostModels;
-using MyApp.Backend.Models.PostModels.KnowledgeModels;
-using MyApp.Backend.Repositories.PostRepositories;
+using MyApp.Backend.Models.TopicModels;
+using MyApp.Backend.Models.TopicModels.KnowledgeModels;
+using MyApp.Backend.Repositories.TopicRepositories;
 
 namespace MyApp.Backend.Controllers
 {
@@ -11,17 +11,17 @@ namespace MyApp.Backend.Controllers
     [Route("[controller]")]
     public class KnowledgeController : ControllerBase
     {
-        private readonly ILogger<PostsController> _logger;
+        private readonly ILogger<TopicsController> _logger;
 
-        public KnowledgeController(ILogger<PostsController> logger)
+        public KnowledgeController(ILogger<TopicsController> logger)
         {
             _logger = logger;
         }
 
-        #region Get Requests
+        #region GET Requests
 
         [HttpGet]
-        public List<PostModel> Get()
+        public List<TopicModel> Get()
         {
             return null;
         }
@@ -46,7 +46,7 @@ namespace MyApp.Backend.Controllers
         public KnowledgeItemModel UploadKnowledgeItem([FromForm] UploadKnowledgeItemParam param)
         {
             IFormFile file = Request.Form.Files.FirstOrDefault();
-            return KnowledgeLogic.UploadKnowledgeItem(param.postId, param.uploaderId, param.title, param.originalAuthors, DateTime.Parse(param.publishDate), file);
+            return KnowledgeLogic.UploadKnowledgeItem(param.topicId, param.uploaderId, param.title, param.originalAuthors, DateTime.Parse(param.publishDate), file);
         }   
 
         #endregion

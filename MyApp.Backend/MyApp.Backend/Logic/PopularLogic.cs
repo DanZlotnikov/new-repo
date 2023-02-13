@@ -1,16 +1,16 @@
 ﻿using MyApp.Backend.Models;
 using System.Data;
-using MyApp.Backend.Repositories.PostRepositories;
-using MyApp.Backend.Models.PostModels;
+using MyApp.Backend.Repositories.TopicRepositories;
+using MyApp.Backend.Models.TopicModels;
 
 namespace MyApp.Backend.Logic
 {
     public class PopularLogic
     {
-        public static List<PopularItemModel> GetPopularItems(long postId)
+        public static List<PopularItemModel> GetPopularItems(long topicId)
         {
             List<PopularItemModel> popularItems = new List<PopularItemModel>();
-            DataTable table = PopularDataAccess.GetPopularItems(postId);
+            DataTable table = PopularDataAccess.GetPopularItems(topicId);
 
             if (table.Rows.Count > 0)
             {
@@ -20,7 +20,7 @@ namespace MyApp.Backend.Logic
                     popularItems.Add(new PopularItemModel
                     {
                         Id = (long)row["id"],
-                        PostId = postId,
+                        TopicId = topicId,
                         IframeUrl = row["iframe_url"].ToString(),
                         Uploader = new User
                         {
@@ -50,17 +50,17 @@ namespace MyApp.Backend.Logic
             return PopularDataAccess.RemoveBrainFromPopularItem(itemId, userId);
         } 
         
-        public static PopularItemModel UploadPopularItem(long postId, long uploaderId, string url, int platformTypeId)
+        public static PopularItemModel UploadPopularItem(long topicId, long uploaderId, string url, int platformTypeId)
         {
             PopularItemModel item = new PopularItemModel();
             DateTime now = DateTime.Now;
-            long newItemId = PopularDataAccess.UploadPopularItem(postId, uploaderId, url, platformTypeId, now);
+            long newItemId = PopularDataAccess.UploadPopularItem(topicId, uploaderId, url, platformTypeId, now);
             if (newItemId > 0)
             {
                 item = new PopularItemModel
                 {
                     Id = newItemId,
-                    PostId = postId,
+                    TopicId = topicId,
                     Uploader = UserLogic.GetUser(uploaderId),
                     BrainsUserIds = new List<long>(),
                     IframeUrl = url,

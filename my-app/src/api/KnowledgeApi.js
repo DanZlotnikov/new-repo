@@ -3,25 +3,25 @@ import { config } from '../config';
 import formData from 'form-data';
 
 const KnowledgeApi = {
-  AddBrainToKnowledgeItem: (postId, itemId, userId) => {
+  AddBrainToKnowledgeItem: (topicId, itemId, userId) => {
     return axios.post(`${config.apiBaseUrl}/Knowledge/AddBrainToKnowledgeItem`, {
-      postId: postId,
+      topicId: topicId,
       itemId: itemId,
       userId: userId
     })
     .then(response => response.data);
   },
-  RemoveBrainFromKnowledgeItem: (postId, itemId, userId) => {
+  RemoveBrainFromKnowledgeItem: (topicId, itemId, userId) => {
     return axios.post(`${config.apiBaseUrl}/Knowledge/RemoveBrainFromKnowledgeItem`, {
-      postId: postId,
+      topicId: topicId,
       itemId: itemId,
       userId: userId
     })
     .then(response => response.data);
   },
-  UploadKnowledgeItem: (postId, uploaderId, title, originalAuthors, publishDate, file) => {
+  UploadKnowledgeItem: (topicId, uploaderId, title, originalAuthors, publishDate, file) => {
     const form = new formData();
-    form.append('postId', postId);
+    form.append('topicId', topicId);
     form.append('uploaderId', uploaderId);
     form.append('title', title);
     form.append('originalAuthors', originalAuthors);

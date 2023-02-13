@@ -9,8 +9,8 @@ const texts = {
         createAccount: 'Create account',
         comingSoon: 'Coming soon...'
     },
-    newPost: {
-        newPostInputPlaceholder: 'What do you want to discuss'
+    newTopic: {
+        newTopicInputPlaceholder: 'Create a new topic'
     },
     discussions: {
         commentEditHint: '[Editing]',

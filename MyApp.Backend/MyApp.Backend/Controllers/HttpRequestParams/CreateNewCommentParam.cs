@@ -2,7 +2,7 @@
 {
     public class CreateNewCommentParam
     {
-        public long postId { get; set; }
+        public long topicId { get; set; }
         public string message { get; set; }
         public long authorUserId { get; set; }
     }

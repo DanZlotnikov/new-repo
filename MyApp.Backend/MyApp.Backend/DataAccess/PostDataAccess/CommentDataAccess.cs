@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using MyApp.Backend.Controllers.HttpRequestParams;
 using MyApp.Backend.Logic;
-using MyApp.Backend.Models.PostModels.DiscussionModels;
+using MyApp.Backend.Models.TopicModels.DiscussionModels;
 using MySqlConnector;
 using System.ComponentModel.Design;
 using System.Data;
 using System.IO;
 using System.Reflection;
 
-namespace MyApp.Backend.Repositories.PostRepositories
+namespace MyApp.Backend.Repositories.TopicRepositories
 {
     public class CommentDataAccess : BaseDataAccess
     {
@@ -19,7 +19,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             _configuration = iconfig;
         }
 
-        public static DataTable GetComments(long postId)
+        public static DataTable GetComments(long topicId)
         {
             DataTable table = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
@@ -44,11 +44,11 @@ namespace MyApp.Backend.Repositories.PostRepositories
   	                    ON c.author_id = u.id   
                     LEFT JOIN brains b
 	                    ON c.id = b.object_id AND b.object_type_id = ?comment_object_type
-                    WHERE c.post_id = ?post_id
+                    WHERE c.topic_id = ?topic_id
                     GROUP BY c.id;
                     ";
                 command.Connection = connection;
-                command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("topic_id", topicId);
                 command.Parameters.AddWithValue("comment_object_type", Enums.BrainedObjectType.Comment);
                 MySqlDataAdapter da = new MySqlDataAdapter(command);
 
@@ -57,7 +57,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             return table;
         }
 
-        public static long CreateNewComment(long postId, long authorUserId, string message, DateTime createdTime)
+        public static long CreateNewComment(long topicId, long authorUserId, string message, DateTime createdTime)
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {
@@ -66,7 +66,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 command.CommandText = @"
                                         INSERT INTO comments 
                                         ( 
-                                            post_id, 
+                                            topic_id, 
                                             author_id, 
                                             message,
                                             created_time,
@@ -74,14 +74,14 @@ namespace MyApp.Backend.Repositories.PostRepositories
                                         ) 
                                         VALUES 
                                         ( 
-                                            ?post_id, 
+                                            ?topic_id, 
                                             ?author_id, 
                                             ?message,
                                             ?created_time,
                                             ?updated_time
                                         );";
                 command.Connection = connection;
-                command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("topic_id", topicId);
                 command.Parameters.AddWithValue("author_id", authorUserId);
                 command.Parameters.AddWithValue("message", message);
                 command.Parameters.AddWithValue("created_time", createdTime);

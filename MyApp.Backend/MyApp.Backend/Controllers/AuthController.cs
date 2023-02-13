@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
 using MyApp.Backend.Logic;
 using MyApp.Backend.Models;
-using MyApp.Backend.Models.PostModels;
-using MyApp.Backend.Repositories;
-using MyApp.Backend.Repositories.PostRepositories;
 
 namespace MyApp.Backend.Controllers
 {

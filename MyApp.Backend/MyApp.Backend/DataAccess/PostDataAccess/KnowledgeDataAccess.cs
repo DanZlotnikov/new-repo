@@ -1,10 +1,10 @@
 ﻿using MyApp.Backend.Logic;
-using MyApp.Backend.Models.PostModels.KnowledgeModels;
+using MyApp.Backend.Models.TopicModels.KnowledgeModels;
 using MySqlConnector;
 using System.ComponentModel.Design;
 using System.Data;
 
-namespace MyApp.Backend.Repositories.PostRepositories
+namespace MyApp.Backend.Repositories.TopicRepositories
 {
     public class KnowledgeDataAccess : BaseDataAccess
     {
@@ -15,7 +15,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             _configuration = iconfig;
         }
 
-        public static DataTable GetKnowledgeItems(long postId)
+        public static DataTable GetKnowledgeItems(long topicId)
         {
             DataTable table = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
@@ -44,11 +44,11 @@ namespace MyApp.Backend.Repositories.PostRepositories
 	                    ON k.uploader_id = u.id    
                     LEFT JOIN brains b
 	                    ON k.id = b.object_id AND b.object_type_id = ?knowledge_item_object_type
-                    WHERE k.post_id = ?post_id
+                    WHERE k.topic_id = ?topic_id
                     GROUP BY k.id;
                     ";
                 command.Connection = connection;
-                command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("topic_id", topicId);
                 command.Parameters.AddWithValue("knowledge_item_object_type", Enums.BrainedObjectType.KnowledgeItem);
                 MySqlDataAdapter da = new MySqlDataAdapter(command);
 
@@ -110,7 +110,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             return false;
         }
 
-        public static long UploadKnowledgeItem(long postId, long uploaderId, string title, string fileUrl, string originalAuthors, DateTime publishDate, DateTime createdTime)
+        public static long UploadKnowledgeItem(long topicId, long uploaderId, string title, string fileUrl, string originalAuthors, DateTime publishDate, DateTime createdTime)
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {
@@ -119,7 +119,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 command.CommandText = @"
                                         INSERT INTO knowledge_items 
                                         ( 
-                                            post_id,
+                                            topic_id,
                                             uploader_id, 
                                             title,
                                             file_url,
@@ -130,7 +130,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                                         ) 
                                         VALUES 
                                         ( 
-                                            ?post_id,
+                                            ?topic_id,
                                             ?uploader_id, 
                                             ?title,
                                             ?file_url,
@@ -140,7 +140,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                                             ?updated_time
                                         );";
                 command.Connection = connection;
-                command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("topic_id", topicId);
                 command.Parameters.AddWithValue("uploader_id", uploaderId);
                 command.Parameters.AddWithValue("title", title);
                 command.Parameters.AddWithValue("file_url", fileUrl);

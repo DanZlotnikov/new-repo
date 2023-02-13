@@ -1,17 +1,17 @@
 ﻿using MyApp.Backend.Models;
 using System.Data;
-using MyApp.Backend.Models.PostModels.KnowledgeModels;
-using MyApp.Backend.Repositories.PostRepositories;
+using MyApp.Backend.Models.TopicModels.KnowledgeModels;
+using MyApp.Backend.Repositories.TopicRepositories;
 using MyApp.Backend.Repositories;
 
 namespace MyApp.Backend.Logic
 {
     public class KnowledgeLogic
     {
-        public static List<KnowledgeItemModel> GetKnowledgeItems(long postId)
+        public static List<KnowledgeItemModel> GetKnowledgeItems(long topicId)
         {
             List<KnowledgeItemModel> knowledgeItems = new List<KnowledgeItemModel>();
-            DataTable table = KnowledgeDataAccess.GetKnowledgeItems(postId);
+            DataTable table = KnowledgeDataAccess.GetKnowledgeItems(topicId);
 
             if (table.Rows.Count > 0)
             {
@@ -21,7 +21,7 @@ namespace MyApp.Backend.Logic
                     knowledgeItems.Add(new KnowledgeItemModel
                     {
                         Id = (long)row["id"],
-                        PostId = postId,
+                        TopicId = topicId,
                         Title = row["title"].ToString(),
                         Uploader = new User
                         {
@@ -54,7 +54,7 @@ namespace MyApp.Backend.Logic
             return KnowledgeDataAccess.RemoveBrainFromKnowledgeItem(itemId, userId);
         }
 
-        public static KnowledgeItemModel UploadKnowledgeItem(long postId, long uploaderId, string title, string originalAuthors, DateTime publishDate, IFormFile file)
+        public static KnowledgeItemModel UploadKnowledgeItem(long topicId, long uploaderId, string title, string originalAuthors, DateTime publishDate, IFormFile file)
         {
             KnowledgeItemModel item = new KnowledgeItemModel();
             if (file != null)
@@ -67,13 +67,13 @@ namespace MyApp.Backend.Logic
                     file.CopyTo(fs);
                     fs.Close();
                 }
-                long newItemId = KnowledgeDataAccess.UploadKnowledgeItem(postId, uploaderId, title, fileUrl, originalAuthors, publishDate, now);
+                long newItemId = KnowledgeDataAccess.UploadKnowledgeItem(topicId, uploaderId, title, fileUrl, originalAuthors, publishDate, now);
                 if (newItemId > 0)
                 {
                     item = new KnowledgeItemModel
                     {
                         Id = newItemId,
-                        PostId = postId,
+                        TopicId = topicId,
                         Title = title,
                         Uploader = UserLogic.GetUser(uploaderId),
                         FileUrl = fileUrl,

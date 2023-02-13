@@ -1,22 +1,22 @@
 ﻿using MyApp.Backend.Models;
-using MyApp.Backend.Models.PostModels;
+using MyApp.Backend.Models.TopicModels;
 using MyApp.Backend.Repositories;
 using System.Data;
-using MyApp.Backend.Models.PostModels.KnowledgeModels;
+using MyApp.Backend.Models.TopicModels.KnowledgeModels;
 
 namespace MyApp.Backend.Logic
 {
-    public class PostLogic
+    public class TopicLogic
     {
-        public static PostModel GetPost(int id)
+        public static TopicModel GetTopic(int id)
         {
-            PostModel post = new PostModel();
-            DataTable table = PostDataAccess.GetPost(id);
+            TopicModel post = new TopicModel();
+            DataTable table = TopicDataAccess.GetTopic(id);
 
             if (table.Rows.Count > 0)
             {
                 DataRow row = table.Rows[0];
-                post.Id = (long)row["post_id"];
+                post.Id = (long)row["topic_id"];
                 post.Author = new User 
                 {
                     Id = (long)row["author_id"],

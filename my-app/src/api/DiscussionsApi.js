@@ -2,9 +2,9 @@ import axios from 'axios';
 import { config } from '../config';
 
 const DiscussionsApi = {
-  CreateNewComment: (postId, authorUserId, message) => {
+  CreateNewComment: (topicId, authorUserId, message) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/CreateNewComment`, {
-      postId: postId,
+      topicId: topicId,
       authorUserId: authorUserId,
       message: message,
     })
@@ -18,17 +18,17 @@ const DiscussionsApi = {
     })
     .then(response => response.data);
   },
-  AddBrainToComment: (postId, commentId, userId) => {
+  AddBrainToComment: (topicId, commentId, userId) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/AddBrainToComment`, {
-      postId: postId,
+      topicId: topicId,
       commentId: commentId,
       userId: userId
     })
     .then(response => response.data);
   },
-  RemoveBrainFromComment: (postId, commentId, userId) => {
+  RemoveBrainFromComment: (topicId, commentId, userId) => {
     return axios.post(`${config.apiBaseUrl}/Discussions/RemoveBrainFromComment`, {
-      postId: postId,
+      topicId: topicId,
       commentId: commentId,
       userId: userId
     })

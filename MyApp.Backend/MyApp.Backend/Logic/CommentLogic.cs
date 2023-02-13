@@ -1,16 +1,16 @@
 ﻿using MyApp.Backend.Models;
 using System.Data;
-using MyApp.Backend.Models.PostModels.DiscussionModels;
-using MyApp.Backend.Repositories.PostRepositories;
+using MyApp.Backend.Models.TopicModels.DiscussionModels;
+using MyApp.Backend.Repositories.TopicRepositories;
 
 namespace MyApp.Backend.Logic
 {
     public class CommentLogic
     {
-        public static List<CommentModel> GetComments(long postId)
+        public static List<CommentModel> GetComments(long topicId)
         {
             List<CommentModel> comments = new List<CommentModel>();
-            DataTable table = CommentDataAccess.GetComments(postId);
+            DataTable table = CommentDataAccess.GetComments(topicId);
 
             if (table.Rows.Count > 0)
             {
@@ -20,7 +20,7 @@ namespace MyApp.Backend.Logic
                     comments.Add(new CommentModel
                     {
                         Id = (long)row["comment_id"],
-                        PostId = postId,
+                        TopicId = topicId,
                         Author = new User
                         {
                             Id = (long)row["author_id"],
@@ -45,16 +45,16 @@ namespace MyApp.Backend.Logic
             return CommentDataAccess.EditComment(commentId, message, editingUserId);
         }
 
-        public static CommentModel CreateNewComment(long postId, long authorUserId, string message)
+        public static CommentModel CreateNewComment(long topicId, long authorUserId, string message)
         {
             DateTime createdTime = DateTime.Now;
-            long createdId = CommentDataAccess.CreateNewComment(postId, authorUserId, message, createdTime);
+            long createdId = CommentDataAccess.CreateNewComment(topicId, authorUserId, message, createdTime);
             if (createdId > 0)
             {
                 return new CommentModel
                 {
                     Id = createdId,
-                    PostId = postId,
+                    TopicId = topicId,
                     Author = UserLogic.GetUser(authorUserId),
                     Message = message,
                     BrainsUserIds = new List<long>(),

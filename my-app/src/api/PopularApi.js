@@ -2,25 +2,25 @@ import axios from 'axios';
 import { config } from '../config';
 
 const PopularApi = {
-  AddBrainToPopularItem: (postId, itemId, userId) => {
+  AddBrainToPopularItem: (topicId, itemId, userId) => {
     return axios.post(`${config.apiBaseUrl}/Popular/AddBrainToPopularItem`, {
-      postId: postId,
+      topicId: topicId,
       itemId: itemId,
       userId: userId
     })
     .then(response => response.data);
   },
-  RemoveBrainFromPopularItem: (postId, itemId, userId) => {
+  RemoveBrainFromPopularItem: (topicId, itemId, userId) => {
     return axios.post(`${config.apiBaseUrl}/Popular/RemoveBrainFromPopularItem`, {
-      postId: postId,
+      topicId: topicId,
       itemId: itemId,
       userId: userId
     })
     .then(response => response.data);
   },
-  UploadPopularItem: (postId, uploaderId, url, platformTypeId) => {
+  UploadPopularItem: (topicId, uploaderId, url, platformTypeId) => {
     return axios.post(`${config.apiBaseUrl}/Popular/UploadPopularItem`, {
-      postId: postId,
+      topicId: topicId,
       uploaderId: uploaderId,
       url: url,
       platformTypeId: platformTypeId

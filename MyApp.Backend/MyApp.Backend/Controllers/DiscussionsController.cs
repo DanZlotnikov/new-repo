@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
 using MyApp.Backend.Logic;
-using MyApp.Backend.Models.PostModels;
-using MyApp.Backend.Models.PostModels.DiscussionModels;
-using MyApp.Backend.Repositories.PostRepositories;
+using MyApp.Backend.Models.TopicModels;
+using MyApp.Backend.Models.TopicModels.DiscussionModels;
 
 namespace MyApp.Backend.Controllers
 {
@@ -11,17 +10,17 @@ namespace MyApp.Backend.Controllers
     [Route("[controller]")]
     public class DiscussionsController : ControllerBase
     {
-        private readonly ILogger<PostsController> _logger;
+        private readonly ILogger<TopicsController> _logger;
 
-        public DiscussionsController(ILogger<PostsController> logger)
+        public DiscussionsController(ILogger<TopicsController> logger)
         {
             _logger = logger;
         }
 
-        #region Get Requests
+        #region GET Requests
 
         [HttpGet]
-        public List<PostModel> Get()
+        public List<TopicModel> Get()
         {
             return null;
         }
@@ -33,7 +32,7 @@ namespace MyApp.Backend.Controllers
         [HttpPost("CreateNewComment")]
         public CommentModel CreateNewComment(CreateNewCommentParam param)
         {
-            return CommentLogic.CreateNewComment(param.postId, param.authorUserId, param.message);
+            return CommentLogic.CreateNewComment(param.topicId, param.authorUserId, param.message);
         }
 
 

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Backend.Controllers.HttpRequestParams;
 using MyApp.Backend.Logic;
-using MyApp.Backend.Models.PostModels;
-using MyApp.Backend.Repositories.PostRepositories;
+using MyApp.Backend.Models.TopicModels;
+using MyApp.Backend.Repositories.TopicRepositories;
 
 namespace MyApp.Backend.Controllers
 {
@@ -10,17 +10,17 @@ namespace MyApp.Backend.Controllers
     [Route("[controller]")]
     public class PopularController : ControllerBase
     {
-        private readonly ILogger<PostsController> _logger;
+        private readonly ILogger<TopicsController> _logger;
 
-        public PopularController(ILogger<PostsController> logger)
+        public PopularController(ILogger<TopicsController> logger)
         {
             _logger = logger;
         }
 
-        #region Get Requests
+        #region GET Requests
 
         [HttpGet]
-        public List<PostModel> Get()
+        public List<TopicModel> Get()
         {
             return null;
         }
@@ -45,7 +45,7 @@ namespace MyApp.Backend.Controllers
         [HttpPost("UploadPopularItem")]
         public PopularItemModel UploadPopularItem(UploadPopularItemParam param)
         {
-            return PopularLogic.UploadPopularItem(param.postId, param.uploaderId, param.url, param.platformTypeId);
+            return PopularLogic.UploadPopularItem(param.topicId, param.uploaderId, param.url, param.platformTypeId);
         }
 
         #endregion

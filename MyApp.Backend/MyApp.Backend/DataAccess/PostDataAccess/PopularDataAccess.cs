@@ -2,7 +2,7 @@
 using MySqlConnector;
 using System.Data;
 
-namespace MyApp.Backend.Repositories.PostRepositories
+namespace MyApp.Backend.Repositories.TopicRepositories
 {
     public class PopularDataAccess : BaseDataAccess
     {
@@ -13,7 +13,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             _configuration = iconfig;
         }
 
-        public static DataTable GetPopularItems(long postId)
+        public static DataTable GetPopularItems(long topicId)
         {
             DataTable table = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
@@ -39,11 +39,11 @@ namespace MyApp.Backend.Repositories.PostRepositories
 	                    ON p.uploader_id = u.id    
                      LEFT JOIN brains b
 	                    ON p.id = b.object_id AND b.object_type_id = ?popular_item_object_type
-                    WHERE p.post_id = ?post_id
+                    WHERE p.topic_id = ?topic_id
                     GROUP BY p.id;
                     ";
                 command.Connection = connection;
-                command.Parameters.AddWithValue("post_id", postId); 
+                command.Parameters.AddWithValue("topic_id", topicId); 
                 command.Parameters.AddWithValue("popular_item_object_type", Enums.BrainedObjectType.PopularItem);
                 MySqlDataAdapter da = new MySqlDataAdapter(command);
 
@@ -105,7 +105,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
             return false;
         }
 
-        public static long UploadPopularItem(long postId, long uploaderId, string url, int platformTypeId, DateTime createdTime)
+        public static long UploadPopularItem(long topicId, long uploaderId, string url, int platformTypeId, DateTime createdTime)
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {
@@ -114,7 +114,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                 command.CommandText = @"
                                         INSERT INTO popular_items 
                                         ( 
-                                            post_id,
+                                            topic_id,
                                             uploader_id, 
                                             platform_type_id,
                                             iframe_url,
@@ -123,7 +123,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                                         ) 
                                         VALUES 
                                         ( 
-                                            ?post_id,
+                                            ?topic_id,
                                             ?uploader_id, 
                                             ?platform_type_id,
                                             ?iframe_url,
@@ -131,7 +131,7 @@ namespace MyApp.Backend.Repositories.PostRepositories
                                             ?updated_time
                                         );";
                 command.Connection = connection;
-                command.Parameters.AddWithValue("post_id", postId);
+                command.Parameters.AddWithValue("topic_id", topicId);
                 command.Parameters.AddWithValue("uploader_id", uploaderId);
                 command.Parameters.AddWithValue("platform_type_id", platformTypeId);
                 command.Parameters.AddWithValue("iframe_url", url);
