@@ -12,12 +12,15 @@ namespace MyApp.Backend.Logic
             User user = UserLogic.GetUserBySsoId(userSsoId);
             if (user.Id > 0)
             {
+                user.IsFirstLogin = false;
                 return user;
             }
             else
             {
                 long newUserId = await UserLogic.CreateNewUserBySsoId(ssoTypeId, userSsoId, ssoAccessToken, firstName, lastName);
-                return UserLogic.GetUser(newUserId);
+                User newUser = UserLogic.GetUser(newUserId);
+                newUser.IsFirstLogin = true;
+                return newUser;
             }
         }
     }

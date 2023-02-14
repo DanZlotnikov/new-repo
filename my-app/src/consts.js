@@ -19,3 +19,17 @@ export const SsoType = {
     Facebook: 1,
     Google: 2,
 }
+
+export const TutorialStages = {
+    Welcome: 0,
+    NewTopic: 1,
+    NewTopicAddKnowledge: 2,
+    NewTopicAddPopular: 3,
+    NewTopicCreate: 4,
+    ExploreTopics: 5,
+    ExistingTopicDiscussionSection: 6,
+    ExistingTopicKnowledgeSection: 7,
+    ExistingTopicPopularSection: 8,
+    Enjoy: 9,
+    Done: 10
+}

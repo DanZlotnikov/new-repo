@@ -2,18 +2,17 @@ import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import TopicSectionCard from '../Common/TopicSectionCard';
 import { FaBookOpen, FaFire } from 'react-icons/fa';
-import { Colors } from '../../consts';
+import { Colors, TutorialStages } from '../../consts';
 import { TextareaAutosize } from '@mui/material';
 import texts from '../../texts';
 import { Oval } from 'react-loader-spinner';
-import { IoMdSend } from 'react-icons/io';
 import FileUploadWidget from '../Common/FileUploadWidget';
 import UploadKnowledgeItemForm from '../Topic/Knowledge/UploadKnowledgeItemForm';
 import Modal from '../Common/Modal';
 import UploadPopularItemForm from '../Topic/Popular/UploadPopularItemForm';
 import TopicApi from '../../api/TopicApi';
 
-function NewTopic({handleCreateNewTopic}) {
+function NewTopic({handleCreateNewTopic, tutorialStage}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const topicTextInputRef = useRef(null);
     const [message, setMessage] = useState('');
@@ -70,44 +69,28 @@ function NewTopic({handleCreateNewTopic}) {
         <div className='newTopicDiv'>
             <div className='newTopic'>
                 <img className='userProfileImg topicImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
-                <span className='newTopicTextCont'>
+                <span className={`newTopicTextCont ${tutorialStage === TutorialStages.NewTopic ? 'tutorial' : ''}`}>
                 <TextareaAutosize
                         ref={topicTextInputRef}
                         type='textarea' 
                         className={'topicTextInp'}
                         placeholder={`${texts.newTopic.newTopicInputPlaceholder}, ${currentUser.firstName}`}
                         value={message}
-                        onChange = {(e) => setMessage(e.target.value)} 
+                        onChange = {(e) => setMessage(e.target.value)}
+                        readOnly={tutorialStage === TutorialStages.NewTopic}
                     />
-                    <span className='sendDiv'>
-                        <span className='topicTextLoader'>
-                            {showLoader &&
-                                <Oval
-                                className='loaderSpinner'
-                                height={18}
-                                width={18}
-                                strokeWidth={2}
-                                strokeWidthSecondary={2}
-                            />
-                            }
-                        </span>
-                        {!showLoader &&
-                        <span className='sendIcon' onClick={() => createNewTopic()}>
-                            <IoMdSend size={20} />
-                        </span>
-                        }
-                    </span>
                 </span>
             </div>
+            
             <div className='itemAdditionDiv'>
                 <span className='knowledgeItemAddition'>
-                    <span className={`itemAdditionBtn ${knowledgeFile ? 'uploadedKnowledge' : ''}`}>
+                    <span className={`itemAdditionBtn ${knowledgeFile ? 'uploadedKnowledge' : ''} ${tutorialStage === TutorialStages.NewTopicAddKnowledge ? 'tutorial' : ''}`}>
                         <FileUploadWidget uploadButtonIcon={<TopicSectionCard icon={<FaBookOpen />} iconColor={Colors.discussionBlue} />} openFileUploadModal={() => setShowKnowldegeModal(true)} file={knowledgeFile} setFile={setKnowledgeFile} />
                     </span>
                     {knowledgeFile && <span className='knowledgeFileName ellipsis'>{knowledgeFile.name}</span>}
                 </span>
                 <span className='popularItemAddition' >
-                    <span onClick={() => setShowPopularModal(true)} className={`itemAdditionBtn ${popularItem.info.url ? 'uploadedPopular' : ''}`}><TopicSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
+                    <span onClick={() => setShowPopularModal(true)} className={`itemAdditionBtn ${popularItem.info.url ? 'uploadedPopular' : ''} ${tutorialStage === TutorialStages.NewTopicAddPopular ? 'tutorial' : ''}`}><TopicSectionCard icon={<FaFire />} iconColor={Colors.brainPink} /></span>
                     {popularItem.info.url && <span className='popularUrl ellipsis'>{popularItem.info.url}</span>}
                 </span>
             </div>
@@ -117,6 +100,22 @@ function NewTopic({handleCreateNewTopic}) {
              {showPopularModal && 
                 <Modal renderComponent={<UploadPopularItemForm handleUploadItem={handleUploadPopularItem} />} onCancel={() => setShowPopularModal(false)} />
             }
+                <span className='topicTextLoader'>
+                    {showLoader &&
+                        <Oval
+                        className='loaderSpinner'
+                        height={18}
+                        width={18}
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
+                    />
+                    }
+                </span>
+                {!showLoader &&
+                    <span className={`sendButton ${tutorialStage === TutorialStages.NewTopicCreate ? 'tutorial' : ''}`} onClick={() => createNewTopic()}>
+                        {texts.newTopic.create}
+                    </span>
+                }
         </div>
     )
 }

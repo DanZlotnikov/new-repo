@@ -8,8 +8,9 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { GiCheckMark } from 'react-icons/gi';
 import { Oval } from 'react-loader-spinner';
 import { config } from '../../../config';
+import { TutorialStages } from '../../../consts';
 
-function NewComment({commentDataToEdit, topic, handleCreateComment, handleEditComment}) {
+function NewComment({commentDataToEdit, tutorialStage, topic, handleCreateComment, handleEditComment}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [message, setMessage] = useState(commentDataToEdit ? commentDataToEdit.message : '');
     const [emptyMsg, setEmptyMsg] = useState(false);
@@ -51,7 +52,7 @@ function NewComment({commentDataToEdit, topic, handleCreateComment, handleEditCo
     }
     
     return (
-        <div className='newCommentCont'>
+        <div className={`newCommentCont ${tutorialStage === TutorialStages.ExistingTopicAddComment ? 'tutorial' : ''}`}>
             <img className='userProfileImg newCommentProfileImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
             { commentDataToEdit && 
                 <span className='commentAuthorName'>

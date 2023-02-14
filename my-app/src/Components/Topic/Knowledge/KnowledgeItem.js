@@ -1,4 +1,4 @@
-import { FaBrain, FaPen } from 'react-icons/fa';
+import { FaBrain } from 'react-icons/fa';
 import dateFormat from 'dateformat';
 import KnowledgeApi from '../../../api/KnowledgeApi';
 import { useSelector } from 'react-redux';
@@ -56,12 +56,12 @@ function KnowledgeItem({item}) {
                                 {item.brainsUserIds.length}
                             </span>
                         </span>
-                        <span className='highlights'>
+                        {/* <span className='highlights'>
                             <FaPen className='counterIcon markerIcon' size={16}/>
                             <span className='counter-number'>
                                 {item.highlightsCount}
                             </span>
-                        </span>
+                        </span> */}
                     </span>
                 </span>
             </span>  

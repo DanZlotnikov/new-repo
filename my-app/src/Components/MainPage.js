@@ -2,13 +2,26 @@ import { useState, useRef, useEffect } from 'react';
 import Topic  from './Topic/Topic.js';
 import TopicsApi from '../api/TopicApi.js';
 import { InfinitySpin  } from 'react-loader-spinner';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NewTopic from './NewTopic/NewTopic.js';
+import texts from '../texts.js';
+import { IoMdHelp } from 'react-icons/io';
+import { TutorialStages } from '../consts';
+import { endTutorial } from '../redux/authReducer';
 
 function MainPage() {
-    const didMount = useRef(false);
-    const [topics, setTopics] = useState(null);
     const currentUser = useSelector((state) => state.authReducer.currentUser);
+    const dispatch = useDispatch();
+    const [topics, setTopics] = useState(null);
+    const didMount = useRef(false);
+    const [tutorialStage, setTutorialStage] = useState(currentUser.isFirstLogin ? TutorialStages.Welcome : TutorialStages.Done);
+    const [tutorialHint, setTutorialHint] = useState('');
+    useEffect(() => {
+        if (tutorialStage === TutorialStages.Done) {
+            dispatch(endTutorial());
+        }
+        setTutorialHint(texts.tutorial[tutorialStage]);
+    }, [tutorialStage]);
     
     /* eslint-disable */
     useEffect(() => {
@@ -16,17 +29,26 @@ function MainPage() {
             TopicsApi.GetTopicsForUser(currentUser.id).then((topicsData) => {
                 setTopics(topicsData);
             });
-            return;
+        }
+        if (currentUser.isFirstLogin) {
+            setTutorialHint(texts.tutorial[TutorialStages.Welcome]);
         }
     }, []);
     /* eslint-enable */
-
+        
     const handleCreateNewTopic = (newTopic) => {
         setTopics([newTopic, ...topics]);
     }
 
     return (
         <div className='mainDiv'>
+            {tutorialStage !== TutorialStages.Done &&
+                <span className='tutorialHint'>
+                    <IoMdHelp className='helpIcon'/>
+                    {tutorialHint}
+                    <span className='continueTutorialBtn' onClick={() => setTutorialStage((stage) => stage + 1)}>CONTINUE</span>
+                </span>
+            }
             {!topics &&
                 <div className='loaderDiv'>
                     <InfinitySpin className='loaderSpinner' />
@@ -34,11 +56,11 @@ function MainPage() {
             }
             {topics && 
                 <div className='mainPage'>
-                    <NewTopic handleCreateNewTopic={handleCreateNewTopic}/>
-                    <div className='topicsDiv'>
+                    <NewTopic handleCreateNewTopic={handleCreateNewTopic} tutorialStage={tutorialStage} />
+                    <div className={`topicsDiv ${tutorialStage === TutorialStages.ExploreTopics ? 'tutorial' : ''}`}>
                         {topics.map((topic) => (
                             <div key={topic.id}>
-                                <Topic topic={topic} />
+                                <Topic topic={topic} tutorialStage={tutorialStage} />
                             </div>
                         ))}
                     </div>

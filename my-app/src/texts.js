@@ -10,7 +10,8 @@ const texts = {
         comingSoon: 'Coming soon...'
     },
     newTopic: {
-        newTopicInputPlaceholder: 'Create a new topic'
+        newTopicInputPlaceholder: 'Create a new topic',
+        create: 'Create'
     },
     discussions: {
         commentEditHint: '[Editing]',
@@ -40,6 +41,18 @@ const texts = {
             url: 'URL',
         },
     },
+    tutorial: {
+        0: 'Welcome! This is a quick tutorial just to get you started...',
+        1: 'Here you can create new topics for people to discuss :)',
+        2: 'This is where you upload knowledge files to your topic',
+        3: 'And here you can upload popular items',
+        4: 'Click here to create it!',
+        5: 'Here you can explore other topics',
+        6: 'Feel free to discuss!',
+        7: 'Click here to view knowledge items. Or add some!',
+        8: 'And of course scroll & upload popular items ;)',
+        9: 'Enjoy yourself!'
+    }
 };
 
 export default texts;

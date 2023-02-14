@@ -289,9 +289,41 @@ input {
   padding-top: 30px;
   display: flex;
   justify-content: center;
-  
+
   .mainPage {
     width: 50%;
+  }
+
+  .tutorialHint {
+    z-index: 100;
+    box-shadow: 0 0 0 1000vh rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 10px;
+    background-color: $background-green;
+    padding: 15px 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    width: 100vh;
+
+    .helpIcon {
+      position: relative;
+      margin-inline-end: 10px;
+      height: 25px;
+      width: 25px;
+    }
+
+    .continueTutorialBtn {
+      position: absolute;
+      right: 20px;
+      background: $app-green;
+      color: white;
+      margin-inline-start: 15px;
+      padding: 7px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   }
 }
 
@@ -302,18 +334,18 @@ input {
   border-radius: 5px;
   box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
   margin-bottom: 20px;
+  position: relative;
 
   .newTopic {
     width: 100%;
     display: flex;
     
     .newTopicTextCont {
-      position: relative;
       width: 90%;
       background-color: #f0f2f5;
       border-radius: 5px;
       margin-inline-start: 10px;
-
+      
       .topicTextInp {
         width: 88%;
         border: 0;
@@ -322,35 +354,17 @@ input {
         padding: 10px;
         font-size: 14px;
         resize: none;
+        font-weight: inherit;
         overflow: hidden;
-  
+        
         &:focus {
           outline: none;
-        }
-      }
-      .sendDiv {
-        .topicTextLoader {
-          display: inline-flex;
-          position: relative;
-          right: -12px;
-          bottom: 9px;
-        }
-       
-        .sendIcon {
-          position: absolute;
-          right: 12px;
-          bottom: 8px;
-          color: $app-green;
-    
-          &:hover {
-            cursor: pointer;
-            margin-bottom: 1px;
-          }
         }
       }
     }
   }
 
+  
   .itemAdditionDiv {
     display: flex;
     margin-top: 10px;
@@ -360,7 +374,7 @@ input {
       display: flex;
       flex-direction: column;
       align-items: center;
-      
+
       .itemAdditionBtn {
         display: inline-flex;
         margin-inline-end: 10px;
@@ -370,7 +384,7 @@ input {
         border-radius: 5px;
         background-color: $background-gray;
         cursor: pointer;
-        
+      
         .fileUploadDiv {
           margin-bottom: 0px;
         }
@@ -391,48 +405,62 @@ input {
       }
     }
   }
+
+  .sendButton {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    background-color: $app-green;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 }
 
 .topicsDiv {
   min-height: 100vh;
-  
+
   .topicDiv {
     padding: 20px;
     margin-bottom: 20px;
     background-color: $background-white;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
-
     .topicHeaderDiv {
-      display: flex;
-  
-      .nameAndDate {
+      border-radius: 5px;
+
+      .topicUserDiv {
         display: flex;
-        flex-direction: column;
-        margin-inline-start: 7px;
-        position: relative;
-        bottom: 4px;
-        margin-inline-end: 0px;
-        
-        .userNameSpan {
+    
+        .nameAndDate {
           display: flex;
-          margin-top: 2px;
+          flex-direction: column;
+          margin-inline-start: 7px;
+          position: relative;
+          bottom: 4px;
+          margin-inline-end: 0px;
           
-          .userName {
-            font-weight: 500;
+          .userNameSpan {
+            display: flex;
+            margin-top: 2px;
+            
+            .userName {
+              font-weight: 500;
+            }
           }
-        }
-  
-        .topicCreatedTime {
-          font-size: 12px;
-          margin-top: 1px;
-          color: $text-gray;
-          font-weight: 400;
-          
-          .globeIcon {
-            position: relative;
-            left: 5px;
-            top: 2px;
+    
+          .topicCreatedTime {
+            font-size: 12px;
+            margin-top: 1px;
+            color: $text-gray;
+            font-weight: 400;
+            
+            .globeIcon {
+              position: relative;
+              left: 5px;
+              top: 2px;
+            }
           }
         }
       }
@@ -447,7 +475,7 @@ input {
       margin-inline-start: 48px;
       margin-top: 25px;
       margin-bottom: 10px;
-  
+
       .topicSectionCard {
         display: inline-flex;
         flex-direction: column;
@@ -1311,4 +1339,11 @@ input {
       margin-top: 10px;
     }
   }
+}
+
+.tutorial {
+  position: relative;
+  z-index: 101;
+  transform: scale(1.1);
+  transition: transform 200ms ease-in;
 }

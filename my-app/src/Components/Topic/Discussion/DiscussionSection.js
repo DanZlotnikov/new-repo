@@ -3,9 +3,8 @@ import ExistingComment from './ExistingComment'
 import { useState } from 'react';
 import texts from '../../../texts';
 
-function DiscussionSection({topic, updateDataCount}) {
+function DiscussionSection({topic, tutorialStage, updateDataCount}) {
     const [showAllComments, setShowAllComments] = useState(topic.comments.length < 2);
-    
     const handleCreateComment = () => {
         setShowAllComments(true);
         updateDataCount();
@@ -13,7 +12,7 @@ function DiscussionSection({topic, updateDataCount}) {
 
     return (
         <div className='discussionSectionDiv'>
-            <NewComment topic={topic} handleCreateComment={handleCreateComment} />
+            <NewComment topic={topic} tutorialStage={tutorialStage} handleCreateComment={handleCreateComment} />
             {topic.comments.length > 1 && 
             <div>
                 <span className='seeDiscussions' onClick={() => setShowAllComments(!showAllComments)}>

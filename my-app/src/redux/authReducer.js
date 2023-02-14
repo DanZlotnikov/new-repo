@@ -9,7 +9,8 @@ const authSlice = createSlice({
       firstName: null,
       lastName: null,
       profileImgUrl: null,
-      isVerified: false
+      isVerified: false,
+      isFirstLogin: false
     }
   },
   reducers: {
@@ -22,16 +23,20 @@ const authSlice = createSlice({
         state.currentUser.lastName = payload.lastName;
         state.currentUser.profileImgUrl = payload.profileImgUrl;
         state.currentUser.isVerified = payload.isVerified;
+        state.currentUser.isFirstLogin = payload.isFirstLogin;
       }
     },
     logout: (state) => {
       state.currentUser = {
         isLoggedIn: false
       };
+    },
+    endTutorial: (state) => {
+      state.currentUser.isFirstLogin = false;
     }
   }
 });
 
-export const { ssoLogin, logout } = authSlice.actions
+export const { ssoLogin, logout, endTutorial } = authSlice.actions
 
 export default authSlice.reducer;

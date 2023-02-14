@@ -7,5 +7,6 @@
         public string? LastName { get; set; }
         public string? ProfileImgUrl { get; set; }
         public bool IsVerified { get; set; }
+        public bool IsFirstLogin { get; set; }
     }
 }
