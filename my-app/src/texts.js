@@ -17,6 +17,9 @@ const texts = {
         commentEmptyHint: '[Cannot be Empty]',
         newCommentPlaceholder: 'Start a discussion...',
         newSubcommentPlaceholder: 'Add a comment...',
+        seeAllDiscussions: 'See all discussions',
+        hideDiscussions: 'Hide discussions',
+        openComments: 'Open comments'
     },
     knowledge: {
         itemListHeaderTitle: 'title',

@@ -7,7 +7,7 @@ import UploadPopularItemForm from './UploadPopularItemForm';
 import PopularApi from '../../../api/PopularApi';
 import { useSelector } from 'react-redux';
 
-function PopularSection({topic}) {
+function PopularSection({topic, updateDataCount}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [showModal, setShowModal] = useState(false);
     const [createdItems, setCreatedItems] = useState(0);
@@ -17,6 +17,7 @@ function PopularSection({topic}) {
             if (newItem.id) {
                 topic.popularItems.push(newItem);
                 setCreatedItems(createdItems + 1);
+                updateDataCount();
             }
         });
         setShowModal(false);

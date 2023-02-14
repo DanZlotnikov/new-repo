@@ -6,11 +6,10 @@ import KnowledgeApi from '../../../api/KnowledgeApi';
 import { useSelector } from 'react-redux';
 import UploadKnowledgeItemForm from './UploadKnowledgeItemForm';
 
-function KnowledgeSection({topic}) {
+function KnowledgeSection({topic, updateDataCount}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const [showModal, setShowModal] = useState(false);
     const [file, setFile] = useState(null);
-    const [createdItems, setCreatedItems] = useState(0);
 
     const handleUploadItem = (title, originalAuthors, publishDate) => {
         setShowModal(false);
@@ -18,7 +17,7 @@ function KnowledgeSection({topic}) {
         KnowledgeApi.UploadKnowledgeItem(topic.id, currentUser.id, title, originalAuthors, publishDate, file).then(newItem => {
             if (newItem.id) {
                 topic.knowledgeItems.push(newItem);
-                setCreatedItems(createdItems + 1);
+                updateDataCount();
             }
         });
     }

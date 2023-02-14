@@ -55,7 +55,7 @@ input {
   .chambersHeader {
     position: relative;
     bottom: 2px;
-    margin-left: 10px;
+    margin-inline-start: 10px;
     font-size: 18px;
     font-weight: bold;
   }
@@ -375,9 +375,6 @@ input {
           margin-bottom: 0px;
         }
 
-        &:hover {
-        }
-
         &.uploadedKnowledge {
           background-color: $background-blue;
         }
@@ -412,10 +409,10 @@ input {
       .nameAndDate {
         display: flex;
         flex-direction: column;
-        margin-left: 7px;
+        margin-inline-start: 7px;
         position: relative;
         bottom: 4px;
-        margin-right: 0px;
+        margin-inline-end: 0px;
         
         .userNameSpan {
           display: flex;
@@ -441,13 +438,15 @@ input {
       }
     }
     .topicText {
-      margin-left: 47px;
+      margin-inline-start: 47px;
       margin-top: 5px;
+      word-wrap: break-word;
+      max-width: 90%;
     }
     .sectionSelectionDiv {
-      margin-left: 48px;
+      margin-inline-start: 48px;
       margin-top: 25px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
   
       .topicSectionCard {
         display: inline-flex;
@@ -458,7 +457,7 @@ input {
         padding-left: 9px;
         padding-right: 10px;
         border-radius: 5px;
-        margin-right: 10px;
+        margin-inline-end: 10px;
         margin-bottom: 15px;
   
         &.selected {
@@ -488,21 +487,37 @@ input {
 }
 
 .discussionSectionDiv {
+  .seeDiscussions {
+    margin-inline-start: 7px;
+    position: relative;
+    display: block;
+    margin-bottom: 13px;
+    font-size: 16px;
+    color: #4cb45a;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
   .newCommentCont {
     position: relative;
-    width: 65%;
+    width: 85%;
     padding: 3px;
     background-color: #f0f2f5;
     border-radius: 5px;
     margin-top: 3px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     margin-inline-start: 52px;
 
     .commentAuthorName {
       font-weight: 600;
       font-size: 14px;
       display: block;
-      margin-left: 7px;
+      margin-inline-start: 7px;
       margin-top: 4px;
 
       .editingHint {
@@ -570,7 +585,7 @@ input {
   
   .commentDiv {
     position: relative;
-    margin-bottom: 22px;
+    margin-bottom: 30px;
     
     .existingComment {
       border: 0;
@@ -579,12 +594,14 @@ input {
       margin-inline-start: 52px;
       display: inline-block;
       padding: 10px;
+      padding-top: 7px;
       font-size: 14px;
       resize: none;
       position: relative;
       bottom: 3px;
       min-width: 240px;
-      
+      max-width: 85%;
+
       &:focus {
         outline: none;
       }
@@ -592,7 +609,11 @@ input {
       .commentAuthorName {
         font-weight: 600;
         display: block;
-        margin-right: 10px;
+        margin-inline-end: 10px;
+      }
+
+      .commentText {
+        word-wrap: break-word;
       }
     }
   }
@@ -613,22 +634,22 @@ input {
     }
 
     .editSpan {
-      margin-right: 4px;
+      margin-inline-end: 4px;
 
     }
     
     .deleteAreYouSure {
       cursor: pointer;
       .yes {
-        margin-left: 5px;
-        margin-right: 3px;
+        margin-inline-start: 5px;
+        margin-inline-end: 3px;
 
         &:hover {
           color: $app-green;
         }
       }
       .no {
-        margin-left: 3px;
+        margin-inline-start: 3px;
 
         &:hover {
           color: $app-green;
@@ -639,8 +660,7 @@ input {
 
   .subcommentsContainer {
     display: block;
-    margin-left: 80px;
-
+    margin-inline-start: 80px;
 
     .seeComments {
       font-size: 14px;
@@ -668,13 +688,14 @@ input {
           border-radius: 5px;
           margin-top: 3px;
           margin-bottom: 5px;
+          max-width: 85%;
 
           .newSubcomment {
             .subcommentAuthorName {
               font-weight: 600;
               font-size: 14px;
               display: block;
-              margin-left: 7px;
+              margin-inline-start: 7px;
               margin-top: 4px;
 
               .editingHint {
@@ -741,27 +762,31 @@ input {
           background-color: $background-gray;
           border-radius: 5px;
           margin-bottom: 5px;
+          max-width: 85%;
         }
 
         .subcomment {
           border: 0;
-          background-color: #f0f2f5;
           border-radius: 5px;
           display: inline-block;
           padding: 7px;
+          padding-top: 5px;
           font-size: 14px;
           resize: none;
-          position: relative;
-          bottom: 3px;
-      
+          max-width: 95%;
+
           &:focus {
             outline: none;
           }
-      
+          
           .subcommentAuthorName {
             font-weight: 600;
             display: block;
-            margin-right: 10px;
+            margin-inline-end: 10px;
+          }
+
+          .subcommentText {
+            word-wrap: break-word;
           }
 
           .subcommentEditSpan {
@@ -780,22 +805,22 @@ input {
             }
 
             .editSpan {
-              margin-right: 4px;
+              margin-inline-end: 4px;
 
             }
             
             .deleteAreYouSure {
               cursor: pointer;
               .yes {
-                margin-left: 5px;
-                margin-right: 3px;
+                margin-inline-start: 5px;
+                margin-inline-end: 3px;
 
                 &:hover {
                   color: $app-green;
                 }
               }
               .no {
-                margin-left: 3px;
+                margin-inline-start: 3px;
  
                 &:hover {
                   color: $app-green;
@@ -981,8 +1006,8 @@ input {
 .userProfileImg {
   border-radius: 5px;
     display: inline-flex;
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
 
   &.topicImg {
     height: 40px;
@@ -991,12 +1016,12 @@ input {
 
   &.commentProfileImg {
     position: absolute;
-    left: 10px;
+    left: 16px;
   }
 
   &.newCommentProfileImg {
     position: absolute;
-    left: -42px;
+    left: -36px;
   }
 
   &.subcommentProfileImg {
@@ -1031,6 +1056,7 @@ input {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
   position: relative;
+
   &.commentCounters {
     position: absolute;
     right: 10px;
@@ -1040,7 +1066,7 @@ input {
   }
 
   .brains, .comments, .highlights {
-    margin-right: 5px;
+    margin-inline-end: 5px;
     background: white;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
@@ -1074,7 +1100,7 @@ input {
       position: relative;
       top: 4px;
       right: 2px;
-      margin-right: 3px;
+      margin-inline-end: 3px;
       
       &.brainsIcon {
         color: $discussion-blue;
@@ -1087,7 +1113,7 @@ input {
       &.markerIcon {
         color: $text-blue;
         margin-bottom: 1px; 
-        margin-left: 3px;
+        margin-inline-start: 3px;
       }
     }        
   }
@@ -1116,8 +1142,8 @@ input {
 }
 
 .fileUploadDiv {
-  margin-bottom: 30px;
-  display: block;
+  margin-bottom: 20px;
+  display: flex;
   position: relative;
 
   .uploadBtn {
@@ -1142,7 +1168,7 @@ input {
   }
   
   .uploadIcon {
-    margin-left: 10px;
+    margin-inline-start: 10px;
     width: 25px;
     height: 25px;
     color: $discussion-blue;

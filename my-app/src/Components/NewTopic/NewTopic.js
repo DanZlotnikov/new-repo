@@ -13,7 +13,7 @@ import Modal from '../Common/Modal';
 import UploadPopularItemForm from '../Topic/Popular/UploadPopularItemForm';
 import TopicApi from '../../api/TopicApi';
 
-function NewTopic() {
+function NewTopic({handleCreateNewTopic}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const topicTextInputRef = useRef(null);
     const [message, setMessage] = useState('');
@@ -36,7 +36,11 @@ function NewTopic() {
     const createNewTopic = () => {
         if (!message) return;
         setShowLoader(true);
-        TopicApi.CreateNewTopic(currentUser.id, message, knowledgeItem, knowledgeFile, popularItem);
+        TopicApi.CreateNewTopic(currentUser.id, message, knowledgeItem, knowledgeFile, popularItem).then(newTopic => {
+            handleCreateNewTopic(newTopic);
+            setMessage('');
+            setShowLoader(false);
+        });
     }
     
     const handleUploadKnowledgeItem = (title, originalAuthors, publishDate) => {

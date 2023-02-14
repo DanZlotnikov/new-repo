@@ -9,7 +9,7 @@ function MainPage() {
     const didMount = useRef(false);
     const [topics, setTopics] = useState(null);
     const currentUser = useSelector((state) => state.authReducer.currentUser);
-   
+    
     /* eslint-disable */
     useEffect(() => {
         if (!didMount.current) { // this will only run on first render
@@ -21,6 +21,10 @@ function MainPage() {
     }, []);
     /* eslint-enable */
 
+    const handleCreateNewTopic = (newTopic) => {
+        setTopics([newTopic, ...topics]);
+    }
+
     return (
         <div className='mainDiv'>
             {!topics &&
@@ -30,7 +34,7 @@ function MainPage() {
             }
             {topics && 
                 <div className='mainPage'>
-                    <NewTopic />
+                    <NewTopic handleCreateNewTopic={handleCreateNewTopic}/>
                     <div className='topicsDiv'>
                         {topics.map((topic) => (
                             <div key={topic.id}>

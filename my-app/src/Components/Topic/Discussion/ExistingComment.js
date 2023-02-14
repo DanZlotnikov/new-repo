@@ -5,6 +5,7 @@ import DiscussionsApi from '../../../api/DiscussionsApi';
 import { useSelector } from 'react-redux';
 import NewComment from './NewComment';
 import EditDeleteSpan from '../../Common/EditDeleteSpan';
+import texts from '../../../texts';
 
 function ExistingComment({commentData}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser)
@@ -82,7 +83,7 @@ function ExistingComment({commentData}) {
                             </span>
                         }
                     </span>
-                    <span className='comment-text'>
+                    <span className='commentText'>
                         {commentData.message}
                     </span> 
                     {currentUser.id === commentData.author.id &&
@@ -95,7 +96,7 @@ function ExistingComment({commentData}) {
                     <span className='subcomments'>
                         {!subcommentsOpen && commentData.subcomments.length > 0 &&
                         <span className='seeComments' onClick={() => setSubcommentsOpen(true)}>
-                            See all comments
+                            {texts.discussions.openComments}
                         </span>
                         }
                         {(subcommentsOpen || commentData.subcomments.length === 0) &&

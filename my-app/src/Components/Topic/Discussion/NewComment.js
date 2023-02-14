@@ -7,6 +7,7 @@ import texts from '../../../texts';
 import { FaCheckCircle } from 'react-icons/fa';
 import { GiCheckMark } from 'react-icons/gi';
 import { Oval } from 'react-loader-spinner';
+import { config } from '../../../config';
 
 function NewComment({commentDataToEdit, topic, handleCreateComment, handleEditComment}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
@@ -19,7 +20,7 @@ function NewComment({commentDataToEdit, topic, handleCreateComment, handleEditCo
         if (!message) {
             setEmptyMsg(true);
         }
-        else {
+        else if (message.length < config.MAX_CHAR_COUNT) {
             setShowLoader(true);
             DiscussionsApi.CreateNewComment(topic.id, currentUser.id, message).then(newComment => {
                 if (newComment && newComment.id > 0) {

@@ -37,7 +37,6 @@ namespace MyApp.Backend.Logic
         }
         public static TopicModel CreateNewTopic(CreateNewTopicParam param, IFormFile file)
         {
-            TopicModel topicModel = new TopicModel();
             long newTopicId = TopicDataAccess.CreateNewTopic(param.authorId, param.message);
             if (newTopicId > 0)
             {
@@ -50,7 +49,7 @@ namespace MyApp.Backend.Logic
                     PopularLogic.UploadPopularItem(newTopicId, param.authorId, param.popularItemUrl, param.popularItemPlatformType);
                 }
             }
-            return topicModel;
+            return GetTopic(newTopicId);
         }
     }
 }

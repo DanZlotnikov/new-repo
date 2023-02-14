@@ -36,7 +36,7 @@ function ExistingSubcomment({subcommentData, handleEditSubcomment, handleDeleteS
                                 </span>
                             }
                         </span>
-                        <span className='subcomment-text'>
+                        <span className='subcommentText'>
                             {subcommentData.message}
                         </span>
                         {currentUser.id === subcommentData.author.id &&

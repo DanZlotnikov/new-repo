@@ -6,6 +6,7 @@ import { GiCheckMark } from 'react-icons/gi';
 import texts from '../../../../texts';
 import { Oval } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
+import { config } from '../../../../config';
 
 function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSubcomment}) {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
@@ -14,7 +15,7 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
     const [showLoader, setShowLoader] = useState(false);
     
     const addSubcomment = () => {
-        if (message) {
+        if (message && message.length < config.MAX_CHAR_COUNT) {
             setShowLoader(true);
             handleAddSubcomment(message).then((res) => {
                 setShowLoader(false);
