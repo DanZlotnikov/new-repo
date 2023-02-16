@@ -1,7 +1,8 @@
+**\bin
+**\obj
 **\appsettings.json
 *.suo
 *.metadata
 *.vsidx
 *.v2
-**\bin
-**\obj
+*.lock
