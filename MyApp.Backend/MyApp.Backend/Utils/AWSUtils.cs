@@ -1,4 +1,6 @@
-﻿using Amazon.S3;
+﻿using Amazon;
+using Amazon.S3;
+using Amazon.S3.Transfer;
 
 namespace MyApp.Backend.Utils
 {
@@ -18,7 +20,7 @@ namespace MyApp.Backend.Utils
             // SAEast1 , USEast1 , USGovCloudWest1 , USWest1 , USWest2 . this choice will not
             // store your file in a different cloud storage but (i think) it differ in performance
             // depending on your location
-            IAmazonS3 client = Amazon.AWSClientFactory.CreateAmazonS3Client(RegionEndpoint.EUWest1);
+            IAmazonS3 client = new AmazonS3Client(RegionEndpoint.EUWest1);
 
             // create a TransferUtility instance passing it the IAmazonS3 created in the first step
             TransferUtility utility = new TransferUtility(client);

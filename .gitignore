@@ -3,4 +3,5 @@
 *.metadata
 *.vsidx
 *.v2
-MyApp.Backend\MyApp.Backend\bin\Debug\*
+**\bin
+**\obj
