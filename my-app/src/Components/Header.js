@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
