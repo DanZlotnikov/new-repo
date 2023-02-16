@@ -1,14 +1,14 @@
-﻿namespace MyApp.Backend
+﻿namespace MyApp.Backend.Utils
 {
-    public class Utils
+    public class GeneralUtils
     {
-        public async static Task<bool> SaveImageInternally(string localPath, string imageUrl)
+        public async static Task<bool> SaveFileInternally(string localPath, string fileUrl)
         {
             try
             {
                 using (var httpClient = new HttpClient())
                 {
-                    using (var response = await httpClient.GetAsync(imageUrl))
+                    using (var response = await httpClient.GetAsync(fileUrl))
                     {
                         if (!response.IsSuccessStatusCode)
                         {

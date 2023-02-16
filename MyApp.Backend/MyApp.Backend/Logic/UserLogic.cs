@@ -2,7 +2,7 @@
 using MyApp.Backend.Repositories;
 using Newtonsoft.Json;
 using System.Data;
-using System.Dynamic;
+using MyApp.Backend.Utils;
 
 namespace MyApp.Backend.Logic
 {
@@ -51,8 +51,8 @@ namespace MyApp.Backend.Logic
             var externalProfileImgUrl = GetProfileImageUrl(ssoType, ssoAccessToken, ssoUserId).Result;
             long newUserId = UserDataAccess.CreateUser(firstName, lastName, DateTime.UtcNow, (int)ssoType, ssoUserId);
             string internalProfileImgUrl = $"C:\\Projects\\new-repo\\my-app\\src\\New folder\\{newUserId}_profile_img_url";
+            await GeneralUtils.SaveFileInternally(internalProfileImgUrl, externalProfileImgUrl);
             UserDataAccess.UpdateUserProfileImg(newUserId, $"http://localhost:8080/{newUserId}_profile_img_url");
-            await Utils.SaveImageInternally(internalProfileImgUrl, externalProfileImgUrl);
             return newUserId;
         }
 

@@ -1,0 +1,6 @@
+**\appsettings.json
+*.suo
+*.metadata
+*.vsidx
+*.v2
+MyApp.Backend\MyApp.Backend\bin\Debug\*

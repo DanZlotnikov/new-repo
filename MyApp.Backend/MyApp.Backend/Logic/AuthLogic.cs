@@ -1,7 +1,4 @@
 ﻿using MyApp.Backend.Models;
-using MyApp.Backend.Repositories;
-using MySqlConnector;
-using System.Data;
 
 namespace MyApp.Backend.Logic
 {

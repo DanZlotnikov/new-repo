@@ -16,14 +16,14 @@ function MainPage() {
     const didMount = useRef(false);
     const [tutorialStage, setTutorialStage] = useState(currentUser.isFirstLogin ? TutorialStages.Welcome : TutorialStages.Done);
     const [tutorialHint, setTutorialHint] = useState('');
+    
+    /* eslint-disable */
     useEffect(() => {
         if (tutorialStage === TutorialStages.Done) {
             dispatch(endTutorial());
         }
         setTutorialHint(texts.tutorial[tutorialStage]);
     }, [tutorialStage]);
-    
-    /* eslint-disable */
     useEffect(() => {
         if (!didMount.current) { // this will only run on first render
             TopicsApi.GetTopicsForUser(currentUser.id).then((topicsData) => {
