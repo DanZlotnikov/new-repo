@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 import { config } from '../config';
@@ -11,10 +11,12 @@ import { useEffect } from 'react';
 import texts from '../texts';
 import AuthApi from '../api/AuthApi';
 import { SsoType } from '../consts';
+import { InfinitySpin } from 'react-loader-spinner';
 
 const LoginPage = () => {
     const currentUser = useSelector((state) => state.authReducer.currentUser)
     const dispatch = useDispatch();
+    const [showLoader, setShowLoader] = useState(false);
 
     useEffect(() => {
         function start() {
@@ -32,6 +34,7 @@ const LoginPage = () => {
     }
 
     const handleFacebookLogin = (fbResponse) => {
+        setShowLoader(true);
         let nameArr = fbResponse.name.split(' ');
         AuthApi.Login(SsoType.Facebook, fbResponse.id, fbResponse.accessToken, nameArr[0], nameArr[1]).then(response => dispatch(ssoLogin(response)));
         
@@ -46,6 +49,7 @@ const LoginPage = () => {
     };
 
     const handleGoogleLogin = (googleResponse) => {
+        setShowLoader(true);
         AuthApi.Login(SsoType.Google, googleResponse.googleId, googleResponse.accessToken, googleResponse.profileObj.givenName, googleResponse.profileObj.familyName).then(response => dispatch(ssoLogin(response)));
     };
 
@@ -56,35 +60,37 @@ const LoginPage = () => {
                     <div className='loginForm'>
                         <h1 className='signinHeader'>{texts.general.welcome}</h1>
                         <span className='signInExplanation'>{texts.general.signInExplanation}</span>
-                        <div className='socialContainer'>
-                        <FacebookLogin
-                            appId={config.facebookAppId}
-                            callback={handleFacebookLogin}
-                            render={(renderProps) => (
-                                <span
-                                    onClick={renderProps.onClick}
-                                    className='facebookLoginButton'
-                                    >
-                                    <FaFacebook className='facebookButton' size={40}/>
-                                </span>
-                            )}
-                        />
-                        <GoogleLogin
-                            clientId={config.googleClientId}
-                            buttonText=''
-                            onSuccess={handleGoogleLogin}
-                            onFailure={(response) => {console.log(response);}}
-                            cookiePolicy={'single_host_origin'}
-                            render={(renderProps) => (
-                                <span
-                                    onClick={renderProps.onClick}
-                                    className='googleLoginButton'
-                                    >
-                                    <FaGoogle className='googleButton' size={40}/>
-                                </span>
-                            )}
-                        />
-                        </div>
+                        {!showLoader &&
+                            <div className='socialContainer'>
+                                <FacebookLogin
+                                    appId={config.facebookAppId}
+                                    callback={handleFacebookLogin}
+                                    render={(renderProps) => (
+                                        <span
+                                            onClick={renderProps.onClick}
+                                            className='facebookLoginButton'
+                                            >
+                                            <FaFacebook className='facebookButton' size={40}/>
+                                        </span>
+                                    )}
+                                />
+                                <GoogleLogin
+                                    clientId={config.googleClientId}
+                                    buttonText=''
+                                    onSuccess={handleGoogleLogin}
+                                    onFailure={(response) => {console.log(response);}}
+                                    cookiePolicy={'single_host_origin'}
+                                    render={(renderProps) => (
+                                        <span
+                                            onClick={renderProps.onClick}
+                                            className='googleLoginButton'
+                                            >
+                                            <FaGoogle className='googleButton' size={40}/>
+                                        </span>
+                                    )}
+                                />
+                            </div>
+                        }
                         {/* <span> Or sign in using E-Mail Address</span>
                         <label>
                             <input type='email' placeholder='Email'/>
@@ -94,6 +100,11 @@ const LoginPage = () => {
                         </label>
                         <span className='forgotPassword'>Forgot your password?</span> */}
                         {/* <button className='signIn'>Sign In</button> */}
+                        {showLoader &&
+                            <div className='loaderDiv'>
+                                <InfinitySpin className='loaderSpinner' />
+                            </div>
+                        }
                     </div>
                 </div>
                 <div className='overlayContainer'>

@@ -48,11 +48,14 @@ namespace MyApp.Backend.Logic
 
         public async static Task<long> CreateNewUserBySsoId(Enums.SsoType ssoType, string ssoUserId, string ssoAccessToken, string firstName, string lastName)
         {
-            var externalProfileImgUrl = GetProfileImageUrl(ssoType, ssoAccessToken, ssoUserId).Result;
+            string s3BucketBaseUrl = ConfigrationHelper.AppSetting("AWS:S3:ChambersBucket:BaseUrl");
+            
             long newUserId = UserDataAccess.CreateUser(firstName, lastName, DateTime.UtcNow, (int)ssoType, ssoUserId);
-            string internalProfileImgUrl = $"C:\\Projects\\new-repo\\my-app\\src\\New folder\\{newUserId}_profile_img_url";
-            await GeneralUtils.SaveFileInternally(internalProfileImgUrl, externalProfileImgUrl);
-            UserDataAccess.UpdateUserProfileImg(newUserId, $"http://localhost:8080/{newUserId}_profile_img_url");
+            string newUserImgFileName = $"{newUserId}_profile_img";
+            string externalSsoProfileImgUrl = GetProfileImageUrl(ssoType, ssoAccessToken, ssoUserId).Result;
+            
+            await AWSUtils.UploadFileToS3(newUserImgFileName, ConfigrationHelper.AppSetting("AWS:S3:ChambersBucket:UserProfileImagesPath"), newUserImgFileName, externalUrlFile: externalSsoProfileImgUrl);
+            UserDataAccess.UpdateUserProfileImg(newUserId, $"{s3BucketBaseUrl}/{ConfigrationHelper.AppSetting("AWS:S3:ChambersBucket:UserProfileImagesPath")}/{newUserImgFileName}");
             return newUserId;
         }
 

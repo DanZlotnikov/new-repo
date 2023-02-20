@@ -42,7 +42,7 @@ namespace MyApp.Backend.Logic
             {
                 if (!string.IsNullOrEmpty(param.knowledgeItemTitle))
                 {
-                    KnowledgeLogic.UploadKnowledgeItem(newTopicId, param.authorId, param.knowledgeItemTitle, param.knowledgeItemOriginalAuthors, (DateTime)param.knowledgeItemPublishDate, file);
+                    KnowledgeLogic.UploadKnowledgeItem(newTopicId, param.authorId, param.knowledgeItemTitle, param.knowledgeItemOriginalAuthors, (DateTime)param.knowledgeItemPublishDate, file).Wait();
                 }
                 if (!string.IsNullOrEmpty(param.popularItemUrl))
                 {

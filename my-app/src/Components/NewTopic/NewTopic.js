@@ -38,6 +38,13 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
         TopicApi.CreateNewTopic(currentUser.id, message, knowledgeItem, knowledgeFile, popularItem).then(newTopic => {
             handleCreateNewTopic(newTopic);
             setMessage('');
+            setKnowledgeFile(null);
+            setPopularItem({
+                info: {
+                    title: '', 
+                    originalAuthors: '', 
+                    publishDate: ''
+            }});
             setShowLoader(false);
         });
     }
@@ -70,7 +77,7 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
             <div className='newTopic'>
                 <img className='userProfileImg topicImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
                 <span className={`newTopicTextCont ${tutorialStage === TutorialStages.NewTopic ? 'tutorial' : ''}`}>
-                <TextareaAutosize
+                    <TextareaAutosize
                         ref={topicTextInputRef}
                         type='textarea' 
                         className={'topicTextInp'}
@@ -79,6 +86,17 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
                         onChange = {(e) => setMessage(e.target.value)}
                         readOnly={tutorialStage === TutorialStages.NewTopic}
                     />
+                    <span className='topicTextLoader'>
+                        {showLoader &&
+                            <Oval
+                            className='loaderSpinner'
+                            height={23}
+                            width={23}
+                            strokeWidth={2}
+                            strokeWidthSecondary={2}
+                        />
+                        }
+                    </span>
                 </span>
             </div>
             
@@ -100,17 +118,7 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
              {showPopularModal && 
                 <Modal renderComponent={<UploadPopularItemForm handleUploadItem={handleUploadPopularItem} />} onCancel={() => setShowPopularModal(false)} />
             }
-                <span className='topicTextLoader'>
-                    {showLoader &&
-                        <Oval
-                        className='loaderSpinner'
-                        height={18}
-                        width={18}
-                        strokeWidth={2}
-                        strokeWidthSecondary={2}
-                    />
-                    }
-                </span>
+              
                 {!showLoader &&
                     <span className={`sendButton ${tutorialStage === TutorialStages.NewTopicCreate ? 'tutorial' : ''}`} onClick={() => createNewTopic()}>
                         {texts.newTopic.create}

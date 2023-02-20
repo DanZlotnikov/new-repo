@@ -3,6 +3,7 @@ using System.Data;
 using MyApp.Backend.Models.TopicModels.KnowledgeModels;
 using MyApp.Backend.Repositories.TopicRepositories;
 using MyApp.Backend.Repositories;
+using MyApp.Backend.Utils;
 
 namespace MyApp.Backend.Logic
 {
@@ -54,19 +55,14 @@ namespace MyApp.Backend.Logic
             return KnowledgeDataAccess.RemoveBrainFromKnowledgeItem(itemId, userId);
         }
 
-        public static KnowledgeItemModel UploadKnowledgeItem(long topicId, long uploaderId, string title, string originalAuthors, DateTime publishDate, IFormFile file)
+        public async static Task<KnowledgeItemModel> UploadKnowledgeItem(long topicId, long uploaderId, string title, string originalAuthors, DateTime publishDate, IFormFile file)
         {
             KnowledgeItemModel item = new KnowledgeItemModel();
             if (file != null)
             {
                 DateTime now = DateTime.UtcNow;
-                string filePath = $"C:\\Projects\\new-repo\\my-app\\src\\New folder\\{file.FileName}";
-                string fileUrl = "http://localhost:8080/" + file.FileName;
-                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                {
-                    file.CopyTo(fs);
-                    fs.Close();
-                }
+               
+                string fileUrl = await AWSUtils.UploadFileToS3(file.FileName, ConfigrationHelper.AppSetting("AWS:S3:ChambersBucket:KnowledgeItemsPath"), file.FileName, formFile: file);
                 long newItemId = KnowledgeDataAccess.UploadKnowledgeItem(topicId, uploaderId, title, fileUrl, originalAuthors, publishDate, now);
                 if (newItemId > 0)
                 {

@@ -6,40 +6,35 @@ namespace MyApp.Backend.Utils
 {
     public class AWSUtils
     {
-        public bool UploadFileToS3(string localFilePath, string bucketName, string subDirectoryInBucket, string fileNameInS3)
+        private static readonly string systemTempPath = System.IO.Path.GetTempPath();
+        private static readonly string s3ChambersBucketName = ConfigrationHelper.AppSetting("AWS:S3:ChambersBucket:BucketName");
+        private static readonly string s3BucketBaseUrl = ConfigrationHelper.AppSetting("AWS:S3:ChambersBucket:BaseUrl");
+
+        public async static Task<string> UploadFileToS3(string localFileName, string SubfolderPath, string fileNameInS3, IFormFile formFile = null, string externalUrlFile = "")
         {
-            // input explained :
-            // localFilePath = the full local file path e.g. "c:\mydir\mysubdir\myfilename.zip"
-            // bucketName : the name of the bucket in S3 ,the bucket should be alreadt created
-            // subDirectoryInBucket : if this string is not empty the file will be uploaded to
-            // a subdirectory with this name
-            // fileNameInS3 = the file name in the S3
-
-            // create an instance of IAmazonS3 class ,in my case i choose RegionEndpoint.EUWest1
-            // you can change that to APNortheast1 , APSoutheast1 , APSoutheast2 , CNNorth1
-            // SAEast1 , USEast1 , USGovCloudWest1 , USWest1 , USWest2 . this choice will not
-            // store your file in a different cloud storage but (i think) it differ in performance
-            // depending on your location
-            IAmazonS3 client = new AmazonS3Client(RegionEndpoint.EUWest1);
-
-            // create a TransferUtility instance passing it the IAmazonS3 created in the first step
-            TransferUtility utility = new TransferUtility(client);
-            // making a TransferUtilityUploadRequest instance
-            TransferUtilityUploadRequest request = new TransferUtilityUploadRequest();
-
-            if (string.IsNullOrEmpty(subDirectoryInBucket))
+            if (formFile != null)
             {
-                request.BucketName = bucketName; //no subdirectory just bucket name
+                GeneralUtils.CreateTempFileFromFormFile(formFile);
+            }
+            else if (!string.IsNullOrEmpty(externalUrlFile))
+            {
+                await GeneralUtils.CreateTempFileFromUrl(localFileName, externalUrlFile);
+            }
+            IAmazonS3 client = new AmazonS3Client(ConfigrationHelper.AppSetting("AWS:S3:Keys:UploadAccessKey"), ConfigrationHelper.AppSetting("AWS:S3:Keys:UploadSecretKey"), RegionEndpoint.EUWest2);
+            TransferUtility utility = new TransferUtility(client);
+            TransferUtilityUploadRequest request = new TransferUtilityUploadRequest();
+            if (string.IsNullOrEmpty(SubfolderPath))
+            {
+                request.BucketName = s3ChambersBucketName; //no subdirectory just bucket name
             }
             else
-            {   // subdirectory and bucket name
-                request.BucketName = bucketName + @"/" + subDirectoryInBucket;
+            {
+                request.BucketName = s3ChambersBucketName + @"/" + SubfolderPath;
             }
-            request.Key = fileNameInS3; //file name up in S3
-            request.FilePath = localFilePath; //local file name
-            utility.Upload(request); //commensing the transfer
-
-            return true; //indicate that the file was sent
+            request.Key = fileNameInS3;
+            request.FilePath = $"{systemTempPath}\\{localFileName}";
+            await utility.UploadAsync(request);
+            return $"{s3BucketBaseUrl}/{SubfolderPath}/{fileNameInS3}";
         }
     }
 }

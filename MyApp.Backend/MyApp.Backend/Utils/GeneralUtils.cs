@@ -2,35 +2,41 @@
 {
     public class GeneralUtils
     {
-        public async static Task<bool> SaveFileInternally(string localPath, string fileUrl)
-        {
-            try
-            {
-                using (var httpClient = new HttpClient())
-                {
-                    using (var response = await httpClient.GetAsync(fileUrl))
-                    {
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            Console.WriteLine("Error downloading image: " + response.StatusCode);
-                            return false;
-                        }
+        private static readonly string systemTempPath = System.IO.Path.GetTempPath();
 
-                        using (var stream = await response.Content.ReadAsStreamAsync())
+        public async static Task<string> CreateTempFileFromUrl(string fileName, string fileUrl)
+        {
+            string tempPath = $"{systemTempPath}\\{fileName}";
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(fileUrl))
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("Error downloading image: " + response.StatusCode);
+                    }
+
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
                         {
-                            using (var fileStream = new FileStream(localPath, FileMode.Create, FileAccess.Write))
-                            {
-                                await stream.CopyToAsync(fileStream);
-                            }
+                            await stream.CopyToAsync(fileStream);
                         }
                     }
                 }
             }
-            catch
+            return tempPath;
+        }
+
+        public static string CreateTempFileFromFormFile(IFormFile file)
+        {
+            string tempPath = $"{systemTempPath}\\{file.FileName}";
+            using (FileStream fs = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
             {
-                return false;
+                file.CopyTo(fs);
+                fs.Close();
             }
-            return true;
+            return tempPath;
         }
     }
 }

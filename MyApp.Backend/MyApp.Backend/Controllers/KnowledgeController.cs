@@ -43,10 +43,10 @@ namespace MyApp.Backend.Controllers
         }
 
         [HttpPost("UploadKnowledgeItem")]
-        public KnowledgeItemModel UploadKnowledgeItem([FromForm] UploadKnowledgeItemParam param)
+        public async Task<KnowledgeItemModel> UploadKnowledgeItem([FromForm] UploadKnowledgeItemParam param)
         {
             IFormFile file = Request.Form.Files.FirstOrDefault();
-            return KnowledgeLogic.UploadKnowledgeItem(param.topicId, param.uploaderId, param.title, param.originalAuthors, DateTime.Parse(param.publishDate), file);
+            return await KnowledgeLogic.UploadKnowledgeItem(param.topicId, param.uploaderId, param.title, param.originalAuthors, DateTime.Parse(param.publishDate), file);
         }   
 
         #endregion
