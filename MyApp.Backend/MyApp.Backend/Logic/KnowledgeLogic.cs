@@ -62,7 +62,7 @@ namespace MyApp.Backend.Logic
             {
                 DateTime now = DateTime.UtcNow;
                
-                string fileUrl = await AWSUtils.UploadFileToS3(file.FileName, ConfigrationHelper.AppSetting("AWS:S3:ChambersBucket:KnowledgeItemsPath"), file.FileName, formFile: file);
+                string fileUrl = await AWSUtils.UploadFileToS3(file.FileName, ConfigrationHelper.AppSetting("AWS:S3:BucketChambers:KnowledgeItemsPath"), formFile: file);
                 long newItemId = KnowledgeDataAccess.UploadKnowledgeItem(topicId, uploaderId, title, fileUrl, originalAuthors, publishDate, now);
                 if (newItemId > 0)
                 {
