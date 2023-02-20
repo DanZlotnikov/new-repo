@@ -7,3 +7,4 @@ MyApp.Backend/.vs
 *.vsidx
 *.v2
 *.lock
+*.ppk
