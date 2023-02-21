@@ -66,9 +66,8 @@ namespace MyApp.Backend.Logic
             }
             else if (ssoType == Enums.SsoType.Google)
             {
-                var response = await client.GetAsync($"{ConfigrationHelper.AppSetting("SSO:GoogleApiUserinfoUrl")}?access_token={accessToken}");
-                var jsonStr = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<dynamic>(jsonStr).picture;
+                dynamic userInfo = await GetUserInfoGoogle(accessToken);
+                return userInfo.picture;
             }
             else
             {
@@ -76,6 +75,11 @@ namespace MyApp.Backend.Logic
             }
         }
 
-        
+        public async static Task<dynamic> GetUserInfoGoogle(string accessToken)
+        {
+            var response = await new HttpClient().GetAsync($"{ConfigrationHelper.AppSetting("SSO:GoogleApiUserinfoUrl")}?access_token={accessToken}");
+            var jsonStr = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<dynamic>(jsonStr);
+        }
     }
 }

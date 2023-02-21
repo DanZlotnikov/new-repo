@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import texts from '../../texts';
 
 function FileUploadWidget({uploadButtonIcon, openFileUploadModal, file, setFile}) {

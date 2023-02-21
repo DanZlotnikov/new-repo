@@ -2,9 +2,14 @@
 **/obj
 MyApp.Backend/.vs
 **/appsettings.json
+**/package.json
+**/package-lock.json
+**/publish
+*.csproj
 *.suo
 *.metadata
 *.vsidx
 *.v2
 *.lock
 *.ppk
+*.pem
