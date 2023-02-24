@@ -3,7 +3,6 @@ using MyApp.Backend.Controllers.HttpRequestParams;
 using MyApp.Backend.Logic;
 using MyApp.Backend.Models.TopicModels;
 using MyApp.Backend.Models.TopicModels.KnowledgeModels;
-using MyApp.Backend.Repositories.TopicRepositories;
 
 namespace MyApp.Backend.Controllers
 {

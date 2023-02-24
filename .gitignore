@@ -13,3 +13,5 @@ MyApp.Backend/.vs
 *.lock
 *.ppk
 *.pem
+*.PublishSettings
+**/PublishProfiles

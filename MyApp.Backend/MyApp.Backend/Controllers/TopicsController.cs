@@ -21,15 +21,23 @@ namespace MyApp.Backend.Controllers
 
         #region GET Requests
         [HttpGet]
-        public List<TopicModel> Get()
+        public string Get()
         {
-            return new List<TopicModel>();
+            return "test successful";
         }
 
         [HttpGet("GetTopic")]
-        public TopicModel GetTopicById(long id)
+        public TopicModel GetTopic(long id)
         {
-            return TopicLogic.GetTopic(1);
+            try
+            {
+                return TopicLogic.GetTopic(1);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new TopicModel();
+            }
         }
 
         [HttpGet("GetTopicsForUser")]

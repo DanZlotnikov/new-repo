@@ -9,7 +9,6 @@ import { useGoogleLogin } from '@react-oauth/google';
 import texts from '../texts';
 import AuthApi from '../api/AuthApi';
 import { SsoType } from '../consts';
-import { InfinitySpin } from 'react-loader-spinner';
 
 const LoginPage = () => {
     const currentUser = useSelector((state) => state.authReducer.currentUser)
@@ -63,9 +62,9 @@ const LoginPage = () => {
                         </label>
                         <span className='forgotPassword'>Forgot your password?</span> */}
                         {/* <button className='signIn'>Sign In</button> */}
-                        <div className='loaderDiv'>
+                        {/* <div className='loaderDiv'>
                             <InfinitySpin className='loaderSpinner' />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className='overlayContainer'>
