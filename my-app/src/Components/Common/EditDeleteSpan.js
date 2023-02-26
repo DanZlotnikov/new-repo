@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import texts from '../../texts';
 
 function EditDeleteSpan({handleSetEdit, handleDelete}) {
     const [checkDeleteSure, setCheckDeleteSure] = useState(false);
@@ -8,24 +9,24 @@ function EditDeleteSpan({handleSetEdit, handleDelete}) {
             {!checkDeleteSure &&
                 <span>
                     <span className='editSpan' onClick={() => handleSetEdit(true)}>
-                        Edit
+                        {texts().general.edit}
                     </span>
                     {handleDelete &&
                         <span className='deleteSpan' onClick={() => setCheckDeleteSure(true)}>
-                            Delete
+                            {texts().general.delete}
                         </span>
                     }
                 </span>
             }
             {checkDeleteSure &&
                 <span className='deleteAreYouSure'>
-                    Are you sure?
+                    {texts().general.areYouSure}
                     <span className='yes' onClick={() => handleDelete()}>
-                        Yes
+                        {texts().general.yes}
                     </span>
                     /
                     <span className='no' onClick={() => setCheckDeleteSure(false)}>
-                        No
+                        {texts().general.no}
                     </span>
                 </span>
             }

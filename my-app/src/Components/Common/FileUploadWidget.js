@@ -16,7 +16,7 @@ function FileUploadWidget({uploadButtonIcon, openFileUploadModal, file, setFile}
     <div className='fileUploadDiv'>
       {!uploadButtonIcon && 
         <span className={'uploadBtn ' + (file ? 'uploaded' : '')} onClick={handleFileInputClick}>
-          {file ? file.name : texts.knowledge.uploadItem}
+          {file ? file.name : texts().knowledge.uploadItem}
         </span>
       }
       {uploadButtonIcon && 

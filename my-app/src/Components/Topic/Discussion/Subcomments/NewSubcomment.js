@@ -19,9 +19,9 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
             setShowLoader(true);
             handleAddSubcomment(message).then((res) => {
                 setShowLoader(false);
+                commentInputRef.current.value = '';
+                setMessage('');
             });
-            commentInputRef.current.value = '';
-            setMessage('');
         }
     }
 
@@ -47,7 +47,7 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
                             </span>
                         }
                         <span className='editingHint'>
-                            {texts.discussions.commentEditHint}
+                            {texts().discussions.commentEditHint}
                         </span>
                     </span>
                 }
@@ -56,29 +56,29 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
                     ref={commentInputRef}
                     type='textarea' 
                     className={'newSubcommentInp ' + (subcommentDataToEdit ? 'editing' : '')}
-                    placeholder={subcommentDataToEdit ? '' : texts.discussions.newSubcommentPlaceholder}
+                    placeholder={subcommentDataToEdit ? '' : texts().discussions.newSubcommentPlaceholder}
                     value={message}
                     onChange = {(e) => setMessage(e.target.value)} 
                 />
                 <span className='sendDiv'>
-                    <span className='commentLoader'>
+                    <span className='loaderDiv commentLoader'>
                         {showLoader &&
                             <Oval
-                            className='loaderSpinner'
-                            height={18}
-                            width={18}
-                            strokeWidth={2}
-                            strokeWidthSecondary={2}
-                        />
+                                className='loaderSpinner'
+                                height={18}
+                                width={18}
+                                strokeWidth={2}
+                                strokeWidthSecondary={2}
+                            />
                         }
                     </span>
                     {!showLoader &&
                         <span className='sendIcon' onClick={() => subcommentDataToEdit ? editSubcomment() : addSubcomment()}>
                             {subcommentDataToEdit && 
-                                <GiCheckMark size={20}  />
+                                <GiCheckMark size={20} />
                             }
                             {!subcommentDataToEdit && 
-                                <IoMdSend size={20} />
+                                <IoMdSend size={20} style={currentUser.language === 'he' ? {transform: 'rotate(180deg)'} : {}} />
                             }
                         </span>
                     }

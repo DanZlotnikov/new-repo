@@ -80,8 +80,8 @@ function PopularItem({item}) {
                     scrolling="no"
                     />
                 }
-                <img src={platformIcon} className={'itemTypeImg ' + platformName} title={platformName} alt={platformName}/>
             </div>
+            <img src={platformIcon} className={'itemTypeImg ' + platformName} title={platformName} alt={platformName}/>
         </div>
     )
 }

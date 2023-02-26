@@ -81,22 +81,27 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
                         ref={topicTextInputRef}
                         type='textarea' 
                         className={'topicTextInp'}
-                        placeholder={`${texts.newTopic.newTopicInputPlaceholder}, ${currentUser.firstName}`}
+                        placeholder={`${texts().newTopic.newTopicInputPlaceholder}, ${currentUser.firstName}`}
                         value={message}
                         onChange = {(e) => setMessage(e.target.value)}
                         readOnly={tutorialStage === TutorialStages.NewTopic}
                     />
-                    <span className='topicTextLoader'>
-                        {showLoader &&
-                            <Oval
-                            className='loaderSpinner'
-                            height={23}
-                            width={23}
-                            strokeWidth={2}
-                            strokeWidthSecondary={2}
-                        />
-                        }
-                    </span>
+                </span>
+                {!showLoader &&
+                <span className={`createTopicButton ${tutorialStage === TutorialStages.NewTopicCreate ? 'tutorial' : ''}`} onClick={() => createNewTopic()}>
+                    {texts().newTopic.create}
+                </span>
+                }
+                <span className='topicTextLoader'>
+                    {showLoader &&
+                        <Oval
+                        className='loaderSpinner'
+                        height={23}
+                        width={23}
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
+                    />
+                    }
                 </span>
             </div>
             
@@ -118,12 +123,6 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
              {showPopularModal && 
                 <Modal renderComponent={<UploadPopularItemForm handleUploadItem={handleUploadPopularItem} />} onCancel={() => setShowPopularModal(false)} />
             }
-              
-                {!showLoader &&
-                    <span className={`sendButton ${tutorialStage === TutorialStages.NewTopicCreate ? 'tutorial' : ''}`} onClick={() => createNewTopic()}>
-                        {texts.newTopic.create}
-                    </span>
-                }
         </div>
     )
 }

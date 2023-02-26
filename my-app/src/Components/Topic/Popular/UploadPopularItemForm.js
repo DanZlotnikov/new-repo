@@ -24,14 +24,14 @@ function UploadPopularItemForm({handleUploadItem}) {
     <div className='uploadPopularItemForm'>
         <div className='uploadFileHeader'>
           <div className='headerText'>
-            {texts.popular.itemUploadModal.header}
+            {texts().popular.itemUploadModal.header}
           </div>
         </div>
         <div className='uploadFileForm'>
             <div className='inputDiv'>
               <TextField 
                 className='textInput'
-                label={texts.popular.itemUploadModal.url}
+                label={texts().popular.itemUploadModal.url}
                 onChange={(e) => setUrl(e.target.value)}
               />
             </div>
@@ -67,10 +67,10 @@ function UploadPopularItemForm({handleUploadItem}) {
               )}
             </Select>
             </div>
-            <button className='uploadButton' onClick={handleUpload}>{texts.general.upload}</button>
+            <button className='uploadButton' onClick={handleUpload}>{texts().general.upload}</button>
             {error && 
               <div className='errorDiv'>
-                {texts.knowledge.itemUploadModal.modalFieldsError}
+                {texts().knowledge.itemUploadModal.modalFieldsError}
               </div>
             }
           </div>

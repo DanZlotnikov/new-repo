@@ -5,6 +5,7 @@ body {
   background-color: $background-gray;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
   -webkit-font-smoothing: antialiased;
+  // direction: rtl;
 }
 
 div {
@@ -52,6 +53,46 @@ input {
     }
   }
 
+  .headerToolbar {
+    display: flex;
+    margin-inline-end: 10px;
+
+    .languageCont {
+      display: flex;
+      flex-direction: column;
+      margin-inline-end: 15px;
+      margin-top: 1px;
+      height: fit-content;
+      
+      .selectedLanguageFlag {
+        width: 30px;
+        cursor: pointer;
+      }
+
+      .languageMenu {
+        top: 45px;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background: #4cb45a;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        padding: 1px 5px;
+        border-radius: 2px;
+        margin-inline-start: 0px;
+
+        .languageItem {
+          margin-bottom: 1px;
+          cursor: pointer;
+        
+          .languageFlag {
+            width: 20px;
+          }
+        }
+      }
+    }
+    
+  }
+
   .chambersHeader {
     position: relative;
     bottom: 2px;
@@ -79,13 +120,17 @@ input {
 .loaderDiv {
   display: flex;
   justify-content: center;
+  
+  &.commentLoader {
+    position: absolute;
+    bottom: 5px;
+    margin-inline-start: -12px;
+  }
+
   .loaderSpinner {
     width: 20;
     color: $app-green;
 
-    &.commentLoader {
-      display: inline-flex;
-    }
   }
 }
 
@@ -294,17 +339,18 @@ input {
     width: 50%;
   }
 
-  .tutorialHint {
+  .tutorialDiv {
     z-index: 100;
     box-shadow: 0 0 0 1000vh rgba(0, 0, 0, 0.6);
     position: absolute;
     top: 10px;
     background-color: $background-green;
-    padding: 15px 15px;
+    padding: 10px 15px;
     font-weight: bold;
     border-radius: 5px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100vh;
 
     .helpIcon {
@@ -315,8 +361,6 @@ input {
     }
 
     .continueTutorialBtn {
-      position: absolute;
-      right: 20px;
       background: $app-green;
       color: white;
       margin-inline-start: 15px;
@@ -347,7 +391,7 @@ input {
       margin-inline-start: 10px;
       
       .topicTextInp {
-        width: 88%;
+        width: 95%;
         border: 0;
         background-color: #f0f2f5;
         border-radius: 5px;
@@ -411,14 +455,14 @@ input {
     }
   }
 
-  .sendButton {
-    position: absolute;
-    right: 30px;
-    bottom: 20px;
+  .createTopicButton {
     background-color: $app-green;
     color: white;
+    height: fit-content;
     padding: 10px;
     border-radius: 5px;
+    margin-inline-start: 10px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.4);
     cursor: pointer;
   }
 }
@@ -432,6 +476,7 @@ input {
     background-color: $background-white;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
+
     .topicHeaderDiv {
       border-radius: 5px;
 
@@ -463,7 +508,7 @@ input {
             
             .globeIcon {
               position: relative;
-              left: 5px;
+              margin-inline-start: 5px;
               top: 2px;
             }
           }
@@ -549,18 +594,17 @@ input {
     .commentAuthorName {
       font-weight: 600;
       font-size: 14px;
-      display: block;
+      display: flex;
+      justify-content: space-between;
       margin-inline-start: 7px;
       margin-top: 4px;
 
       .editingHint {
-        position: absolute;
-        right: 10px;
-        top: 4px;
         font-size: 12px;
         font-weight: bold;
         color: $text-gray;
-
+        margin-inline-end: 5px;
+        
         &.empty {
           color: $site-red;
         }
@@ -572,7 +616,7 @@ input {
         border: 0;
         background-color: #f0f2f5;
         border-radius: 5px;
-        width: 85%;
+        width: 90%;
         padding: 10px;
         padding-bottom: 0px;
         line-height: inherit;
@@ -594,17 +638,16 @@ input {
         }
       }
       .sendDiv {
-        .commentLoader {
-          display: inline-flex;
-          position: relative;
-          right: -12px;
-          bottom: 3px;
-        }
-       
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+
         .sendIcon {
           position: absolute;
-          right: 12px;
-          bottom: 6px;
+          display: flex;
+          justify-content: flex-end;
+          margin-inline-end: 3px;
+          bottom: 8px;
           color: $app-green;
     
           &:hover {
@@ -715,15 +758,18 @@ input {
       .subcommentsDiv {
         .newSubcommentDiv {
           position: relative;
-          width: 65%;
+          width: 70%;
           padding: 3px;
           background-color: #f0f2f5;
           border-radius: 5px;
           margin-top: 3px;
           margin-bottom: 5px;
           max-width: 85%;
+          height: fit-content;
 
           .newSubcomment {
+            width: 100%;
+
             .subcommentAuthorName {
               font-weight: 600;
               font-size: 14px;
@@ -767,17 +813,16 @@ input {
             }
 
             .sendDiv {
-              .commentLoader {
-                display: inline-flex;
-                position: relative;
-                right: -4px;
-                bottom: 3px;
-              }
+              display: flex;
+              width: 100%;
+              justify-content: flex-end;
 
               .sendIcon {
                 position: absolute;
-                bottom: 6px;
-                right: 10px;
+                display: flex;
+                justify-content: flex-end;
+                margin-inline-end: 3px;
+                bottom: 8px;
                 color: $app-green;
 
                 &:hover {
@@ -969,7 +1014,7 @@ input {
 
         &.tiktok {
           top: -5px;
-          left: calc(50% - 180px)
+          left: calc(50% - 180px);
         }
       }
 
@@ -1005,7 +1050,7 @@ input {
           border-radius: 5px;
           position: absolute;
           top: -15px;
-          right: 20px;
+          margin-inline-end: 20px;
           z-index: 1;
 
           &.tiktok {
@@ -1049,17 +1094,17 @@ input {
 
   &.commentProfileImg {
     position: absolute;
-    left: 16px;
+    margin-inline-start: 16px;
   }
 
   &.newCommentProfileImg {
     position: absolute;
-    left: -36px;
+    margin-inline-start: -36px;
   }
 
   &.subcommentProfileImg {
     position: absolute;
-    left: -25px;
+    margin-inline-start: -25px;
     height: 20px;
     width: 20px;
   }
@@ -1073,9 +1118,9 @@ input {
 
 .checkmarkIcon {
   position: relative;
-  left: 7px;
   top: 0px;
   color: $app-green;
+  margin-inline-start: 5px;
 }
 
 .ellipsis {
@@ -1092,10 +1137,11 @@ input {
 
   &.commentCounters {
     position: absolute;
-    right: 10px;
     top: -10px;
     z-index: 1;
-    min-width: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .brains, .comments, .highlights {
@@ -1133,7 +1179,7 @@ input {
       position: relative;
       top: 4px;
       right: 2px;
-      margin-inline-end: 3px;
+      margin-inline-end: 5px;
       
       &.brainsIcon {
         color: $discussion-blue;

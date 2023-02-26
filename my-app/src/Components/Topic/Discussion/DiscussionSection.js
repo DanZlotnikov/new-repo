@@ -16,7 +16,7 @@ function DiscussionSection({topic, tutorialStage, updateDataCount}) {
             {topic.comments.length > 1 && 
             <div>
                 <span className='seeDiscussions' onClick={() => setShowAllComments(!showAllComments)}>
-                    {showAllComments ? texts.discussions.hideDiscussions : texts.discussions.seeAllDiscussions}
+                    {showAllComments ? texts().discussions.hideDiscussions : texts().discussions.seeAllDiscussions}
                 </span>
                 {!showAllComments && <span className='topComment'>
                     <ExistingComment commentData={topic.comments[0]} /> 

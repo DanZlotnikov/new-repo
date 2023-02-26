@@ -25,7 +25,7 @@ function UploadKnowledgeItemForm({fileName, handleUploadItem}) {
     <div className='uploadKnowledgeItemForm'>
         <div className='uploadFileHeader'>
           <div className='headerText'>
-            {texts.knowledge.itemUploadModal.header}
+            {texts().knowledge.itemUploadModal.header}
           </div>
           <div className='fileName'>
             {fileName}
@@ -35,14 +35,14 @@ function UploadKnowledgeItemForm({fileName, handleUploadItem}) {
             <div className='inputDiv'>
               <TextField 
                 className='textInput'
-                label={texts.knowledge.itemUploadModal.title}
+                label={texts().knowledge.itemUploadModal.title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
             <div className='inputDiv'>
               <TextField 
                 className='textInput'
-                label={texts.knowledge.itemUploadModal.originalAuthors}
+                label={texts().knowledge.itemUploadModal.originalAuthors}
                 onChange={(e) => setOriginalAuthors(e.target.value)}
               />
             </div>
@@ -51,7 +51,7 @@ function UploadKnowledgeItemForm({fileName, handleUploadItem}) {
                 <Stack spacing={1}>
                   <DesktopDatePicker
                     className='datePicker'
-                    label="Publish date"
+                    label={texts().knowledge.itemUploadModal.publishDate}
                     inputFormat="DD/MM/YYYY"
                     value={publishDate}
                     onChange={(val) => setPublishDate(val)}
@@ -60,10 +60,10 @@ function UploadKnowledgeItemForm({fileName, handleUploadItem}) {
                 </Stack>
               </LocalizationProvider>
             </div>  
-            <button className='uploadButton' onClick={handleUpload}>{texts.general.upload}</button>
+            <button className='uploadButton' onClick={handleUpload}>{texts().general.upload}</button>
             {error && 
               <div className='errorDiv'>
-                {texts.knowledge.itemUploadModal.modalFieldsError}
+                {texts().knowledge.itemUploadModal.modalFieldsError}
               </div>
             }
           </div>

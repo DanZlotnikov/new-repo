@@ -34,8 +34,8 @@ const LoginPage = () => {
             <div className='container'>
                 <div className='signInContainer'>
                     <div className='loginForm'>
-                        <h1 className='signinHeader'>{texts.general.welcome}</h1>
-                        <span className='signInExplanation'>{texts.general.signInExplanation}</span>
+                        <h1 className='signinHeader'>{texts().general.welcome}</h1>
+                        <span className='signInExplanation'>{texts().general.signInExplanation}</span>
                             <div className='socialContainer'>
                                 <FacebookLogin
                                     appId={config.facebookAppId}
@@ -70,8 +70,8 @@ const LoginPage = () => {
                 <div className='overlayContainer'>
                     <div className='overlay'>
                         <div className='createAccountDiv'>
-                            <h1>{texts.general.createAccount}</h1>
-                            <p>{texts.general.comingSoon}</p>
+                            <h1>{texts().general.createAccount}</h1>
+                            <p>{texts().general.comingSoon}</p>
                         </div>
                     </div>
                 </div>

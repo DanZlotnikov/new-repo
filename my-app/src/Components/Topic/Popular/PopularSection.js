@@ -27,7 +27,7 @@ function PopularSection({topic, updateDataCount}) {
         <div className='popularSectionDiv'>
             <div className='fileUploadDiv'>
                 <span className='uploadBtn' onClick={() => setShowModal(true)}>
-                    {texts.popular.addItem}
+                    {texts().popular.addItem}
                 </span>
             </div>
             {showModal && 

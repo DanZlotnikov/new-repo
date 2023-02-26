@@ -96,7 +96,7 @@ function ExistingComment({commentData}) {
                     <span className='subcomments'>
                         {!subcommentsOpen && commentData.subcomments.length > 0 &&
                         <span className='seeComments' onClick={() => setSubcommentsOpen(true)}>
-                            {texts.discussions.openComments}
+                            {texts().discussions.openComments}
                         </span>
                         }
                         {(subcommentsOpen || commentData.subcomments.length === 0) &&

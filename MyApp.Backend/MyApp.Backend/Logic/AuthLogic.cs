@@ -15,6 +15,7 @@ namespace MyApp.Backend.Logic
                 dynamic userInfo = await UserLogic.GetUserInfoGoogle(ssoAccessToken);
                 firstName = userInfo.given_name;
                 lastName = userInfo.family_name;
+                userSsoId = userInfo.sub;
             }
             User user = UserLogic.GetUserBySsoId(userSsoId);
             if (user.Id > 0)

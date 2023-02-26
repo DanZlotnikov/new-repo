@@ -22,7 +22,7 @@ function MainPage() {
         if (tutorialStage === TutorialStages.Done) {
             dispatch(endTutorial());
         }
-        setTutorialHint(texts.tutorial[tutorialStage]);
+        setTutorialHint(texts().tutorial[tutorialStage]);
     }, [tutorialStage]);
     useEffect(() => {
         if (!didMount.current) { // this will only run on first render
@@ -31,7 +31,7 @@ function MainPage() {
             });
         }
         if (currentUser.isFirstLogin) {
-            setTutorialHint(texts.tutorial[TutorialStages.Welcome]);
+            setTutorialHint(texts().tutorial[TutorialStages.Welcome]);
         }
     }, []);
     /* eslint-enable */
@@ -43,11 +43,13 @@ function MainPage() {
     return (
         <div className='mainDiv'>
             {tutorialStage !== TutorialStages.Done &&
-                <span className='tutorialHint'>
+                <div className='tutorialDiv'>
                     <IoMdHelp className='helpIcon'/>
-                    {tutorialHint}
-                    <span className='continueTutorialBtn' onClick={() => setTutorialStage((stage) => stage + 1)}>CONTINUE</span>
-                </span>
+                    <span class='tutorialTxt'>
+                        {tutorialHint}
+                    </span>
+                    <span className='continueTutorialBtn' onClick={() => setTutorialStage((stage) => stage + 1)}>{texts().general.continue.toUpperCase()}</span>
+                </div>
             }
             {!topics &&
                 <div className='loaderDiv'>

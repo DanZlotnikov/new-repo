@@ -10,8 +10,9 @@ const authSlice = createSlice({
       lastName: null,
       profileImgUrl: null,
       isVerified: false,
-      isFirstLogin: false
-    }
+      isFirstLogin: false,
+      language: 'he'
+    },
   },
   reducers: {
     ssoLogin: (state, action) => {
@@ -24,6 +25,7 @@ const authSlice = createSlice({
         state.currentUser.profileImgUrl = payload.profileImgUrl;
         state.currentUser.isVerified = payload.isVerified;
         state.currentUser.isFirstLogin = payload.isFirstLogin;
+        state.currentUser.language = 'he';
       }
     },
     logout: (state) => {
@@ -33,10 +35,13 @@ const authSlice = createSlice({
     },
     endTutorial: (state) => {
       state.currentUser.isFirstLogin = false;
+    },
+    changeLanguage: (state, action) => {
+      state.currentUser.language = action.payload;
     }
   }
 });
 
-export const { ssoLogin, logout, endTutorial } = authSlice.actions
+export const { ssoLogin, logout, endTutorial, changeLanguage } = authSlice.actions
 
 export default authSlice.reducer;

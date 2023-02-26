@@ -8,10 +8,10 @@ function FileList({items}) {
                 <span className='uploaderImg'>
                 </span>
                 <span className='fileListCell header-name' >
-                    {texts.knowledge.itemListHeaderTitle}
+                    {texts().knowledge.itemListHeaderTitle}
                 </span>
                 <span className='fileListCell publishedCell'>
-                    {texts.knowledge.itemListHeaderPublished}
+                    {texts().knowledge.itemListHeaderPublished}
                 </span>  
             </div>
             {items.map((item) => 

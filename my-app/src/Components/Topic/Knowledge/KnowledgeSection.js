@@ -13,8 +13,8 @@ function KnowledgeSection({topic, updateDataCount}) {
 
     const handleUploadItem = (title, originalAuthors, publishDate) => {
         setShowModal(false);
-        setFile(null);
         KnowledgeApi.UploadKnowledgeItem(topic.id, currentUser.id, title, originalAuthors, publishDate, file).then(newItem => {
+            setFile(null);
             if (newItem.id) {
                 topic.knowledgeItems.push(newItem);
                 updateDataCount();
