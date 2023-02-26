@@ -9,7 +9,7 @@ function Header() {
     const currentUser = useSelector((state) => state.authReducer.currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [languageSelectionOpen, setLanguageSelectionOpen] = useState(true);
+    const [languageSelectionOpen, setLanguageSelectionOpen] = useState(false);
 
     const handleLogout = () => {
         dispatch(logout());
