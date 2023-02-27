@@ -16,7 +16,7 @@ const TopicApi = {
     form.append('message', message);
     form.append('knowledgeItemTitle', knowledgeItem.info.title);
     form.append('knowledgeItemOriginalAuthors', knowledgeItem.info.originalAuthors);
-    form.append('knowledgeItemPublishDate', dateFormat(knowledgeItem.info.publishDate, 'dd-mm-yyyy'));
+    form.append('knowledgeItemPublishDate', dateFormat(knowledgeItem.info.publishDate, 'mm/dd/yyyy'));
     form.append('knowledgeFile', knowledgeFile);
     form.append('popularItemUrl', popularItem.info.url);
     form.append('popularItemPlatformType', popularItem.info.platformType);

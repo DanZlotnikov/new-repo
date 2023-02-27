@@ -24,7 +24,7 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
         info: {
             title: '', 
             originalAuthors: '', 
-            publishDate: ''
+            publishDate: new Date('01/01/2000')
     }});
     const [popularItem, setPopularItem] = useState({
         info: {

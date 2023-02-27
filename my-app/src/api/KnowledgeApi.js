@@ -26,7 +26,7 @@ const KnowledgeApi = {
     form.append('uploaderId', uploaderId);
     form.append('title', title);
     form.append('originalAuthors', originalAuthors);
-    form.append('publishDate', dateFormat(publishDate, 'dd-mm-yyyy'));
+    form.append('publishDate', dateFormat(publishDate, 'mm/dd/yyyy'));
     form.append('file', file);
     return axios.post(`${config.apiBaseUrl}/Knowledge/UploadKnowledgeItem`, form, {'Content-Type': 'multipart/form-data'}).then(response => response.data);
   },

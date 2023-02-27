@@ -18,7 +18,11 @@ builder.Services.AddCors(options =>
                       });
 });
 
-// services.AddResponseCaching();
+
+var supportedCultures = new[] { "en-UK" };
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
 
 builder.Services.AddControllers();
 
@@ -27,6 +31,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseRequestLocalization(localizationOptions);
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
