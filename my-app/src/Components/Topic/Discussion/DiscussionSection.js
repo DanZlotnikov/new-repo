@@ -5,8 +5,10 @@ import texts from '../../../texts';
 
 function DiscussionSection({topic, tutorialStage, updateDataCount}) {
     const [showAllComments, setShowAllComments] = useState(false);
+    const [commentsAdded, setCommentsAdded] = useState(0);
     const handleCreateComment = () => {
         setShowAllComments(true);
+        setCommentsAdded(commentsAdded + 1);
         updateDataCount();
     }
 

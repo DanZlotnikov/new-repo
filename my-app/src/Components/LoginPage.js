@@ -37,7 +37,7 @@ const LoginPage = () => {
                         <h1 className='signinHeader'>{texts().general.welcome}</h1>
                         <span className='signInExplanation'>{texts().general.signInExplanation}</span>
                             <div className='socialContainer'>
-                                <FacebookLogin
+                                {/* <FacebookLogin
                                     appId={config.facebookAppId}
                                     callback={handleFacebookLogin}
                                     render={(renderProps) => (
@@ -48,7 +48,7 @@ const LoginPage = () => {
                                             <FaFacebook className='facebookButton' size={40}/>
                                         </span>
                                     )}
-                                />
+                                /> */}
                                 <span className='googleLoginButton' onClick={() => handleGoogleLogin()}>
                                     <FaGoogle className='googleButton' size={40}/>
                                 </span>

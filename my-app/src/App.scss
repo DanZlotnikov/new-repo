@@ -802,17 +802,17 @@ input {
             .subcommentAuthorName {
               font-weight: 600;
               font-size: 14px;
-              display: block;
+              display: flex;
+              justify-content: space-between;
               margin-inline-start: 7px;
               margin-top: 4px;
 
               .editingHint {
-                position: absolute;
-                right: 10px;
                 top: 4px;
                 font-size: 12px;
                 font-weight: bold;
                 color: $text-gray;
+                margin-inline-end: 5px;
               }
             }
             

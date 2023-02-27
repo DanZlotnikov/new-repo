@@ -40,12 +40,14 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
             <span className='newSubcomment'>
                 { subcommentDataToEdit && 
                     <span className='subcommentAuthorName'>
-                        {subcommentDataToEdit.author.firstName + ' ' + subcommentDataToEdit.author.lastName}
-                        {subcommentDataToEdit.author.isVerified &&  
-                            <span className='checkmarkIcon'>
-                                <FaCheckCircle size={13}/>
-                            </span>
-                        }
+                        <span className='authorName'>
+                            {subcommentDataToEdit.author.firstName + ' ' + subcommentDataToEdit.author.lastName}
+                            {subcommentDataToEdit.author.isVerified &&  
+                                <span className='checkmarkIcon'>
+                                    <FaCheckCircle size={13}/>
+                                </span>
+                            }
+                        </span>
                         <span className='editingHint'>
                             {texts().discussions.commentEditHint}
                         </span>
