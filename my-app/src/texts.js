@@ -19,7 +19,8 @@ const texts = () => {
                     edit: 'Edit',
                     areYouSure: 'Are you sure?',
                     yes: 'Yes',
-                    no: 'No'
+                    no: 'No',
+                    searchTopic: 'Search a Topic'
                 },
                 newTopic: {
                     newTopicInputPlaceholder: 'Create a new topic',
@@ -83,7 +84,8 @@ const texts = () => {
                     edit: 'ערוך',
                     areYouSure: 'מאשר/ת מחיקה?',
                     yes: 'כן',
-                    no: 'לא'
+                    no: 'לא',
+                    searchTopic: 'חפש נושא'
                 },
                 newTopic: {
                     newTopicInputPlaceholder: 'צור/י נושא חדש',
