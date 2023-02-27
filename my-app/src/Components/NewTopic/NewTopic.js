@@ -41,9 +41,8 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
             setKnowledgeFile(null);
             setPopularItem({
                 info: {
-                    title: '', 
-                    originalAuthors: '', 
-                    publishDate: ''
+                    url: '', 
+                    platformType: 0,
             }});
             setShowLoader(false);
         });

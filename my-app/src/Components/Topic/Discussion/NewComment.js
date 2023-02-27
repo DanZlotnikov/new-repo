@@ -25,7 +25,7 @@ function NewComment({commentDataToEdit, tutorialStage, topic, handleCreateCommen
             setShowLoader(true);
             DiscussionsApi.CreateNewComment(topic.id, currentUser.id, message).then(newComment => {
                 if (newComment && newComment.id > 0) {
-                    topic.comments.unshift(newComment);
+                    topic.comments.push(newComment);
                     commentInputRef.current.value = '';
                     setMessage('');
                     handleCreateComment();
