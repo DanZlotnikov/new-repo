@@ -26,7 +26,7 @@ function ExistingSubcomment({subcommentData, handleEditSubcomment, handleDeleteS
             }
             {!isEditingSubcomment &&
                 <div className='subcommentDiv'>
-                    <img className='userProfileImg subcommentProfileImg' src={subcommentData.author.profileImgUrl} title={authorFullName} alt={authorFullName} />
+                    <img className='userProfileImg subcommentProfileImg' src={subcommentData.author.profileImgPresignedUrlS3} title={authorFullName} alt={authorFullName} />
                     <span className='subcomment'>
                         <span className='subcommentAuthorName'>
                             {subcommentData.author.firstName + ' ' + subcommentData.author.lastName}

@@ -30,7 +30,7 @@ function KnowledgeItem({item}) {
     return (
         <div className='fileListRow'>                        
             <span className='uploaderImgSpan'>
-                <img className='fileListCell userProfileImg' src={item.uploader.profileImgUrl} title={uploaderFullName} alt={uploaderFullName}/>
+                <img className='fileListCell userProfileImg' src={item.uploader.profileImgPresignedUrlS3} title={uploaderFullName} alt={uploaderFullName}/>
             </span>
             <div className='fileListCell' >
                 <a href={item.fileUrl} className='fileTitleLink' rel="noopener noreferrer" target="_blank">

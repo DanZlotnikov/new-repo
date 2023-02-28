@@ -52,7 +52,7 @@ function PopularItem({item}) {
 
     return (
         <div className={'itemDiv ' + platformName}>
-            <img src={item.uploader.profileImgUrl} className={`uploaderImg ${platformName}`} title={uploaderFullName} alt={uploaderFullName}></img>
+            <img src={item.uploader.profileImgPresignedUrlS3} className={`uploaderImg ${platformName}`} title={uploaderFullName} alt={uploaderFullName}></img>
             <span className={`reactionCounters ${platformName}`}>
                 <span className={'brains ' + (itemBrained ? 'brained' : '')} onClick={handleBrainClick}>
                     <FaBrain className='counterIcon brainsIcon' size={18}/>

@@ -36,7 +36,7 @@ function NewSubcomment({subcommentDataToEdit, handleEditSubcomment, handleAddSub
 
     return (
         <div className='newSubcommentDiv'>
-            <img className='userProfileImg subcommentProfileImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
+            <img className='userProfileImg subcommentProfileImg' src={currentUser.profileImgPresignedUrlS3} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
             <span className='newSubcomment'>
                 { subcommentDataToEdit && 
                     <span className='subcommentAuthorName'>

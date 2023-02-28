@@ -5,7 +5,7 @@ function TopicHeader({topic}) {
     return (
         <div className='topicHeaderDiv'>
             <div className='topicUserDiv'>
-                <img className='userProfileImg topicImg' src={topic.author.profileImgUrl} alt={topic.author.firstName + ' ' + topic.author.lastName}/>
+                <img className='userProfileImg topicImg' src={topic.author.profileImgPresignedUrlS3} alt={topic.author.firstName + ' ' + topic.author.lastName}/>
                 <span className='nameAndDate'>
                     <span className='userNameSpan'>
                         <span className='userName'>

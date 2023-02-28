@@ -59,7 +59,7 @@ function ExistingComment({commentData}) {
         }
         {!isEditingComment &&
             <div className='commentDiv'>
-                <img className='userProfileImg commentProfileImg' src={commentData.author.profileImgUrl} title={authorFullName} alt={authorFullName}/>
+                <img className='userProfileImg commentProfileImg' src={commentData.author.profileImgPresignedUrlS3} title={authorFullName} alt={authorFullName}/>
                 <span className='existingComment'>
                     <span className='reactionCounters commentCounters'>
                         <span className={'brains ' + (commentBrained ? 'brained' : '')} onClick={handleBrainClick}>

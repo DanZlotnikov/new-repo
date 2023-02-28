@@ -53,7 +53,7 @@ function NewComment({commentDataToEdit, tutorialStage, topic, handleCreateCommen
     
     return (
         <div className={`newCommentCont ${tutorialStage === TutorialStages.ExistingTopicAddComment ? 'tutorial' : ''}`}>
-            <img className='userProfileImg newCommentProfileImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
+            <img className='userProfileImg newCommentProfileImg' src={currentUser.profileImgPresignedUrlS3} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
             { commentDataToEdit && 
                 <span className='commentAuthorName'>
                     <span className='authorName'>

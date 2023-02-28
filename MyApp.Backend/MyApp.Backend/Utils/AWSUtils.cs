@@ -1,5 +1,6 @@
 ﻿using Amazon;
 using Amazon.S3;
+using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 
 namespace MyApp.Backend.Utils
@@ -35,6 +36,20 @@ namespace MyApp.Backend.Utils
             request.FilePath = $"{systemTempPath}\\{fileName}";
             await utility.UploadAsync(request);
             return $"{s3BucketBaseUrl}/{SubfolderPath}/{fileName}";
+        }
+
+        public static string GetPresignedUrlFromS3(string s3Path)
+        {
+            IAmazonS3 client = new AmazonS3Client(ConfigrationHelper.AppSetting("AWS:S3:Keys:UploadAccessKey"), ConfigrationHelper.AppSetting("AWS:S3:Keys:UploadSecretKey"), RegionEndpoint.EUCentral1);
+            GetPreSignedUrlRequest request = new GetPreSignedUrlRequest
+            {
+                BucketName = s3BucketChambersName,
+                Key = s3Path,
+                Expires = DateTime.Now.AddMinutes(1)
+            };
+            
+            string presignedUrl = client.GetPreSignedURL(request);
+            return presignedUrl;
         }
     }
 }

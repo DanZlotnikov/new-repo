@@ -8,7 +8,7 @@ const authSlice = createSlice({
       isLoggedIn: false, 
       firstName: null,
       lastName: null,
-      profileImgUrl: null,
+      profileImgPresignedUrlS3: null,
       isVerified: false,
       isFirstLogin: false,
       language: 'he'
@@ -22,7 +22,7 @@ const authSlice = createSlice({
         state.currentUser.isLoggedIn = true;
         state.currentUser.firstName = payload.firstName;
         state.currentUser.lastName = payload.lastName;
-        state.currentUser.profileImgUrl = payload.profileImgUrl;
+        state.currentUser.profileImgPresignedUrlS3 = payload.profileImgPresignedUrlS3;
         state.currentUser.isVerified = payload.isVerified;
         state.currentUser.isFirstLogin = payload.isFirstLogin;
         state.currentUser.language = 'he';

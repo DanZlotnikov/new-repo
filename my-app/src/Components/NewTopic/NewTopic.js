@@ -74,7 +74,7 @@ function NewTopic({handleCreateNewTopic, tutorialStage}) {
     return (
         <div className='newTopicDiv'>
             <div className='newTopic'>
-                <img className='userProfileImg topicImg' src={currentUser.profileImgUrl} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
+                <img className='userProfileImg topicImg' src={currentUser.profileImgPresignedUrlS3} title={`${currentUser.firstName} ${currentUser.lastName}`} alt={`${currentUser.firstName} ${currentUser.lastName}`}/>
                 <span className={`newTopicTextCont ${tutorialStage === TutorialStages.NewTopic ? 'tutorial' : ''}`}>
                     <TextareaAutosize
                         ref={topicTextInputRef}
